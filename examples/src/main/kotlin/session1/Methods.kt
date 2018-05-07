@@ -24,3 +24,25 @@ fun main(args: Array<String>) {
     val field2 = area(5)
     val field3 = area(b = 2, a = 3)
 }
+
+
+/*
+Kotlin erlaubt das verschachteln von Funktionen.
+In diesem Beispiel soll eine Int-Liste rekursiv summiert werden. Da wir den Machnismus der Tailrecurstion benutzen
+wollen, definieren wir uns eine lokale Hilfsfunktion, die für uns die rekursive Summierung übernimmt.
+ */
+fun recursiveSum(elements: List<Int>): Int {
+
+    fun recursiveStep(accumulator: Int, remainingList: List<Int>): Int {
+
+        // In Kotlin sind IFs expressions und besitzen einen "Rückgabewert", der immer dem letzten Statement
+        // eines Blocks entspricht.
+        return if(remainingList.isEmpty()) {
+            accumulator
+        } else {
+            recursiveStep(accumulator + remainingList.first(), remainingList.drop(1))
+        }
+    }
+
+    return recursiveStep(0, elements)
+}
