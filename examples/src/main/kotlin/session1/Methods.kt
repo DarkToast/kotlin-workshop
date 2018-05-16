@@ -1,5 +1,11 @@
 package session1
 
+/**
+ * Themen:
+ *  - default parameters
+ *  - named arguments
+ *  - Funktionsverschachtelung
+ */
 
 /*
 Jedwede Parameterlisten können in Kotlin mit `default parameters` angereichtert werden.
@@ -33,7 +39,9 @@ wollen, definieren wir uns eine lokale Hilfsfunktion, die für uns die rekursive
  */
 fun recursiveSum(elements: List<Int>): Int {
 
-    fun recursiveStep(accumulator: Int, remainingList: List<Int>): Int {
+    // Btw: Kotlin kennt eine Reihe von optionalen Funktionsmarkern. `tailrec` kümmert sich z.B. darum, dass unsere
+    // Funktion tail recursive geschrieben ist. Ist sie es nicht, wird uns der Compiler eine Warnung ausgeben.
+    tailrec fun recursiveStep(accumulator: Int, remainingList: List<Int>): Int {
 
         // In Kotlin sind IFs expressions und besitzen einen "Rückgabewert", der immer dem letzten Statement
         // eines Blocks entspricht.

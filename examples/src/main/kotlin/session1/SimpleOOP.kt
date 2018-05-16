@@ -1,5 +1,13 @@
 package session1
 
+/**
+ * Themen:
+ *  - simple Klassen
+ *  - Konstruktoren
+ *  - init-Block
+ *  - Simple Generics
+ */
+
 // Die simpelste Klasse. Ohne Attribute oder Konstruktor.
 class Simple
 
@@ -19,7 +27,7 @@ class Account(val name: String, password: String, private val salt: String = "#s
     // Ein klassisches Attribut der Klasse.
     private val passwordHash: String
 
-    // Ein oder mehrere `init`-Blöcke ersetzt den Konstruktorbody.
+    // Der `init`-Block ersetzt den Konstruktorbody.
     init {
         passwordHash = password + salt
     }

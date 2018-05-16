@@ -1,3 +1,11 @@
+/**
+ * Themen:
+ *  - Die KotlinFile
+ *  - Alles sind Objekte
+ *  - String interpolation
+ *  - value equality
+ */
+
 // Kotlin ist, wie Java, in ein Packagesystem eingebunden. Hier gelten die Regeln von Java. Pro Package, ein Verzeichnis
 // mit 1 .. n *.kt Dateien.
 

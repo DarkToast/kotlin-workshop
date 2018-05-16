@@ -1,5 +1,14 @@
 package session1
 
+/**
+ * Themen:
+ *  - If-Expression
+ *  - Loops
+ *  - Try-Catch
+ *  - Exceptions
+ *  - When
+ */
+
 fun main(args: Array<String>) {
     val x = 42
     println(checkValueClassic(x))

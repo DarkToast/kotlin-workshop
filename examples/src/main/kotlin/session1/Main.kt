@@ -1,5 +1,13 @@
 package session1
 
+/**
+ * Themen:
+ *  - main function
+ *  - val vs. var
+ *  - Alles sind Objekte
+ */
+
+
 /* Kotlin erlaubt stand alone functions, sodass wir die main-Methode als einzelne Funktion im der Datei definieren können.
    Schauen wir sie uns ein wenig genauer an, um ein wenig die Syntax von Kotlin zu verstehen.
 
