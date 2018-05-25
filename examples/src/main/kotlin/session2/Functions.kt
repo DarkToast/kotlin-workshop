@@ -8,7 +8,7 @@ package session2
  *  - Typ aliases
  */
 
-typealias Foo = (String) -> Boolean
+typealias EmployeeMapper = (Employee) -> Employee
 
 fun main(args: Array<String>) {
     functions()
@@ -81,7 +81,7 @@ fun higherOrderFunctions() {
      * Egal ob `createSalaryIncrease` beendet ist der die erzeugte Funktion durch alle Schichten der Applikation
      * geschleust wird: Der Wert für `factor` bleibt immer im Scope der neuen Funktion erhalten.
      */
-    fun createSalaryIncrease(factor: Float): (Employee) -> Employee {
+    fun createSalaryIncrease(factor: Float): EmployeeMapper {
 
         return { employee: Employee ->
             val newSalary: Int = (employee.salary.value * factor).toInt()
