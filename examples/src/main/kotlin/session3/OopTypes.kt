@@ -30,7 +30,8 @@ interface Arithmetic {
  * Wort `abstract` vor `class` definiert.
  *
  * Diese abstrakte Klasse implementiert das Interface `Arithmetic`. Dabei wird hinter dem Klassenname und einem `:`
- * das Interface oder die abzuleitende Klasse gesetzt.
+ * das Interface oder die abzuleitende Klasse gesetzt. Möchte man mehrere Interfaces implementieren, so werden diese nach
+ * dem `:`, kommasepariert aufgelistet.
  */
 abstract class ExtendedArithmetic: Arithmetic {
 
@@ -85,20 +86,26 @@ class ConcreteArithmetic: ExtendedArithmetic() {
     }
 
     override fun add(a: Int, b: Int): Int {
+        // Greift die private Funktion `LOGGER` zu.
         LOGGER("Add $a and $b")
         return super.add(a, b)
     }
 
-    private fun format(prefix: String): String {
-        return prefix + helloWorld
+    private fun getTheBasicInteger(): String {
+        return basicInt.toString()
     }
 
+    // Um Kotlinklassen den Zugriff auf statische Elemente zu gewähren, existiert das Konzept des `companion object`s
+    // Dieses `object` wird direkt in der Klasse definiert und kann somit auf private Elemente der umgebenen Klasse
+    // zugreifen, bzw. die Klasse auf private Elemente des `objects`.
     companion object {
-
-        private val helloWorld: String = "Hallo Welt"
-
-        val LOGGER = { message: String ->
+        private val LOGGER = { message: String ->
             println("Log: $message")
+        }
+
+        fun printInformation(arithmetic: ConcreteArithmetic) {
+            // Greift auf die private Methode `getTheBasicInteger` zu.
+            println("The basic int is: ${arithmetic.getTheBasicInteger()}")
         }
     }
 }
