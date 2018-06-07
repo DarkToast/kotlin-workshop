@@ -28,6 +28,7 @@
     <modules>
         <module>examples</module>
         <module>spring-kotlin</module>
+        <module>workshopspace</module>
     </modules>
 
     <dependencyManagement>
@@ -75,6 +76,12 @@
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
                 <version>${junit-platform-runner.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test</artifactId>
+                <version>${kotlin.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
