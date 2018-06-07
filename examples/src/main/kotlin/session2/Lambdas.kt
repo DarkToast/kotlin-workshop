@@ -37,6 +37,11 @@ fun lambdas() {
     // den Startwert 0. `int` ist wiederum das aktuelle Element der Liste.
     aList.fold(0, { acc, int -> acc + int} )    // 15
 
+    // Alternative Schreibweise, wenn ein Lambda der letzte Parameter ist.
+    aList.fold(0) {
+        acc, int -> acc + int
+    }
+
     // `forEach` führt das übergenene Lambda einfach auf jedes Element aus. Der Rückgabewert ist dabei egal.
     aList.forEach { int -> println(int) }
 }
