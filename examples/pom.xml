@@ -75,7 +75,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>session1.MainKt</mainClass>
+                            <mainClass>session1._1_MainKt</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
