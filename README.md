@@ -4,7 +4,7 @@ Willkommen zum tarent Academy Kotlin Workshop.
 
 Damit jeder die Workshopinhalte auch nach den Terminen folgen kann und selbst kein Kotlinprojekt aufziehen muss, kann dieses Projekt genutzt werden.
 
-Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0`.
+Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0` mit einem `openJDK-8`.
 
     $ git clone https://github.com/DarkToast/kotlin-workshop.git
     $ cd kotlin-workshop
@@ -15,6 +15,8 @@ In den einzelnen Modulen innerhalb des Projekts finden sich folgende Inhalte:
 `examples` Alle theoretischen Blöcke sind hier noch einmal, mit Kommentaren versehen, aufgelistet.  
 
 `workshopspace` Ein vorgefertigtes, aber leeres, Kotlin-Mavenprojekt mit 
+
+`spring-kotlin` Ein Beispiel, wie sich Kotlin mit Spring Boot 2 verheiraten lässt.
 
 
 ## Links:
@@ -34,26 +36,39 @@ Informationen zu den Kotlin Testframeworks
 * https://github.com/kotlintest/kotlintest
 
 
+## Ablauf
+
+Ich werde an maximal fünf Tagen für jeweils 2,5h eine Workshopeinheit halten. Zunächst werde ich euch in 30 - 45min 
+Syntax und Sprachelemente zeigen. Im Anschluss werden wir in kleinen Grüppchen oder, wer will, alleine Übungen machen.
+Dazu eigenen sich Coding Dojos. Dies sind kleine vorgefertigte Problemstellungen, die man in gut einer Stunde lösen kann.
+
+Das Hauptaugenmerk soll dabei eben nicht auf den Problemstellungen liegen, sondern darauf, etwas mit Kotlin zu machen. 
+Eine Auswahl an schönen Dojos finden sich hier: http://ccd-school.de/coding-dojo/
+
+Jeder einzelne kann aber auch sein Wunschdojo aussuchen.
+
 ## Workshopeinheiten
 
-### Part 1
+Bis auf den ersten Teil können wir jeden anderen Teil frei gestalten. Die Themen sind nicht vorgegeben.
+ 
+### Teil 1
 * Basics
 * Conditionals
 * Methods
 * Simple classes
 
-### Part 2
+### Teil 2
 * Data classes
 * functions
 * lambdas
 
-### Part 3
+### Teil 3
 * Custom accessors
 * oop types
 * sealed classs
 * visibility modifier
 
-### Part 4
+### Teil 4
 * Delegation
 * Extensions
 * Operators
