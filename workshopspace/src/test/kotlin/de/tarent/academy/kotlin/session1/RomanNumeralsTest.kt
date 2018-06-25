@@ -1,4 +1,4 @@
-package de.tarent.academy.kotlin.excercise
+package de.tarent.academy.kotlin.session1
 
 import org.junit.Assert.*
 import org.junit.Test
