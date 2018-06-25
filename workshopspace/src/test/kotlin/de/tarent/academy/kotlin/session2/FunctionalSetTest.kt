@@ -58,7 +58,7 @@ class FunctionalSetTest {
         val unionSet = union(singleSet(10), union(singleSet(15), singleSet(20)))
 
         assertEquals(false, unionSet(5))
-        assertEquals(false, unionSet(10))
+        assertEquals(true, unionSet(10))
         assertEquals(true, unionSet(15))
         assertEquals(true, unionSet(20))
     }
