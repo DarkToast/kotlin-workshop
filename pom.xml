@@ -9,7 +9,7 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>de.iwanzik</groupId>
+    <groupId>de.tarent.academy</groupId>
     <artifactId>KotlinWorkshop</artifactId>
     <version>1.0.0</version>
     <description>Kotlin Workshop</description>

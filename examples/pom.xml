@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>de.iwanzik</groupId>
+        <groupId>de.tarent.academy</groupId>
         <artifactId>KotlinWorkshop</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>de.iwanzik</groupId>
+    <groupId>de.tarent.academy</groupId>
     <artifactId>examples</artifactId>
     <version>1.0.0</version>
     <description>Kotlin Techtalk - Examples</description>
