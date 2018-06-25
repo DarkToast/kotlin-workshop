@@ -3,10 +3,14 @@ package de.tarent.academy.kotlin.session2
 import de.tarent.academy.kotlin.session2.FunctionSet.contains
 import de.tarent.academy.kotlin.session2.FunctionSet.diff
 import de.tarent.academy.kotlin.session2.FunctionSet.emptySet
+import de.tarent.academy.kotlin.session2.FunctionSet.exists
 import de.tarent.academy.kotlin.session2.FunctionSet.filter
+import de.tarent.academy.kotlin.session2.FunctionSet.forall
 import de.tarent.academy.kotlin.session2.FunctionSet.intersect
 import de.tarent.academy.kotlin.session2.FunctionSet.singleSet
 import de.tarent.academy.kotlin.session2.FunctionSet.union
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -129,6 +133,26 @@ class FunctionalSetTest {
         assertEquals(false, filterSet(1))
         assertEquals(false, filterSet(2))
         assertEquals(false, filterSet(3))
+    }
+
+    @Test
+    fun `exists checks for the existential quantification`() {
+        val set = union(singleSet(1), union(singleSet(2), singleSet(3)))
+
+//        assertTrue(exists(set, { i -> i % 2 == 0 }))
+//        assertFalse(exists(set, { i -> i > 4 }))
+
+        TODO()
+    }
+
+    @Test
+    fun `forall checks for the universal quantification`() {
+        val set = union(singleSet(1), union(singleSet(2), singleSet(3)))
+
+//        assertTrue(forall(set, { i -> i > 0 }))
+//        assertFalse(forall(set, { i -> i % 2 == 0 }))
+
+        TODO()
     }
 
 }

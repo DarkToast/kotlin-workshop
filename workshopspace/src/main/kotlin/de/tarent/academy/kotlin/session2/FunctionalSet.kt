@@ -22,5 +22,11 @@ object FunctionSet {
 
     val filterBound = 1000
     val filter: (Set, Filter) -> Set = { i , j -> TODO() }
+
+    // Implement equals to filter
+    val exists = null
+
+    // Implement equals to filter
+    val forall = null
 }
 
