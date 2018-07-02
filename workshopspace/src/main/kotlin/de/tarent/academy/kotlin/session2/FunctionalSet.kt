@@ -12,14 +12,21 @@ object FunctionSet {
         { i: Int -> element == i }
     }
 
-    val contains: (Set, Int) -> Boolean = { i, j -> TODO() }
+    val contains: (Set, Int) -> Boolean = { set, element -> set(element) }
 
-    val union: (Set, Set) -> Set = { i , j -> TODO() }
+    val union: (Set, Set) -> Set = { set1: Set, set2: Set ->
+        { element: Int -> set1(element) || set2(element) }
+    }
 
-    val intersect: (Set, Set) -> Set = { i , j -> TODO() }
-
-    val diff: (Set, Set) -> Set = { i , j -> TODO() }
-
+    val intersect: (Set, Set) -> Set = { set1: Set, set2: Set ->
+        { element: Int -> set1(element) && set2(element) }
+    }
+    val diff: (Set, Set) -> Set = { set1: Set, set2: Set ->
+        { element: Int ->
+            (set1(element) && !set2(element)) ||
+            (!set1(element) && set2(element))
+        }
+    }
     val filterBound = 1000
     val filter: (Set, Filter) -> Set = { i , j -> TODO() }
 

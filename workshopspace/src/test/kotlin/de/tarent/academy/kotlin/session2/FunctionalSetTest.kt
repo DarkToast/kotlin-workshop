@@ -128,7 +128,7 @@ class FunctionalSetTest {
     fun `filter can take every filter function`() {
         val set = union(singleSet(1), union(singleSet(2), singleSet(3)))
 
-        val filterSet = filter(set, { i -> false })
+        val filterSet = filter(set, { i -> true })
 
         assertEquals(false, filterSet(1))
         assertEquals(false, filterSet(2))

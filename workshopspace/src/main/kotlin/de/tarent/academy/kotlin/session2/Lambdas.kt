@@ -43,6 +43,7 @@ fun higherOrderFunction() {
     val list = listOf(max, yvonne)
     val match = matchEmployees(list, matcher)
 
+    list.filter(matcher)
 
     fun createSalaryIncrease(factor: Float): (Employee) -> Employee {
 
