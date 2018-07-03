@@ -25,7 +25,7 @@ class VisibilityClass(onlyConstructor: Int, val publicAttribute: Int, private va
      *  - IntelliJ Modul
      *  - Maven Modul
      *  - Gradle source set
-     *  - Summe von Dateien innerhabl eines Ant Tasks.
+     *  - Summe von Dateien innerhalb eines Ant Tasks.
      *  sein.
      */
     internal val internalValue: Int = 0
