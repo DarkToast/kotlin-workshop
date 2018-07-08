@@ -1,4 +1,4 @@
-package spring
+package spring.hello
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDO
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
+import spring.App
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [App::class], webEnvironment = RANDOM_PORT)

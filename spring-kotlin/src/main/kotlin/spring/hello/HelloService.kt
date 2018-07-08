@@ -1,4 +1,4 @@
-package spring
+package spring.hello
 
 import org.springframework.stereotype.Service
 
