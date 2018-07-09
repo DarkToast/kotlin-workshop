@@ -14,7 +14,7 @@ import spring.App
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [App::class], webEnvironment = RANDOM_PORT)
-class KotlinDemoApplicationTests {
+class ControllerTest {
 
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate
