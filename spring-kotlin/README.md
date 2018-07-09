@@ -5,7 +5,7 @@
   - SKU: required, not empty, unique
   - Name: required, not empty
   - EANs: At least one, non-empty item
-- URL should be `/admin/products/{sku}`  
+- URL should be `/admin/products/{articleNo}`  
   
 ## Task 2: Prices for products
 

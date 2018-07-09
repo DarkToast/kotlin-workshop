@@ -12,7 +12,7 @@ class ProductPort(val repo: ProductRepo) {
     fun post(@RequestBody productView: ProductView): ResponseEntity<ProductView> {
 
         val product =  Product(
-            SKU(productView.sku),
+            ArticleNo(productView.articleNo),
             ProductName(productView.name),
             EAN(productView.ean)
         )
@@ -23,9 +23,9 @@ class ProductPort(val repo: ProductRepo) {
     }
 
 
-    @GetMapping("/{sku}")
+    @GetMapping("/{articleNo}")
     fun get(@PathVariable sku: String): ResponseEntity<ProductView> {
-        val product = repo.findFirstBySku(SKU(sku))
+        val product = repo.findFirstByArticleNo(ArticleNo(sku))
 
         return if(product != null) {
             ResponseEntity.ok(ProductView.fromProduct(product))
@@ -44,13 +44,13 @@ class ProductPort(val repo: ProductRepo) {
 }
 
 data class ProductView(
-    val sku: String,
+    val articleNo: String,
     val name: String,
     val ean: String
 ) {
     companion object {
         fun fromProduct(product: Product): ProductView = ProductView(
-            product.sku.value,
+            product.articleNo.value,
             product.name.name,
             product.ean.value
         )

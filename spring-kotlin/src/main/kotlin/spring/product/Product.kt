@@ -2,10 +2,10 @@ package spring.product
 
 import org.springframework.data.annotation.Id
 
-data class SKU(val value: String) {
+data class ArticleNo(val value: String) {
     init {
         if (value.isEmpty() || !value.matches(Regex("^[\\w\\d]+$"))) {
-            throw IllegalArgumentException("$value is not a valid sku")
+            throw IllegalArgumentException("$value is not a valid articleNo")
         }
     }
 }
@@ -27,5 +27,5 @@ data class EAN(val value: String) {
 }
 
 
-data class Product(@Id val sku: SKU, val name: ProductName, val ean: EAN)
+data class Product(@Id val articleNo: ArticleNo, val name: ProductName, val ean: EAN)
 

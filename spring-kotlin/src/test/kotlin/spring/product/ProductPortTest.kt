@@ -22,7 +22,7 @@ class ProductPortTest {
     val sku = "12345678"
     val productJson =
         """ |{
-            |    "sku": "$sku",
+            |    "articleNo": "$sku",
             |    "name": "Bier",
             |    "ean": "12345678
             |}
