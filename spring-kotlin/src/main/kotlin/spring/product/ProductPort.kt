@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @Controller
-@RequestMapping("/admin/products")
+@RequestMapping("/products")
 class ProductPort(val repo: ProductRepo) {
 
     @PostMapping
@@ -24,8 +24,8 @@ class ProductPort(val repo: ProductRepo) {
 
 
     @GetMapping("/{articleNo}")
-    fun get(@PathVariable sku: String): ResponseEntity<ProductView> {
-        val product = repo.findFirstByArticleNo(ArticleNo(sku))
+    fun get(@PathVariable articleNo: String): ResponseEntity<ProductView> {
+        val product = repo.findFirstByArticleNo(ArticleNo(articleNo))
 
         return if(product != null) {
             ResponseEntity.ok(ProductView.fromProduct(product))

@@ -2,10 +2,10 @@
 
 - Add the ability to create and update products.
 - Validate the product and enforce data integrity constraints:
-  - SKU: required, not empty, unique
+  - articleNo: required, not empty, unique
   - Name: required, not empty
   - EANs: At least one, non-empty item
-- URL should be `/admin/products/{articleNo}`  
+- URL should be `/products/{articleNo}`  
   
 ## Task 2: Prices for products
 
