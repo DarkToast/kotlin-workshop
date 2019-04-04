@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 import spring.App
@@ -27,11 +29,13 @@ class ProductPortTest {
 
         // when - post on the resource
         val result = testRestTemplate.postForEntity("/products", product, String::class.java)
+        val entity = HttpEntity(product)
+        val result2 = testRestTemplate.exchange("/products/$articleNo", HttpMethod.PUT, entity, String::class.java)
 
         // then - http ok and the new product as response
         assertNotNull(result)
         assertEquals(HttpStatus.OK, result?.statusCode)
-        assertProductResponse(result.body ?: "", articleNo)
+        assertProductResponse(articleNo, result.body ?: "")
     }
 
     @Test
@@ -46,12 +50,12 @@ class ProductPortTest {
         // then - http ok and the product response
         assertNotNull(result)
         assertEquals(HttpStatus.OK, result?.statusCode)
-        assertProductResponse(result?.body ?: "", articleNo)
+        assertProductResponse(articleNo, result?.body ?: "")
     }
 
-    private fun assertProductResponse(responseBody: String, articleNo: String) {
+    private fun assertProductResponse(articleNo: String, responseBody: String) {
         val productJson ="""{"articleNo":"$articleNo","name":"Bier","ean":"12345678"}""".trim()
-        assertEquals(responseBody, productJson)
+        assertEquals(productJson, responseBody)
     }
 
     private fun anExistingProduct(articleNo: String) {

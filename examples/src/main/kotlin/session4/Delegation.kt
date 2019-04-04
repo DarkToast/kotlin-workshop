@@ -39,7 +39,7 @@ class PrinterFacade(printer: Printer): Printer by printer {
  * - Der Aufruf von `printMessageLine` wird die Implementierung von `PrinterFacade` nutzen.
  */
 fun main(args: Array<String>) {
-    val printer = PrinterFacade(StdOutPrinter())
+    val printer: Printer = PrinterFacade(StdOutPrinter())
     printer.printMessage("Hallo Welt")
     printer.printMessageLine("Hallo Welt")
 }

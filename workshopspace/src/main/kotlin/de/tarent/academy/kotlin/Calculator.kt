@@ -4,7 +4,7 @@ class Calculator {
 
     fun sum(list: List<Int>): Int {
 
-        tailrec fun step(accumulator: Int, list: List<Int>): Int {
+        fun step(accumulator: Int, list: List<Int>): Int {
             return if(list.isEmpty()) {
                 accumulator
             } else {
