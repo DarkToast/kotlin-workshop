@@ -67,6 +67,10 @@ Jeder einzelne kann aber auch sein Wunschdojo aussuchen.
 ### 12:30 - 13:30
 PAUSE!
 
+### 13:30 - 14:00
+* Klasse
+* Non- nullable types
+* Lambdas - Collection-API
 
 
 ### Teil 2

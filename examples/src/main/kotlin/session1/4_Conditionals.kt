@@ -76,7 +76,7 @@ fun forLoop() {
     }
 }
 
-// ---- Try Catch
+// ---- Exceptions und Try Catch
 
 fun tryCatch() {
 
