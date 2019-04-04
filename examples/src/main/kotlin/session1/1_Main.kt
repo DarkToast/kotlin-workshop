@@ -1,5 +1,7 @@
 package session1
 
+import oneday.basics.myStaticFunction
+
 /**
  * Themen:
  *  - main function

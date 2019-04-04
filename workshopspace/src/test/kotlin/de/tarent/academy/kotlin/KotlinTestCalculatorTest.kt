@@ -1,6 +1,6 @@
 package de.tarent.academy.kotlin
 
-import io.kotlintest.matchers.shouldBe
+import io.kotlintest.shouldBe
 import io.kotlintest.specs.FeatureSpec
 
 class KotlinTestCalculatorTest : FeatureSpec() {

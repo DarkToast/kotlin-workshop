@@ -14,7 +14,7 @@ package session1
 /*
   Kotlindateien sind nicht an Klassen gebunden, sondern sind seht frei in ihrem Inhalt.
 
-  Generell können ohne Klassen Werte definiert werden. Diese glangen dann in einen globalen Scope. Daher: Vorsicht mit
+  Generell können ohne Klassen Werte definiert werden. Diese gelangen dann in einen globalen Scope. Daher: Vorsicht mit
   solchen Konstrukten.
 */
 val x = "Hello world"

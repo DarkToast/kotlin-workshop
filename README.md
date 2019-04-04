@@ -2,9 +2,9 @@
 
 Willkommen zum tarent Academy Kotlin Workshop.
 
-Damit jeder die Workshopinhalte auch nach den Terminen folgen kann und selbst kein Kotlinprojekt aufziehen muss, kann dieses Projekt genutzt werden.
+Damit jeder die Workshopinhalte direkt einsetzen kann und selbst kein Kotlinprojekt aufziehen muss, kann dieses Projekt genutzt werden.
 
-Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0` mit einem `openJDK-8`.
+Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0` mit einem `openJDK-11`.
 
     $ git clone https://github.com/DarkToast/kotlin-workshop.git
     $ cd kotlin-workshop
@@ -14,7 +14,7 @@ In den einzelnen Modulen innerhalb des Projekts finden sich folgende Inhalte:
 
 `examples` Alle theoretischen Blöcke sind hier noch einmal, mit Kommentaren versehen, aufgelistet.  
 
-`workshopspace` Ein vorgefertigtes, aber leeres, Kotlin-Mavenprojekt mit 
+`workshopspace` Ein vorgefertigtes, aber leeres, Kotlin-Mavenprojekt.
 
 `spring-kotlin` Ein Beispiel, wie sich Kotlin mit Spring Boot 2 verheiraten lässt.
 
@@ -47,15 +47,27 @@ Eine Auswahl an schönen Dojos finden sich hier: http://ccd-school.de/coding-doj
 
 Jeder einzelne kann aber auch sein Wunschdojo aussuchen.
 
-## Workshopeinheiten
-
-Bis auf den ersten Teil können wir jeden anderen Teil frei gestalten. Die Themen sind nicht vorgegeben.
+## Schedule
  
-### Teil 1
-* Basics
-* Conditionals
-* Methods
-* Simple classes
+### 10:00 - 10:30
+* Vorstellung und Agenda
+
+### 10:30 - 11:30
+* Übersicht über Kotlin
+* Beispielprojekt
+* Aufsetzen der Umgebung
+
+### 11:30 - 12:30
+* Hands-On! 
+* Basic Syntax
+* Variablen
+* Methoden
+* mein erster grüner Test!
+
+### 12:30 - 13:30
+PAUSE!
+
+
 
 ### Teil 2
 * Data classes
