@@ -18,7 +18,7 @@ class CreateShoppingCartTest() : FeatureSpec() {
     lateinit var restTemplate: TestRestTemplate
 
     init {
-        feature("sum") {
+        feature("The shopping cart service") {
             scenario("a POST on /shoppingcart returns HTTP 201") {
                 val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
 
