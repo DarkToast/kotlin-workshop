@@ -1,7 +1,5 @@
 package de.tarent.ciwanzik.shoppingCart.domain
 
-data class SKU(val value: String)
-
 data class Name(val value: String) {
     private val regex = "[\\w\\düöäÜÖÄß&]{1,40}".toRegex()
 

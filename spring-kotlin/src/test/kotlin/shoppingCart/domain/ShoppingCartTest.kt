@@ -9,6 +9,17 @@ import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.FeatureSpec
 
+
+/*
+ * Aufgabe:
+ *
+ * Bitte implementieren Sie nach und die einzelnen Teste der Klasse ShoppingCart.
+ *
+ * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
+ * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
+ *
+ * Das Ziel ist, kompliziertere Methoden mit Collections und nullable fields zu implementieren.
+*/
 class ShoppingCartTest : FeatureSpec() {
     var cart: ShoppingCart = ShoppingCart()
 
