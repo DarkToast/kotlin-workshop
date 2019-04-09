@@ -1,8 +1,6 @@
 package component
 
 import de.tarent.ciwanzik.Application
-import io.kotlintest.matchers.collections.shouldContain
-import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.string.shouldMatch
 import io.kotlintest.matchers.string.shouldNotContain
 import io.kotlintest.shouldBe
@@ -11,7 +9,6 @@ import io.kotlintest.spring.SpringListener
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import javax.inject.Inject
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
 class CreateShoppingCartTest() : FeatureSpec() {
