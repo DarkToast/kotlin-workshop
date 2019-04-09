@@ -1,7 +1,7 @@
 package shoppingCart.domain
 
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.TooMuchItemsOfAProduct
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.TooMuchItemsOfAProduct
 import io.kotlintest.shouldNotThrow
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.FeatureSpec

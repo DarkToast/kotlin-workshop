@@ -1,9 +1,9 @@
-package de.tarent.ciwanzik.shoppingCart.application
+package shoppingCart.application
 
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartUuid
 import java.util.*
 
 interface ShoppingCartService {

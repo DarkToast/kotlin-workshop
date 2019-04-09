@@ -1,6 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.domain
-
-data class SKU(val value: String)
+package shoppingCart.domain
 
 data class Name(val value: String) {
     private val regex = "[\\w\\düöäÜÖÄß&]{1,40}".toRegex()
@@ -16,3 +14,5 @@ data class Name(val value: String) {
 
 
 data class Product(val sku: SKU, val price: Price, val name: Name)
+
+class SKU(val value: String)

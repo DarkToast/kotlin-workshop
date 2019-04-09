@@ -1,7 +1,7 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.productService
+package shoppingCart.ports.driven.productService
 
-import de.tarent.ciwanzik.shoppingCart.domain.Product
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
+import shoppingCart.domain.Product
+import shoppingCart.domain.SKU
 import java.util.*
 
 interface ProductRepositoryPort {

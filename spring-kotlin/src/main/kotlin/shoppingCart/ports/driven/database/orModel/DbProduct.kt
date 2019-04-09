@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.database.orModel
+package shoppingCart.ports.driven.database.orModel
 
 import javax.persistence.*
 

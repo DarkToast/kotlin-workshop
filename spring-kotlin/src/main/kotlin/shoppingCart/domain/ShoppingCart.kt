@@ -1,10 +1,10 @@
-package de.tarent.ciwanzik.shoppingCart.domain
+package shoppingCart.domain
 
 import java.lang.RuntimeException
 import java.util.*
 
 class MaximumProductCountExceededException(productCount: Int):
-        RuntimeException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
+        DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
 
 class ShoppingCart(
     val shoppingCartUuid: ShoppingCartUuid = ShoppingCartUuid(),

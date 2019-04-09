@@ -1,15 +1,18 @@
 package shoppingCart.domain
 
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldNotThrow
-import io.kotlintest.shouldThrow
 import io.kotlintest.specs.FeatureSpec
 
 class SkuTest: FeatureSpec({
+    /*
+     * Aufgabe 2:
+     * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
+     * `shoppingCart/domain/Product.kt` die Klasse SKU, die Dort der Klasse `Product` fehlt.
+     *
+     * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren.
+    */
+
     feature("A SKU") {
-        scenario("can contain up to 20 alphanumeric characters") {
+        /*scenario("can contain up to 20 alphanumeric characters") {
             shouldNotThrow<IllegalArgumentException> {
                 SKU("12345678901234567890")
             }
@@ -42,6 +45,6 @@ class SkuTest: FeatureSpec({
 
         scenario("!A SKU can be represented as string") {
             SKU("12345678901234567890").toString() shouldBe "12345678901234567890"
-        }
+        }*/
     }
 })

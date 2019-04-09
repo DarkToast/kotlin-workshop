@@ -1,6 +1,7 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.database.orModel
+package shoppingCart.ports.driven.database.orModel
 
-import de.tarent.ciwanzik.shoppingCart.domain.*
+import shoppingCart.domain.*
+import java.util.*
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -9,6 +10,8 @@ import javax.persistence.OneToOne
 @Entity(name = "ShoppingCartItem")
 data class DbShoppingCartItem(
         @Id
+        var id: UUID = UUID.randomUUID(),
+
         var sku: String?,
 
         @OneToOne(cascade = [CascadeType.ALL])
@@ -33,7 +36,7 @@ data class DbShoppingCartItem(
     companion object {
         fun fromProduct(product: Product, quantity: Quantity): DbShoppingCartItem {
             val dbProduct = DbProduct(product.sku.toString(), product.name.toString(), product.price.valueInCent)
-            return DbShoppingCartItem(product.sku.toString(), dbProduct, quantity.value)
+            return DbShoppingCartItem(sku = product.sku.toString(), product = dbProduct, quantity = quantity.value)
         }
     }
 }

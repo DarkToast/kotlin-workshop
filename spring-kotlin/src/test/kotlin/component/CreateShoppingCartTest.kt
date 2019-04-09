@@ -1,6 +1,6 @@
 package component
 
-import de.tarent.ciwanzik.Application
+import shoppingCart.Application
 import io.kotlintest.matchers.string.shouldMatch
 import io.kotlintest.matchers.string.shouldNotContain
 import io.kotlintest.shouldBe
@@ -18,7 +18,7 @@ class CreateShoppingCartTest() : FeatureSpec() {
     lateinit var restTemplate: TestRestTemplate
 
     init {
-        feature("sum") {
+        feature("The shopping cart service") {
             scenario("a POST on /shoppingcart returns HTTP 201") {
                 val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
 

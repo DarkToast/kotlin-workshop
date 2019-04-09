@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik
+package shoppingCart
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

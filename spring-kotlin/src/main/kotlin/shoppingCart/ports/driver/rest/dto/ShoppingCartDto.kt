@@ -1,13 +1,13 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.driver.rest.dto
 
-import de.tarent.ciwanzik.shoppingCart.domain.Product
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartAmount
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.Method.GET
+import shoppingCart.domain.Product
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartAmount
+import shoppingCart.ports.driver.rest.dto.Method.GET
 import java.net.URI
 import java.util.*
 
-data class Item(val quantity: Int, val product: Product)
+data class Item(val quantity: Int, val product: GetProduct)
 
 data class ShoppingCartDto(
     val uuid: UUID,
@@ -24,7 +24,7 @@ data class ShoppingCartDto(
         fun fromDomain(shoppingCart: ShoppingCart): ShoppingCartDto {
             val amount = shoppingCart.amount()
             val items = shoppingCart.content().map { pair ->
-                Item(pair.second.value, pair.first)
+                Item(pair.second.value, GetProduct(pair.first.sku.value, pair.first.name.value))
             }
 
             val uuid = shoppingCart.shoppingCartUuid.uuid

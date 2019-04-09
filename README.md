@@ -14,10 +14,9 @@ In den einzelnen Modulen innerhalb des Projekts finden sich folgende Inhalte:
 
 `examples` Alle theoretischen Blöcke sind hier noch einmal, mit Kommentaren versehen, aufgelistet.  
 
+`spring-kotlin` Ein Beispielservice, an dem wir die meiste Zeit arbeiten werden. 
+
 `workshopspace` Ein vorgefertigtes, aber leeres, Kotlin-Mavenprojekt.
-
-`spring-kotlin` Ein Beispiel, wie sich Kotlin mit Spring Boot 2 verheiraten lässt.
-
 
 ## Links:
 
@@ -32,59 +31,52 @@ Online Hand-ons. Gut, um ohne Balast Kotlin ausprobieren zu können.
 * https://kotlinlang.org/docs/tutorials/koans.html
 
 Informationen zu den Kotlin Testframeworks
-* http://spekframework.org/docs/latest/#_overview
 * https://github.com/kotlintest/kotlintest
 
 
 ## Ablauf
 
-Ich werde an maximal fünf Tagen für jeweils 2,5h eine Workshopeinheit halten. Zunächst werde ich euch in 30 - 45min 
-Syntax und Sprachelemente zeigen. Im Anschluss werden wir in kleinen Grüppchen oder, wer will, alleine Übungen machen.
-Dazu eigenen sich Coding Dojos. Dies sind kleine vorgefertigte Problemstellungen, die man in gut einer Stunde lösen kann.
-
-Das Hauptaugenmerk soll dabei eben nicht auf den Problemstellungen liegen, sondern darauf, etwas mit Kotlin zu machen. 
-Eine Auswahl an schönen Dojos finden sich hier: http://ccd-school.de/coding-dojo/
-
-Jeder einzelne kann aber auch sein Wunschdojo aussuchen.
+Wir werden in drei auf einander aufbauenden Teilen zunächst einzelne Teile von Kotlin theoretisch kennen lernen 
+und sie im Anschluss per Hands-On ausprobieren und einen Beispielservice nach und nach zum Leben erwecken.
 
 ## Schedule
  
 ### 10:00 - 10:30
 * Vorstellung und Agenda
 
-### 10:30 - 11:30
+### 10:30 - 11:00
 * Übersicht über Kotlin
 * Beispielprojekt
 * Aufsetzen der Umgebung
 
-### 11:30 - 12:30
+### 11:00 - 12:00
 * Hands-On! 
 * Basic Syntax
-* Variablen
-* Methoden
 * mein erster grüner Test!
+* Aufgabe 1
 
-### 12:30 - 13:30
+### 12:00 - 13:00
 PAUSE!
 
-### 13:30 - 14:00
-* Klasse
+### 13:00 - 13.30
+* Klassen
 * Non- nullable types
-* Lambdas - Collection-API
 
+### 13:30 - 14:30
+* Hands-On!
+* Wir entwickeln Domainobjekte
+* Aufgabe 2 - 4
 
-### Teil 2
-* Data classes
-* functions
-* lambdas
+### 14:40 - 15:00
+* Kotlin Collection-API
+* Lambdas
 
-### Teil 3
-* Custom accessors
-* oop types
-* sealed classs
-* visibility modifier
+### 15:00 - 16:00
+* Hands-On!
+* Wir entwickeln Logik
+* Aufgabe 5 - 6
 
-### Teil 4
-* Delegation
-* Extensions
-* Operators
+### 16:00 - 16:30
+* Hands-On!
+* Wir finalisieren den Service
+* Aufgabe 7 

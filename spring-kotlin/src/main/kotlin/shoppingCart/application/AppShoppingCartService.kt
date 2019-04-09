@@ -1,28 +1,21 @@
-package de.tarent.ciwanzik.shoppingCart.application
+package shoppingCart.application
 
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.ProductRepositoryPort
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartUuid
+import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import org.springframework.stereotype.Service
 import java.util.*
 
+class ProductNotFoundException(sku: SKU): ApplicationException("The product with the sku $sku is unknown.")
+
 @Service
-class AppShoppingCartService(
-        private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort,
-        private val productRepositoryPort: ProductRepositoryPort) : ShoppingCartService {
+class AppShoppingCartService(private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort) : ShoppingCartService {
 
     override fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): Optional<ShoppingCart> {
-        return productRepositoryPort.findProductBySku(productSku).flatMap { foundProduct ->
-            shoppingCartRepositoryPort.load(shoppingCartUuid)
-                    .map { shoppingCart -> shoppingCart.putProductInto(foundProduct, quantity) }
-                    .map { shoppingCart ->
-                        shoppingCartRepositoryPort.save(shoppingCart)
-                        shoppingCart
-                    }
-        }
+       return Optional.empty()
     }
 
     override fun takeNewShoppingCart(): ShoppingCart {

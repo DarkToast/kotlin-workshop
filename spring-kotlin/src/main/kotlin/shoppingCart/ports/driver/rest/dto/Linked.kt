@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.driver.rest.dto
 
 import java.net.URI
 
