@@ -10,19 +10,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class AppShoppingCartService(
-        private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort,
-        private val productRepositoryPort: ProductRepositoryPort) : ShoppingCartService {
+class AppShoppingCartService(private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort) : ShoppingCartService {
 
     override fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): Optional<ShoppingCart> {
-        return productRepositoryPort.findProductBySku(productSku).flatMap { foundProduct ->
-            shoppingCartRepositoryPort.load(shoppingCartUuid)
-                    .map { shoppingCart -> shoppingCart.putProductInto(foundProduct, quantity) }
-                    .map { shoppingCart ->
-                        shoppingCartRepositoryPort.save(shoppingCart)
-                        shoppingCart
-                    }
-        }
+       return Optional.empty()
     }
 
     override fun takeNewShoppingCart(): ShoppingCart {

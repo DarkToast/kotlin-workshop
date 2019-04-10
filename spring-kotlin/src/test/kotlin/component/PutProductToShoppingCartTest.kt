@@ -23,7 +23,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
 
     init {
         feature("Adding products to the shopping cart") {
-            scenario("an existing shopping cart has an addProduct link") {
+            scenario("!an existing shopping cart has an addProduct link") {
                 val response = createAndGetShoppingCart()
 
                 val json = JSONObject(response.body)
@@ -33,14 +33,14 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 link.optString("method") shouldBe "PUT"
             }
 
-            scenario("a new shopping cart has no products") {
+            scenario("!a new shopping cart has no products") {
                 val response = createAndGetShoppingCart()
 
                 val products = extractProducts(response)
                 products.size shouldBe 0
             }
 
-            scenario("adding a new product returns status 200") {
+            scenario("!adding a new product returns status 200") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -49,7 +49,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 200
             }
 
-            scenario("an added product can be received") {
+            scenario("!an added product can be received") {
                 val location = createShoppingCart()
                 val newProduct = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -63,7 +63,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products[0].sku shouldBe "123456"
             }
 
-            scenario("two products are added and received") {
+            scenario("!two products are added and received") {
                 val location = createShoppingCart()
                 val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
                 val secondProduct = """{ "sku": "654321", "quantity": "3" }"""
