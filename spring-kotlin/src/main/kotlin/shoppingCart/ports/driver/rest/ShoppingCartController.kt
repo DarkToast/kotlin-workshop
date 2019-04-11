@@ -45,4 +45,21 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
 
         return ResponseEntity.created(uri).build()
     }
+
+    /*
+     * RequestBody:
+     *  In Spring kann der RequestBody und auch Pfadvariablen direkt deserialisiert werden.
+     *  Da Kotlin-Data classes keinen Defaultkonstruktor und non-nullable types haben, haben es Liraries die Jackson
+     *  schwer, Kotlinklassen wie erdacht zu benutzen. Stattdessen hat dieser Service für den REST-Layer eigene Data
+     *  Transfer Objekte (DTOs)
+     *
+     *  Ein ProduktDto besteht in Form der Klasse PutProduct. Ein Zugriff erhält man mit einem mit @RequestBody annotierten
+     *  Parameter seiner Methode: `@RequestBody putProductDto: PutProduct`
+     *
+     * ResponseEntity:
+     *   In Spring werden HTTP Responses über die Klasse `ResponseEntity` zurückgegeben. Sie besitzt bereits Convenient-
+     *   methoden wie `created`, `ok` oder `notFound`. Als Response Body können hier beliebige Objekte angegeben werden.
+     *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
+     *   `ResponseEntity` kann aber auch normal instantiiert werden.
+     */
 }
