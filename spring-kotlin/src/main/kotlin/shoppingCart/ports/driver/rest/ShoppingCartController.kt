@@ -4,6 +4,7 @@ import de.tarent.ciwanzik.shoppingCart.application.ShoppingCartService
 import de.tarent.ciwanzik.shoppingCart.domain.Quantity
 import de.tarent.ciwanzik.shoppingCart.domain.SKU
 import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
+import de.tarent.ciwanzik.shoppingCart.ports.PortException
 import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.PutProduct
 import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.ShoppingCartDto
 import org.springframework.http.HttpStatus
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import java.net.URI
 import java.util.*
+
+class ShoppingCartNotFoundException(uuid: ShoppingCartUuid): PortException("The shopping cart with id $uuid is unknown.")
 
 @Controller
 class ShoppingCartController(private val shoppingCartService: ShoppingCartService) {

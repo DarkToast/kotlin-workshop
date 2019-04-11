@@ -9,6 +9,8 @@ import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.ProductReposi
 import org.springframework.stereotype.Service
 import java.util.*
 
+class ProductNotFoundException(sku: SKU): ApplicationException("The product with the sku $sku is unknown.")
+
 @Service
 class AppShoppingCartService(private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort) : ShoppingCartService {
 

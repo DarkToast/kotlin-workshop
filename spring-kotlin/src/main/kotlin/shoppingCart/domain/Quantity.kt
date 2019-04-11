@@ -9,4 +9,4 @@ data class Quantity(val value: Int) {
     }
 }
 
-class TooMuchItemsOfAProduct(quantity: Int): RuntimeException("Quantity must not exceed 10. Is '$quantity'")
+class TooMuchItemsOfAProduct(quantity: Int): DomainException("Quantity must not exceed 10. Is '$quantity'")
