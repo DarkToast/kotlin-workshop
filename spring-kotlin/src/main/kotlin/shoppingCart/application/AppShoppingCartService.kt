@@ -14,10 +14,6 @@ class ProductNotFoundException(sku: SKU): ApplicationException("The product with
 @Service
 class AppShoppingCartService(private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort) : ShoppingCartService {
 
-    override fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): Optional<ShoppingCart> {
-       return Optional.empty()
-    }
-
     override fun takeNewShoppingCart(): ShoppingCart {
         val shoppingCart = ShoppingCart()
         shoppingCartRepositoryPort.save(shoppingCart)

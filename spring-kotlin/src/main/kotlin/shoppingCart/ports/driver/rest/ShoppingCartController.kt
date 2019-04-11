@@ -38,9 +38,4 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
 
         return ResponseEntity.created(uri).build()
     }
-
-    @RequestMapping(path = ["/shoppingcart/{uuid}/items"], method = [RequestMethod.PUT])
-    fun putProductToShoppingCart(@PathVariable uuid: UUID, @RequestBody putProductDto: PutProduct): ResponseEntity<ShoppingCartDto> {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
-    }
 }
