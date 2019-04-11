@@ -39,6 +39,9 @@ Informationen zu den Kotlin Testframeworks
 Wir werden in drei auf einander aufbauenden Teilen zunächst einzelne Teile von Kotlin theoretisch kennen lernen 
 und sie im Anschluss per Hands-On ausprobieren und einen Beispielservice nach und nach zum Leben erwecken.
 
+Nach dem Training würde ich mich über ein Feedback per Formular freuen:
+https://forms.gle/bDQb5CdAVGUBzQF4A
+
 ## Schedule
  
 ### 10:00 - 10:30
