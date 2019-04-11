@@ -43,7 +43,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 val json = JSONObject(response.body)
                 val link: JSONObject = json?.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
 
-                link.optString("href") shouldMatch (Regex("""\/shoppingcart\/[\w\d-]+"""))
+                link.optString("href") shouldMatch (Regex("""\/shoppingcart\/[\w\d-]+\/items"""))
                 link.optString("method") shouldBe "PUT"
             }
 
@@ -153,11 +153,14 @@ class PutProductToShoppingCartTest : FeatureSpec() {
     }
 
     private fun addProduct(location: String, product: String): ResponseEntity<String> {
+        val response = getShoppingCart(location)
+        val json = JSONObject(response.body)
+        val putProductLocation: String = json?.optJSONObject("links")?.optJSONObject("addProduct")?.optString("href") ?: ""
+
         val header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON_UTF8
 
         val entity = HttpEntity(product, header)
-        return restTemplate.exchange(location, HttpMethod.PUT, entity, String::class.java, "")
+        return restTemplate.exchange(putProductLocation, HttpMethod.PUT, entity, String::class.java, "")
     }
-
 }

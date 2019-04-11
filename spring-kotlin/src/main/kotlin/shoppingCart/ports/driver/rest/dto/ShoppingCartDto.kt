@@ -17,7 +17,7 @@ data class ShoppingCartDto(
 
     private fun withLinks(): ShoppingCartDto {
         return addLink("self", GET, URI("/shoppingcart/${uuid}"))
-            .addLink("addProduct", Method.PUT, URI("/shoppingcart/${uuid}"))
+            .addLink("addProduct", Method.PUT, URI("/shoppingcart/${uuid}/items"))
     }
 
     companion object {
