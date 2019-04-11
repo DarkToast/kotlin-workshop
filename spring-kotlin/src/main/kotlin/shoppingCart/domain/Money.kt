@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.domain
+package shoppingCart.domain
 
 class TooHighPriceException(value: Int): DomainException("Price must not exceed 120,00€. Actual: '$value'")
 

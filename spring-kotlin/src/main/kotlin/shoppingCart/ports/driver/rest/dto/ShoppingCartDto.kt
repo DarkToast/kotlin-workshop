@@ -1,9 +1,9 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.driver.rest.dto
 
-import de.tarent.ciwanzik.shoppingCart.domain.Product
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartAmount
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.Method.GET
+import shoppingCart.domain.Product
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartAmount
+import shoppingCart.ports.driver.rest.dto.Method.GET
 import java.net.URI
 import java.util.*
 

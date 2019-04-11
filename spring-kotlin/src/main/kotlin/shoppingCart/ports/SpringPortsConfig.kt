@@ -1,11 +1,11 @@
-package de.tarent.ciwanzik.shoppingCart.ports
+package shoppingCart.ports
 
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.ProductRepositoryPort
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.ShoppingCartJPARepository
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.JpaShoppingCartRepository
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.CachingProductRepository
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.MockedProductRepository
+import shoppingCart.ports.driven.productService.ProductRepositoryPort
+import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.driven.database.ShoppingCartJPARepository
+import shoppingCart.ports.driven.database.JpaShoppingCartRepository
+import shoppingCart.ports.driven.productService.CachingProductRepository
+import shoppingCart.ports.driven.productService.MockedProductRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

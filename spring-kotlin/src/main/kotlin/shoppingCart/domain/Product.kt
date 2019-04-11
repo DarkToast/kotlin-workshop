@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.domain
+package shoppingCart.domain
 
 data class Name(val value: String) {
     private val regex = "[\\w\\düöäÜÖÄß&]{1,40}".toRegex()

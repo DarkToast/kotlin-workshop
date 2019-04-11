@@ -1,11 +1,11 @@
-package de.tarent.ciwanzik.shoppingCart.application
+package shoppingCart.application
 
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.ProductRepositoryPort
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartUuid
+import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import org.springframework.stereotype.Service
 import java.util.*
 

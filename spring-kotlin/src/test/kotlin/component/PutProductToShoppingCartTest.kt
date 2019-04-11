@@ -1,7 +1,7 @@
 package component
 
-import de.tarent.ciwanzik.Application
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.GetProduct
+import shoppingCart.Application
+import shoppingCart.ports.driver.rest.dto.GetProduct
 import io.kotlintest.matchers.string.shouldMatch
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.FeatureSpec

@@ -1,12 +1,12 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest
+package shoppingCart.ports.driver.rest
 
-import de.tarent.ciwanzik.shoppingCart.application.ShoppingCartService
-import de.tarent.ciwanzik.shoppingCart.domain.Quantity
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
-import de.tarent.ciwanzik.shoppingCart.ports.PortException
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.PutProduct
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.ShoppingCartDto
+import shoppingCart.application.ShoppingCartService
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import shoppingCart.domain.ShoppingCartUuid
+import shoppingCart.ports.PortException
+import shoppingCart.ports.driver.rest.dto.PutProduct
+import shoppingCart.ports.driver.rest.dto.ShoppingCartDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller

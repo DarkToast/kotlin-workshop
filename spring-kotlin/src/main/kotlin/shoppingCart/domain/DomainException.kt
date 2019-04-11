@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.domain
+package shoppingCart.domain
 
 import java.lang.RuntimeException
 

@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.driver.rest.dto
 
 data class Failure (
     val timestamp: String,

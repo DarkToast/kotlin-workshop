@@ -1,6 +1,6 @@
 package shoppingCart.domain
 
-import de.tarent.ciwanzik.shoppingCart.domain.*
+import shoppingCart.domain.*
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotThrow
 import io.kotlintest.shouldThrow

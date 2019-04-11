@@ -1,4 +1,4 @@
-package de.tarent.ciwanzik.shoppingCart.application
+package shoppingCart.application
 
 import java.lang.RuntimeException
 

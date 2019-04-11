@@ -1,6 +1,6 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.database.orModel
+package shoppingCart.ports.driven.database.orModel
 
-import de.tarent.ciwanzik.shoppingCart.domain.*
+import shoppingCart.domain.*
 import java.util.*
 import javax.persistence.CascadeType
 import javax.persistence.Entity

@@ -1,10 +1,10 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driver.rest
+package shoppingCart.ports.driver.rest
 
-import de.tarent.ciwanzik.shoppingCart.application.ApplicationException
-import de.tarent.ciwanzik.shoppingCart.application.ProductNotFoundException
-import de.tarent.ciwanzik.shoppingCart.domain.DomainException
-import de.tarent.ciwanzik.shoppingCart.ports.PortException
-import de.tarent.ciwanzik.shoppingCart.ports.driver.rest.dto.Failure
+import shoppingCart.application.ApplicationException
+import shoppingCart.application.ProductNotFoundException
+import shoppingCart.domain.DomainException
+import shoppingCart.ports.PortException
+import shoppingCart.ports.driver.rest.dto.Failure
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND

@@ -1,6 +1,6 @@
 package component
 
-import de.tarent.ciwanzik.Application
+import shoppingCart.Application
 import io.kotlintest.matchers.string.shouldMatch
 import io.kotlintest.matchers.string.shouldNotContain
 import io.kotlintest.shouldBe

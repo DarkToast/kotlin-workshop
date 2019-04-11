@@ -1,7 +1,7 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.database
+package shoppingCart.ports.driven.database
 
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCart
-import de.tarent.ciwanzik.shoppingCart.domain.ShoppingCartUuid
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartUuid
 import java.util.*
 
 interface ShoppingCartRepositoryPort {

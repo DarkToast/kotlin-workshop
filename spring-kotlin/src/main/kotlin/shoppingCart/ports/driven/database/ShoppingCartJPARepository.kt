@@ -1,6 +1,6 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.database
+package shoppingCart.ports.driven.database
 
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.orModel.DbShoppingCart
+import shoppingCart.ports.driven.database.orModel.DbShoppingCart
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

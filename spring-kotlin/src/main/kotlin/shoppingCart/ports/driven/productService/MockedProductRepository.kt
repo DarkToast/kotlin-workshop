@@ -1,9 +1,9 @@
-package de.tarent.ciwanzik.shoppingCart.ports.driven.productService
+package shoppingCart.ports.driven.productService
 
-import de.tarent.ciwanzik.shoppingCart.domain.Name
-import de.tarent.ciwanzik.shoppingCart.domain.Price
-import de.tarent.ciwanzik.shoppingCart.domain.Product
-import de.tarent.ciwanzik.shoppingCart.domain.SKU
+import shoppingCart.domain.Name
+import shoppingCart.domain.Price
+import shoppingCart.domain.Product
+import shoppingCart.domain.SKU
 import java.util.*
 
 class MockedProductRepository: ProductRepositoryPort {

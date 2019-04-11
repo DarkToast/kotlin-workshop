@@ -1,10 +1,10 @@
 package shoppingCart.application
 
-import de.tarent.ciwanzik.shoppingCart.application.AppShoppingCartService
-import de.tarent.ciwanzik.shoppingCart.application.ProductNotFoundException
-import de.tarent.ciwanzik.shoppingCart.domain.*
-import de.tarent.ciwanzik.shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import de.tarent.ciwanzik.shoppingCart.ports.driven.productService.ProductRepositoryPort
+import shoppingCart.application.AppShoppingCartService
+import shoppingCart.application.ProductNotFoundException
+import shoppingCart.domain.*
+import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import io.kotlintest.TestCase
 import io.kotlintest.matchers.collections.shouldContain
 import io.kotlintest.shouldBe
