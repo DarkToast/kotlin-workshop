@@ -15,7 +15,7 @@ import org.springframework.http.*
 import org.springframework.util.MultiValueMap
 
 /*
- * Aufgabe: 8
+ * Aufgabe: 7
  *
  * Dieser Test testet die gesamte Komponente für das Feature `put product`.
  * Nachdem Sie die Aufgaben 1 - 7 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle.

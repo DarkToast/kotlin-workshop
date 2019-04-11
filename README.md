@@ -52,20 +52,20 @@ und sie im Anschluss per Hands-On ausprobieren und einen Beispielservice nach un
 ### 11:00 - 12:00
 * Hands-On! 
 * Basic Syntax
-* Variablen
-* Methoden
 * mein erster grüner Test!
+* Aufgabe 1
 
 ### 12:00 - 13:00
 PAUSE!
 
 ### 13:00 - 13.30
-* Klasse
+* Klassen
 * Non- nullable types
 
 ### 13:30 - 14:30
 * Hands-On!
 * Wir entwickeln Domainobjekte
+* Aufgabe 2 - 4
 
 ### 14:40 - 15:00
 * Kotlin Collection-API
@@ -74,3 +74,9 @@ PAUSE!
 ### 15:00 - 16:00
 * Hands-On!
 * Wir entwickeln Logik
+* Aufgabe 5 - 6
+
+### 16:00 - 16:30
+* Hands-On!
+* Wir finalisieren den Service
+* Aufgabe 7 
