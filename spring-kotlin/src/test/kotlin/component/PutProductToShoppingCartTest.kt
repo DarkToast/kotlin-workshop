@@ -18,14 +18,16 @@ import org.springframework.util.MultiValueMap
  * Aufgabe: 7
  *
  * Dieser Test testet die gesamte Komponente für das Feature `put product`.
- * Nachdem Sie die Aufgaben 1 - 7 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle.
+ * Nachdem Sie die Aufgaben 1 - 6 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle.
  *
- * Bitte implementieren Sie die offenen Punkte der Klasse ShoppingCartController.kt
+ * Bitte implementieren Sie einen REST Endpunkt, der ihren in Aufgabe 6 geschriebenen Service aufruft.
  *
  * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
  * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
  *
- * Das Ziel ist, mit Containerformaten wie Collectiond uns Option-Werten zu arbeiten.
+ * Die Tests besitzen das Level 1 und Level 2. Fangen Sie bitte zunächst mit Level 1 an.
+ *
+ * Das Ziel ist, die Interoperabilität zwischen Javalibraries und Kotlin und seinen Möglichkeiten kennen zu lernen.
 */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
@@ -54,7 +56,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products.size shouldBe 0
             }
 
-            scenario("!adding a new product returns status 200") {
+            scenario("! level 1 - adding a new product returns status 200") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -63,34 +65,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 200
             }
 
-            scenario("!adding a unknown product returns status 404") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "4711unknown", "quantity": "2" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 404
-            }
-
-            scenario("!adding a invalid SKU returns status 400") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "-1", "quantity": "2" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 400
-            }
-
-            scenario("!adding two much quantity return status 400") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "123456", "quantity": "11" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 400
-            }
-
-            scenario("!an added product can be received") {
+            scenario("! level 1 - an added product can be received") {
                 val location = createShoppingCart()
                 val newProduct = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -104,7 +79,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products[0].sku shouldBe "123456"
             }
 
-            scenario("!two products are added and received") {
+            scenario("! level 1 - two products are added and received") {
                 val location = createShoppingCart()
                 val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
                 val secondProduct = """{ "sku": "654321", "quantity": "3" }"""
@@ -120,6 +95,33 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products[0].sku shouldBe "123456"
                 products[1].name shouldBe "Milch"
                 products[1].sku shouldBe "654321"
+            }
+
+            scenario("! level 2 - adding a invalid SKU returns status 400") {
+                val location = createShoppingCart()
+                val product = """{ "sku": "-1", "quantity": "2" }"""
+
+                val response = addProduct(location, product)
+
+                response.statusCodeValue shouldBe 400
+            }
+
+            scenario("! level 2 - adding two much quantity return status 400") {
+                val location = createShoppingCart()
+                val product = """{ "sku": "123456", "quantity": "11" }"""
+
+                val response = addProduct(location, product)
+
+                response.statusCodeValue shouldBe 400
+            }
+
+            scenario("! level 2 - adding a unknown product returns status 404") {
+                val location = createShoppingCart()
+                val product = """{ "sku": "4711unknown", "quantity": "2" }"""
+
+                val response = addProduct(location, product)
+
+                response.statusCodeValue shouldBe 404
             }
         }
     }

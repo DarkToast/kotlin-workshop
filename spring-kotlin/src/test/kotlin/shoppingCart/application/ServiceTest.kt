@@ -26,7 +26,7 @@ import java.util.*
  *
  * Das Ziel ist, mit Containerformaten wie Collectiond uns Option-Werten zu arbeiten.
 */
-class AppShoppingCartServiceTest: FeatureSpec() {
+class ServiceTest: FeatureSpec() {
     private var shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
     private val productPort = Mockito.mock(ProductRepositoryPort::class.java)
     private val sku = SKU("123456")

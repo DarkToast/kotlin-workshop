@@ -19,6 +19,13 @@ import java.util.*
 
 class ShoppingCartNotFoundException(uuid: ShoppingCartUuid): PortException("The shopping cart with id $uuid is unknown.")
 
+/**
+ * Generell braucht in Spring nicht jede Controllermethode Exceptions behandeln.
+ * Hierfür existieren explizite ExceptionHandler, welche Exception pro Typ behandeln, egal wo
+ * so geworfen wurden.
+ * 
+ * @see LastLineOfDefenseErrorHandler
+ */
 @Controller
 class ShoppingCartController(private val shoppingCartService: ShoppingCartService) {
 
