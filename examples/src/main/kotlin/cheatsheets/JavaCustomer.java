@@ -1,4 +1,4 @@
-package session1;
+package cheatsheets;
 
 final public class JavaCustomer {
     public JavaContract getContract() {

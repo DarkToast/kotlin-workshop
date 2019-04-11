@@ -1,4 +1,4 @@
-package session2
+package cheatsheets
 
 /**
  * Themen:
@@ -8,6 +8,7 @@ package session2
  *  - Typ aliases
  */
 
+// Typealiases ermöglich eine sytaktische Abkürzung. Sie bilden aber keinen neuen Typ!
 typealias EmployeeMapper = (Employee) -> Employee
 
 fun main(args: Array<String>) {
@@ -62,7 +63,7 @@ fun higherOrderFunctions() {
      * Innerhalb des Bodys wird matcher auf alle übergebenden `Employee`s angewandt. Wenn er für alle `true` zurück gibt,
      * so gibt auch `matchEmployees` true zurück. Sonst false.
      */
-    fun matchEmployees(matcher: (Employee) -> Boolean,  vararg employees: Employee): Boolean {
+    fun matchEmployees(matcher: (Employee) -> Boolean, vararg employees: Employee): Boolean {
         for (employee in employees) {
             if (!matcher(employee)) {
                 return false

@@ -1,6 +1,4 @@
-package session4
-
-import session1.JavaContract
+package cheatsheets
 
 /**
  * Kotlin erlaubt es, bestehende Klassen um neue Methoden zu erweitern. Diese "Extensions" sind dabei nur dort

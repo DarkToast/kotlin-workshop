@@ -1,4 +1,4 @@
-package session1
+package cheatsheets
 
 val customer = JavaCustomer()
 

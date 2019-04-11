@@ -1,7 +1,5 @@
-package session3
+package cheatsheets
 
-data class FirstName(val value: String)
-data class LastName(val value: String)
 data class EmailToken(val token: String) {
     fun isValid() = true
 }

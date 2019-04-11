@@ -1,9 +1,4 @@
-package session3
-
-import session2.Employee
-import session2.FirstName
-import session2.LastName
-import session2.Salary
+package cheatsheets
 
 /**
  * Eine "normale" Klasse haben wir bereits kennen gerlent:

@@ -1,4 +1,4 @@
-package session3
+package cheatsheets
 
 /**
  * Der Klassenkonstruktor ermöglicht direkt die Definition von Klassenattributen:

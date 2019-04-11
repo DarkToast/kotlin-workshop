@@ -1,4 +1,4 @@
-package session2
+package cheatsheets
 
 /**
  * Themen:

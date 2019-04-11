@@ -1,4 +1,4 @@
-package session3
+package cheatsheets
 
 class Car {
 

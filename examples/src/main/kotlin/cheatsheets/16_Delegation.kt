@@ -1,4 +1,4 @@
-package session4
+package cheatsheets
 
 /**
  * Delegations bieten in Kotlin syntactic sugar für delegate objects, sodass man ein direktes Durchschleifen

@@ -1,6 +1,4 @@
-package session1
-
-import oneday.basics.myStaticFunction
+package cheatsheets
 
 /**
  * Themen:

@@ -1,6 +1,6 @@
 package oneday.oop
 
-import session2.Account
+import cheatsheets.Account
 import java.io.Serializable
 
 // Eine Klasse namens `Simple'
@@ -42,4 +42,9 @@ fun Klassen() {
     // nicht aber auf `salt` und `passwordHash`
     println(account1.name)
     println(account1.authenticate("s3cr3t"))
+}
+
+// Static gibt es in Kotlin nicht. Stattdessen existiert ein statisches `object`
+object IAmStatic {
+    fun generateInt(): Int = 42
 }
