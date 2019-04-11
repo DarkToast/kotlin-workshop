@@ -19,6 +19,13 @@ import java.util.*
 
 class ShoppingCartNotFoundException(uuid: ShoppingCartUuid): PortException("The shopping cart with id $uuid is unknown.")
 
+/**
+ * Generell braucht in Spring nicht jede Controllermethode Exceptions behandeln.
+ * Hierfür existieren explizite ExceptionHandler, welche Exception pro Typ behandeln, egal wo
+ * so geworfen wurden.
+ * 
+ * @see LastLineOfDefenseErrorHandler
+ */
 @Controller
 class ShoppingCartController(private val shoppingCartService: ShoppingCartService) {
 
@@ -39,8 +46,20 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
         return ResponseEntity.created(uri).build()
     }
 
-    @RequestMapping(path = ["/shoppingcart/{uuid}"], method = [RequestMethod.PUT])
-    fun putProductToShoppingCart(@PathVariable uuid: UUID, @RequestBody putProductDto: PutProduct): ResponseEntity<ShoppingCartDto> {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()
-    }
+    /*
+     * RequestBody:
+     *  In Spring kann der RequestBody und auch Pfadvariablen direkt deserialisiert werden.
+     *  Da Kotlin-Data classes keinen Defaultkonstruktor und non-nullable types haben, haben es Liraries die Jackson
+     *  schwer, Kotlinklassen wie erdacht zu benutzen. Stattdessen hat dieser Service für den REST-Layer eigene Data
+     *  Transfer Objekte (DTOs)
+     *
+     *  Ein ProduktDto besteht in Form der Klasse PutProduct. Ein Zugriff erhält man mit einem mit @RequestBody annotierten
+     *  Parameter seiner Methode: `@RequestBody putProductDto: PutProduct`
+     *
+     * ResponseEntity:
+     *   In Spring werden HTTP Responses über die Klasse `ResponseEntity` zurückgegeben. Sie besitzt bereits Convenient-
+     *   methoden wie `created`, `ok` oder `notFound`. Als Response Body können hier beliebige Objekte angegeben werden.
+     *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
+     *   `ResponseEntity` kann aber auch normal instantiiert werden.
+     */
 }

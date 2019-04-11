@@ -1,7 +1,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="shoppingCart" level="INFO">
+    <logger name="shoppingCart" level="INFO" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
 

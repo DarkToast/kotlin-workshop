@@ -1,4 +1,4 @@
-package session1
+package oneday.collections
 
 /**
  * Themen:
