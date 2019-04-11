@@ -14,6 +14,20 @@ import org.json.JSONObject
 import org.springframework.http.*
 import org.springframework.util.MultiValueMap
 
+/*
+ * Aufgabe: 8
+ *
+ * Dieser Test testet die gesamte Komponente für das Feature `put product`.
+ * Nachdem Sie die Aufgaben 1 - 7 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle.
+ *
+ * Bitte implementieren Sie die offenen Punkte der Klasse ShoppingCartController.kt
+ *
+ * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
+ * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
+ *
+ * Das Ziel ist, mit Containerformaten wie Collectiond uns Option-Werten zu arbeiten.
+*/
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
 class PutProductToShoppingCartTest : FeatureSpec() {
     override fun listeners() = listOf(SpringListener)
@@ -23,7 +37,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
 
     init {
         feature("Adding products to the shopping cart") {
-            scenario("!an existing shopping cart has an addProduct link") {
+            scenario("an existing shopping cart has an addProduct link") {
                 val response = createAndGetShoppingCart()
 
                 val json = JSONObject(response.body)
@@ -33,7 +47,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 link.optString("method") shouldBe "PUT"
             }
 
-            scenario("!a new shopping cart has no products") {
+            scenario("a new shopping cart has no products") {
                 val response = createAndGetShoppingCart()
 
                 val products = extractProducts(response)
@@ -49,7 +63,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 200
             }
 
-            scenario("adding a unknown product returns status 404") {
+            scenario("!adding a unknown product returns status 404") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "4711unknown", "quantity": "2" }"""
 
@@ -58,7 +72,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 404
             }
 
-            scenario("adding a invalid SKU returns status 400") {
+            scenario("!adding a invalid SKU returns status 400") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "-1", "quantity": "2" }"""
 
@@ -67,7 +81,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 400
             }
 
-            scenario("adding two much quantity return status 400") {
+            scenario("!adding two much quantity return status 400") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "123456", "quantity": "11" }"""
 

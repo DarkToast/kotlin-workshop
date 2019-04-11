@@ -4,7 +4,7 @@ import io.kotlintest.specs.FeatureSpec
 
 class SkuTest: FeatureSpec({
     /*
-     * Aufgabe:
+     * Aufgabe 2:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
      * `shoppingCart/domain/Product.kt` die Klasse SKU, die Dort der Klasse `Product` fehlt.
      *

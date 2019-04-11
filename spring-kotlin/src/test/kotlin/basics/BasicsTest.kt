@@ -5,7 +5,7 @@ import io.kotlintest.specs.FeatureSpec
 
 class BasicsTest : FeatureSpec() {
 /*
- * Aufgabe:
+ * Aufgabe 1:
  * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie unter diesem
  * Kommentar die Methoden `sum`, `getString` und `toPlainJson`.
  *

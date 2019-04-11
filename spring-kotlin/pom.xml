@@ -15,20 +15,33 @@
     <description>Kotlin Techtalk - Spring with Kotlin</description>
 
     <dependencies>
-        <dependency>
-            <groupId>de.tarent.academy</groupId>
-            <artifactId>examples</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
+        <!-- KOTLIN Dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.kotlintest</groupId>
+            <artifactId>kotlintest-runner-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.kotlintest</groupId>
+            <artifactId>kotlintest-extensions-spring</artifactId>
+            <version>3.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- SPRING and other dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -53,28 +66,28 @@
             <version>1.4.199</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.kotlintest</groupId>
-            <artifactId>kotlintest-runner-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.kotlintest</groupId>
-            <artifactId>kotlintest-extensions-spring</artifactId>
-            <version>3.3.1</version>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
+
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
 
-
         <plugins>
 
+            <!--
+                Das kotlin-maven-plugin sorgt für die Kompilierung der *.kt Dateien.
+                Über Plugins können dem Compiler Erweiterungen mitgegeben werden.
+                Hier:
+                 - spring in Verbindung mit dem `kotlin-maven-allopen` Plugin
+                 - jpa in Verbindung mit dem `kotlin-maven-noarg` Plugin
+             -->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <version>${kotlin.version}</version>
+
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
                     <compilerPlugins>
@@ -82,26 +95,6 @@
                         <plugin>jpa</plugin>
                     </compilerPlugins>
                 </configuration>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <version>${kotlin.version}</version>
-
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
 
                 <dependencies>
                     <dependency>
@@ -116,30 +109,6 @@
                         <version>1.3.21</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

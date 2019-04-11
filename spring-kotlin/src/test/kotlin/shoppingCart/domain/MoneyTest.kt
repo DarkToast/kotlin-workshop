@@ -8,7 +8,7 @@ import io.kotlintest.specs.FeatureSpec
 
 class MoneyTest: FeatureSpec({
     /*
-     * Aufgabe:
+     * Aufgabe 3:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
      * `shoppingCart/domain/Money.kt` die Klasse ShoppingCartAmount und ihre Methoden.
      *
@@ -83,7 +83,7 @@ class MoneyTest: FeatureSpec({
     }
 
     /*
-     * Aufgabe:
+     * Aufgabe 4:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
      * `shoppingCart/domain/Money.kt` die Klasse Price und ihre Methoden
      *
