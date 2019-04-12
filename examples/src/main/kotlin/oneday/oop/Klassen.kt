@@ -1,6 +1,7 @@
 package oneday.oop
 
 import cheatsheets.Account
+import cheatsheets.Arithmetic
 import java.io.Serializable
 
 // Eine Klasse namens `Simple'
@@ -48,3 +49,20 @@ fun Klassen() {
 object IAmStatic {
     fun generateInt(): Int = 42
 }
+
+/*
+ * Kotlin kennt neben Klassen, Interfaces.
+ */
+interface Arithmetic {
+    fun add(a: Int, b: Int): Int
+
+    fun subtract(a: Int, b: Int): Int
+}
+
+class MyArithmetic: Arithmetic {
+    // Implementierende oder abgeleitetete Methode müssen mit einem `override` versehen werden.
+    override fun add(a: Int, b: Int): Int = a + b
+
+    override fun subtract(a: Int, b: Int): Int = a - b
+}
+
