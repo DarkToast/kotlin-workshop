@@ -15,4 +15,15 @@ data class Name(val value: String) {
 
 data class Product(val sku: SKU, val price: Price, val name: Name)
 
-class SKU(val value: String)
+
+data class SKU(val value: String) {
+    private val regex = "[\\w\\d]{1,20}".toRegex()
+
+    init {
+        if(!regex.matches(value)) throw IllegalArgumentException("A SKU must contains 1 to 20 alphanumeric characters.")
+    }
+
+    override fun toString(): String {
+        return value
+    }
+}
