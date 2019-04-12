@@ -24,7 +24,7 @@ val max2 = Employee(
 
 // Data classes bringen eine automatische equals und hashCode Methode mit.
 // Der Ausdruck hier ist `true`
-val equal = max == max
+val equal = max == max2
 
 // Ebenfalls bringen sie eine `copy` Methode mit, womit sich leicht ein neues
 // Objekt erzeugen lässt:

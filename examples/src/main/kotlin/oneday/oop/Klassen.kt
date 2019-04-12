@@ -30,6 +30,10 @@ class Account(val name: String, password: String, private val salt: String = "#s
     fun authenticate(password: String): Boolean {
         return this.passwordHash == password + salt
     }
+
+    companion object IAmStatic {
+        private val generateInt: Int = 42
+    }
 }
 
 fun Klassen() {
@@ -65,4 +69,21 @@ class MyArithmetic: Arithmetic {
 
     override fun subtract(a: Int, b: Int): Int = a - b
 }
+
+
+class MultipleConstructors(val value: String) {
+
+    constructor(value: Int): this(value.toString()) {
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
