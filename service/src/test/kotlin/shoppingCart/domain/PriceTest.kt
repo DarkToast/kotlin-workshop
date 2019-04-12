@@ -22,7 +22,6 @@ import org.junit.jupiter.api.assertThrows
  * - Zwei Price können über `plus` addiert werden.
  * - Ein Price kann mit `times` multipliziert werden.
 */
-@Disabled
 class PriceTest() {
     @Test
     fun `can be zero`() {

@@ -21,7 +21,6 @@ import org.junit.jupiter.api.assertThrows
  * - Ein Amount muss seinen Wert in Cents ausdrücken können
  * - Zwei Amounts können über `plus` addiert werden.
 */
-@Disabled
 class AmountTest() {
     @Test
     fun `can be zero`() {
