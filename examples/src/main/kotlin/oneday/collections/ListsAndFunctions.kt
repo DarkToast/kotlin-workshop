@@ -29,12 +29,12 @@ fun functions() {
 
     // Lambdas kann man in Kotlin auch direkt als Funktionen einer Variable zuweisen.
     // Der Typ der FUnktion setzt sich dabei aus den Eingabe- und Ausgabetypen zusammen:
-    val toUpperCase: (String) -> String = { value -> value.toUpperCase() }
-    list.map(toUpperCase)
+    val toUpperCase: (String) -> Int = { value -> Integer.parseInt(value) }
+    val intList: List<Int> = list.map(toUpperCase)
 
 
     // Die Lambdaausdrücke und Funktionen sind auch mit dem Java 8 SDK kompatibel:
     val optional = Optional.of("Foobar")
-    val upperCase = optional.map { value -> value.toUpperCase()}
+    val upperCase = optional.map { it.toUpperCase()}
     val upperCase2 = optional.map(toUpperCase)
 }

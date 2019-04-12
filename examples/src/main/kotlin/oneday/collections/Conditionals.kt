@@ -47,10 +47,10 @@ fun checkValueWithExpression(x: Int): String {
 fun whileLoop() {
     var x = 0
 
-    while(x <= 10) {
+    do {
         println("The value is $x")
         x++
-    }
+    } while(x <= 10)
 }
 
 fun forLoop() {
@@ -114,10 +114,12 @@ fun usingWhen() {
     val value: Any = 42
 
     // Auch `when` ist eine expression und hat einen Rückgabwert.
-    val result = when (value) {
-        0 -> "zero"
+    val result:String = when (value) {
+        0 -> {
+            "zero"
+        }
         in 1..10 -> "between 1 and 10"  // Works for all ClosedRange<T>
-        "one" -> value                  // Smart cast to String
+        "one" -> value.toString()                  // Smart cast to String
         is String -> value
         else -> "something else"
     }
