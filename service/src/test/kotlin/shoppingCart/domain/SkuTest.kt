@@ -14,7 +14,6 @@ import org.junit.jupiter.api.assertThrows
  *
  * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren.
 */
-@Disabled
 class SkuTest() {
     @Test
     fun `can contain up to 20 alphanumeric characters`() {
