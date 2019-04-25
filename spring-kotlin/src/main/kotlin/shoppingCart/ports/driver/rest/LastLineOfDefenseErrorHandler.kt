@@ -29,6 +29,16 @@ open class LastLineOfDefenseErrorHandler {
 
     @ExceptionHandler(value = [DomainException::class, ApplicationException::class, PortException::class])
     fun handleDomainException(ex: RuntimeException, request: HttpServletRequest): ResponseEntity<Failure> {
-        return ResponseEntity.badRequest().build()
+        val httpStatus = when (ex) {
+            is ProductNotFoundException -> NOT_FOUND
+            is ShoppingCartNotFoundException -> NOT_FOUND
+            else -> BAD_REQUEST
+        }
+
+        val now = LocalDateTime.now().toString()
+        val message = ex.message ?: ""
+        val error = Failure(now, httpStatus.value(), httpStatus.reasonPhrase, message, request.getRequestURI())
+
+        return ResponseEntity(error, HttpHeaders(), httpStatus)
     }
 }
