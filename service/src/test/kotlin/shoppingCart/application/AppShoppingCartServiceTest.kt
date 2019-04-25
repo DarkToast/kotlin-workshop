@@ -1,7 +1,10 @@
 package shoppingCart.application
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.core.test.TestCase
+import io.kotest.matchers.collections.shouldContain
+import io.kotest.matchers.shouldBe
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import shoppingCart.domain.*
