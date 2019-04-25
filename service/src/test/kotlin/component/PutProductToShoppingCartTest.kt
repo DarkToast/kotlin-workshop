@@ -56,7 +56,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products.size shouldBe 0
             }
 
-            scenario("! level 1 - adding a new product returns status 200") {
+            scenario("level 1 - adding a new product returns status 200") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -65,7 +65,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 200
             }
 
-            scenario("! level 1 - an added product can be received") {
+            scenario("level 1 - an added product can be received") {
                 val location = createShoppingCart()
                 val newProduct = """{ "sku": "123456", "quantity": "2" }"""
 
@@ -79,7 +79,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products[0].sku shouldBe "123456"
             }
 
-            scenario("! level 1 - two products are added and received") {
+            scenario("level 1 - two products are added and received") {
                 val location = createShoppingCart()
                 val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
                 val secondProduct = """{ "sku": "654321", "quantity": "3" }"""
@@ -97,7 +97,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 products[1].sku shouldBe "654321"
             }
 
-            scenario("! level 2 - adding a invalid SKU returns status 400") {
+            scenario("level 2 - adding a invalid SKU returns status 400") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "-1", "quantity": "2" }"""
 
@@ -106,7 +106,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 400
             }
 
-            scenario("! level 2 - adding two much quantity return status 400") {
+            scenario("level 2 - adding two much quantity return status 400") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "123456", "quantity": "11" }"""
 
@@ -115,7 +115,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 response.statusCodeValue shouldBe 400
             }
 
-            scenario("! level 2 - adding a unknown product returns status 404") {
+            scenario("level 2 - adding a unknown product returns status 404") {
                 val location = createShoppingCart()
                 val product = """{ "sku": "4711unknown", "quantity": "2" }"""
 
