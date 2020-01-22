@@ -1,5 +1,8 @@
 package shoppingCart.domain
 
+import io.kotlintest.shouldBe
+import io.kotlintest.shouldNotThrow
+import io.kotlintest.shouldThrow
 import io.kotlintest.specs.FeatureSpec
 
 class SkuTest: FeatureSpec({
@@ -22,6 +25,10 @@ class SkuTest: FeatureSpec({
             shouldNotThrow<IllegalArgumentException> {
                 SKU("1")
             }
+        }
+
+        scenario("are equals") {
+            (SKU("1234567") == SKU("1234567")) shouldBe true
         }
 
         scenario("!must not be empty") {

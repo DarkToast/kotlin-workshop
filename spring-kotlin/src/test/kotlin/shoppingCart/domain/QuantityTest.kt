@@ -1,5 +1,6 @@
 package shoppingCart.domain
 
+import io.kotlintest.shouldBe
 import shoppingCart.domain.Quantity
 import shoppingCart.domain.TooMuchItemsOfAProduct
 import io.kotlintest.shouldNotThrow
@@ -19,6 +20,10 @@ class QuantityTest: FeatureSpec({
             shouldNotThrow<Throwable> {
                 Quantity(10)
             }
+        }
+
+        scenario("are equals") {
+            (Quantity(10) == Quantity(10)) shouldBe true
         }
 
         scenario("can not be negative") {

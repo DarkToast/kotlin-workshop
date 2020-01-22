@@ -31,6 +31,10 @@ class MoneyTest: FeatureSpec({
             }
         }
 
+        scenario("are equals") {
+            (ShoppingCartAmount(300, 0) == ShoppingCartAmount(300, 0)) shouldBe true
+        }
+
         scenario("can be 0,01 €") {
             shouldNotThrow<Throwable> {
                 ShoppingCartAmount(0, 1)
@@ -59,9 +63,9 @@ class MoneyTest: FeatureSpec({
             }
         }
 
-        scenario("!A price can not exceed 300,00") {
-            shouldThrow<TooHighPriceException> {
-                Price(300, 1)
+        scenario("!A amounts can not exceed 300,00") {
+            shouldThrow<MaximumShoppingCardAmountExceededException> {
+                ShoppingCartAmount(300, 1)
             }
         }
 
@@ -101,6 +105,10 @@ class MoneyTest: FeatureSpec({
             shouldNotThrow<Throwable> {
                 Price(120, 0)
             }
+        }
+
+        scenario("are equals") {
+            (Price(120, 0) == Price(120, 0)) shouldBe true
         }
 
         scenario("can be 0,01 €") {
