@@ -42,7 +42,7 @@ class ServiceTest: FeatureSpec() {
     init {
         feature("The shopping cart service") {
 /*            scenario("if not existing, the service returns empty") {
-                val service = DummyClass(shoppingCartPort)
+                val service: ShoppingCartService = AppShoppingCartService(shoppingCartPort)
 
                 Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.empty())
 
@@ -51,7 +51,7 @@ class ServiceTest: FeatureSpec() {
             }
 
             scenario("!if exists the shopping cart has the product") {
-                val service = DummyClass(shoppingCartPort)
+                val service: ShoppingCartService = AppShoppingCartService(shoppingCartPort)
 
                 Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
                 Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
@@ -65,7 +65,7 @@ class ServiceTest: FeatureSpec() {
             }
 
             scenario("!A not existing product throws an exception") {
-                val service = DummyClass(shoppingCartPort)
+                val service: ShoppingCartService = AppShoppingCartService(shoppingCartPort)
 
                 Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
                 Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.empty())
@@ -74,7 +74,7 @@ class ServiceTest: FeatureSpec() {
             }
 
             scenario("!if exists the shopping cart should be saved") {
-                val service = DummyClass(shoppingCartPort)
+                val service: ShoppingCartService = AppShoppingCartService(shoppingCartPort)
 
                 Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
                 Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
