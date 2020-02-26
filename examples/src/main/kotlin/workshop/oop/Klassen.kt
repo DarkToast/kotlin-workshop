@@ -1,4 +1,4 @@
-package oneday.oop
+package workshop.oop
 
 import cheatsheets.Account
 import cheatsheets.Arithmetic

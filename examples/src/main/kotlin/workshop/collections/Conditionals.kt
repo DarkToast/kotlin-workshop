@@ -1,4 +1,4 @@
-package oneday.collections
+package workshop.collections
 
 /**
  * Themen:

@@ -1,4 +1,4 @@
-package oneday.basics
+package workshop.basics
 
 fun basics() {
     // Immutable `value` - Erst der Name, dann der Typ!

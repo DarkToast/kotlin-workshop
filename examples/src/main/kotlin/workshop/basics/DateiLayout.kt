@@ -1,5 +1,5 @@
 // Paketdekleration. Muss äquvivalent zur Verzeichnisstruktur sein
-package oneday.basics
+package workshop.basics
 
 // Import statements um Klassen, aber auch statische Elemente
 // zu importieren

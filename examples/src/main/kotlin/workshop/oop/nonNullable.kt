@@ -1,4 +1,4 @@
-package oneday.oop
+package workshop.oop
 
 fun NonNullable() {
     // In Kotlin kann einer normalen Referenz kein `null` zugewiesen werden.

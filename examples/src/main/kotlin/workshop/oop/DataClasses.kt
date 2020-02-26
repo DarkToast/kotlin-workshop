@@ -1,4 +1,4 @@
-package oneday.oop
+package workshop.oop
 
 // Data classes bilden value objects ab. In Java ähnlich zu PoJos
 // Jedes Value ist automatisch von außen zugreifbar, aber immutable (val).
