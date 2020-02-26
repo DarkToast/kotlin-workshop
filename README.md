@@ -2,7 +2,7 @@
 
 Willkommen zum Kotlin Workshop.
 
-Damit jeder die Workshopinhalte direkt einsetzen kann und selbst kein Kotlinprojekt aufziehen muss, kann dieses Projekt genutzt werden.
+Damit jeder die Workshopinhalte direkt einsetzen kann und selbst kein Kotlinprojekt aufziehen muss, soll dieses Projekt genutzt werden.
 
 Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0` mit einem `openJDK-11`.
 
