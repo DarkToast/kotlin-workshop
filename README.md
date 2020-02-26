@@ -1,12 +1,12 @@
 # kotlin-workshop
 
-Willkommen zum tarent Academy Kotlin Workshop.
+Willkommen zum Kotlin Workshop.
 
 Damit jeder die Workshopinhalte direkt einsetzen kann und selbst kein Kotlinprojekt aufziehen muss, kann dieses Projekt genutzt werden.
 
 Folgende Befehle sollten zu einem erfolgreichen Build führen und die Tests ausführen. Genutzt wird dabei `Maven 3.5.0` mit einem `openJDK-11`.
 
-    $ git clone https://github.com/DarkToast/kotlin-workshop.git
+    $ git clone https://gitlab.com/christian_schmidt/kotlin-workshop
     $ cd kotlin-workshop
     $ mvn clean verify
 
@@ -15,8 +15,6 @@ In den einzelnen Modulen innerhalb des Projekts finden sich folgende Inhalte:
 `examples` Alle theoretischen Blöcke sind hier noch einmal, mit Kommentaren versehen, aufgelistet.  
 
 `spring-kotlin` Ein Beispielservice, an dem wir die meiste Zeit arbeiten werden. 
-
-`workshopspace` Ein vorgefertigtes, aber leeres, Kotlin-Mavenprojekt.
 
 ## Links:
 
@@ -44,42 +42,33 @@ https://forms.gle/bDQb5CdAVGUBzQF4A
 
 ## Schedule
  
-### 10:00 - 10:30
+### Theorie
 * Vorstellung und Agenda
-
-### 10:30 - 11:00
 * Übersicht über Kotlin
 * Beispielprojekt
 * Aufsetzen der Umgebung
-
-### 11:00 - 12:00
-* Hands-On! 
 * Basic Syntax
-* mein erster grüner Test!
-* Aufgabe 1
 
-### 12:00 - 13:00
-PAUSE!
+### Hands-On
+* Mein erster grüner Test!
+* Aufgabe 1 - Basics
 
-### 13:00 - 13.30
+### Theorie
 * Klassen
 * Non- nullable types
 
-### 13:30 - 14:30
-* Hands-On!
+### Hands-On
 * Wir entwickeln Domainobjekte
 * Aufgabe 2 - 4
 
-### 14:40 - 15:00
+### Theorie
 * Kotlin Collection-API
 * Lambdas
 
-### 15:00 - 16:00
-* Hands-On!
+### Hands-On
 * Wir entwickeln Logik
 * Aufgabe 5 - 6
 
-### 16:00 - 16:30
-* Hands-On!
+### Hands-On
 * Wir finalisieren den Service
 * Aufgabe 7 
