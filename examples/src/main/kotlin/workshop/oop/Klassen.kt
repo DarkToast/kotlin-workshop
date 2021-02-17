@@ -16,7 +16,7 @@ class Simple(x: Int) {
 //   der Variableninitialisierung liegt.
 // Zusätzlich implementiert die Klasse das Interface `Serializable`
 
-class Account(val name: String, password: String, private val salt: String = "#salt#"): Serializable {
+class Account(val name: String, password: String, private val salt: String = "#salt#") : Serializable {
 
     // Ein klassisches Attribut der Klasse.
     private val passwordHash: String
@@ -63,7 +63,7 @@ interface Arithmetic {
     fun subtract(a: Int, b: Int): Int
 }
 
-class MyArithmetic: Arithmetic {
+class MyArithmetic : Arithmetic {
     // Implementierende oder abgeleitetete Methode müssen mit einem `override` versehen werden.
     override fun add(a: Int, b: Int): Int = a + b
 
@@ -73,7 +73,7 @@ class MyArithmetic: Arithmetic {
 
 class MultipleConstructors(val value: String) {
 
-    constructor(value: Int): this(value.toString()) {
+    constructor(value: Int) : this(value.toString()) {
     }
 }
 
