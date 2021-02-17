@@ -1,4 +1,4 @@
-package cheatsheets
+package cheatsheets.oop
 
 /**
  * Der Klassenkonstruktor ermöglicht direkt die Definition von Klassenattributen:

@@ -9,7 +9,7 @@
 // Kotlin ist, wie Java, in ein Packagesystem eingebunden. Hier gelten die Regeln von Java. Pro Package, ein Verzeichnis
 // mit 1 .. n *.kt Dateien.
 
-package cheatsheets
+package cheatsheets.basics
 
 /*
   Kotlindateien sind nicht an Klassen gebunden, sondern sind seht frei in ihrem Inhalt.

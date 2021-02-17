@@ -1,5 +1,8 @@
 package cheatsheets
 
+import cheatsheets.oop.Employee
+import cheatsheets.oop.Salary
+
 /**
  * Themen:
  *  - Funktionstypen

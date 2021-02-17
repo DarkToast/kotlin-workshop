@@ -1,4 +1,4 @@
-package cheatsheets
+package cheatsheets.basics
 
 /**
  * Themen:

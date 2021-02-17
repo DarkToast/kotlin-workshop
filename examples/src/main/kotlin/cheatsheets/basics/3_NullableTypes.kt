@@ -1,4 +1,6 @@
-package cheatsheets
+package cheatsheets.basics
+
+import cheatsheets.JavaCustomer
 
 val customer = JavaCustomer()
 
