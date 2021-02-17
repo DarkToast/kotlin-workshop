@@ -1,17 +1,11 @@
 package shoppingCart.application
 
-import shoppingCart.application.AppShoppingCartService
-import shoppingCart.application.ProductNotFoundException
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.core.test.TestCase
+import org.mockito.Mockito
 import shoppingCart.domain.*
 import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
 import shoppingCart.ports.driven.productService.ProductRepositoryPort
-import io.kotlintest.TestCase
-import io.kotlintest.matchers.collections.shouldContain
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.FeatureSpec
-import org.mockito.Mockito
-import org.mockito.Mockito.times
 import java.util.*
 
 /*

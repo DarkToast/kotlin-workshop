@@ -1,11 +1,11 @@
 package component
 
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldMatch
+import io.kotest.matchers.string.shouldNotContain
+import io.kotest.spring.SpringListener
 import shoppingCart.Application
-import io.kotlintest.matchers.string.shouldMatch
-import io.kotlintest.matchers.string.shouldNotContain
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.FeatureSpec
-import io.kotlintest.spring.SpringListener
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate

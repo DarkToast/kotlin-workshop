@@ -1,11 +1,11 @@
 package shoppingCart.domain
 
-import io.kotlintest.shouldBe
+import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.shouldBe
 import shoppingCart.domain.Quantity
 import shoppingCart.domain.TooMuchItemsOfAProduct
-import io.kotlintest.shouldNotThrow
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.FeatureSpec
 
 
 class QuantityTest: FeatureSpec({

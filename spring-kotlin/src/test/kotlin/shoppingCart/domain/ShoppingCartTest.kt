@@ -1,13 +1,12 @@
 package shoppingCart.domain
 
-import shoppingCart.domain.*
-import io.kotlintest.Spec
-import io.kotlintest.TestCase
-import io.kotlintest.matchers.boolean.shouldBeFalse
-import io.kotlintest.matchers.types.shouldNotBeNull
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.FeatureSpec
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.core.test.TestCase
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+
 
 /*
  * Aufgabe: 5
