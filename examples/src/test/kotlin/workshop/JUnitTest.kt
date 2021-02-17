@@ -13,6 +13,6 @@ class JUnitTest {
         val sum = calculator(2, 4)
 
         // then: 6
-        assertEquals("2 + 4 is not 6", 6, sum)
+        assertEquals("2 + 4 is 6", 6, sum)
     }
 }
