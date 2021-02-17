@@ -19,12 +19,10 @@ fun main(args: Array<String>) {
 fun functions() {
     val list: List<String> = listOf("blue", "green", "red")
 
-
     // Funktionen, welche wir an andere Funktionen übergeben, haben für sich genommen ebenfalls einen Typ.
     // Im Fall der `filter`-Methode von `List` ist der Typ des Lambdaparameters `(T) -> kotlin.Boolean`.
     // `T` definiert dabei den Generic-Typ der Liste. In unserem Fall `String`
     list.filter({ value -> value == "blue" })
-
 
     // Da Funktionen einen Typ haben, können wir sie auch bennen und wie jeden anderen Wert benutzen. Also wie ein
     // `String`, `Boolean` oder Ähnliches. Funktionen sind in Kotlin daher "first class citizens".
@@ -44,7 +42,6 @@ fun functions() {
     // gespeichert haben auch an jeder anderen Stelle wiederverwenden.
     list.filter(filterFun)
 }
-
 
 /**
  * Da wir Funktionen in Kotlin als normale Werte betrachten, können wir sie auch als Parameter und Rückgabewerte
@@ -90,12 +87,11 @@ fun higherOrderFunctions() {
         }
     }
 
-
     // Nun können wir mit diesen Hilfsmitteln auf funktionale Weise und Programm konfigurieren:
 
     // Zunächst erzeugen wir uns mit `createSalaryIncrease` eine Funktion für das Jahr 2018. In diesem Jahr soll
     // jeder Mitarbeiter eine 10%ige Lohnerhöhung bekommen. Da werden sich sicher alle freuen. :-)
-    val salaryIncrease2018:  (Employee) -> Employee = createSalaryIncrease(1.1F)
+    val salaryIncrease2018: (Employee) -> Employee = createSalaryIncrease(1.1F)
 
     // Damit wir aber nicht zu viel erhöhen, definieren wir uns noch eine Überprüfungsfunktion, welche ein Limit
     // auf 100.000€ setzt:
@@ -109,4 +105,3 @@ fun higherOrderFunctions() {
     // Oh je. Einer von beiden verdient zu viel... --> false
     val allInSalaryRange = matchEmployees(salaryBelow100k, increasedMax, increasedYvonne)
 }
-

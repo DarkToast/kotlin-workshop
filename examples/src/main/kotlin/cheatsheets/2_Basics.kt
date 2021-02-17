@@ -27,12 +27,12 @@ fun helloWorld() {
 // wird man sich beim Umstieg auf Kotlin schnell auf dieses System einlassen. Die Datei sollte dann besser einen
 // generischeren Namen besitzen.
 class Foo() {
+
 }
 
 class Bar
 
-
-fun main (args: Array<String>) {
+fun main(args: Array<String>) {
     // Generell ist in Kotlin alles ein Objekt. Hier handelt es sich um ein `Int`-Typ.
     val x: Int = 42
     val y: Int = 42
@@ -49,17 +49,18 @@ fun main (args: Array<String>) {
     val list2: List<String> = listOf("Hallo", "Welt")
 
     // Für einen Referenzvergleich wurde in Kotlin der `===`-Operator eingeführt.
-    println(list1 == list2)     // true
-    println(list1 === list2)    // false
-
+    println(list1 == list2) // true
+    println(list1 === list2) // false
 
     println("Klein aber fein: Stringinterpolation:  $x")
 
-    println("""
+    println(
+        """
         | {
         |   "value1": "Und das ist ein",
         |   "value2": "schöner multi line String."
         |   "value3": "$x"
         | }
-    """.trimMargin("|"))
+    """.trimMargin("|")
+    )
 }

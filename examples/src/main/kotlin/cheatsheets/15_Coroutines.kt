@@ -1,6 +1,12 @@
 package cheatsheets
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
 suspend fun createIntOne(): Int {
@@ -43,7 +49,6 @@ fun main(args: Array<String>) {
         println("Completed in $time ms")
     }
 
-
     runBlocking {
         val time = measureTimeMillis {
             val one = async(start = CoroutineStart.LAZY) { createIntOne() }
@@ -53,6 +58,4 @@ fun main(args: Array<String>) {
 
         println("Completed in $time ms")
     }
-
 }
-

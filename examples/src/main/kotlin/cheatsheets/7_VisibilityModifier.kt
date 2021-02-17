@@ -61,7 +61,6 @@ internal class InternalClass {
  */
 public class PublicClass
 
-
 /**
  * Alle Klassen in Kotlin sind standardmäßig nicht mehr ableitbar. Möchten wir es dennoch erlauben, so muss die
  * Klasse als `open` deklariert werden. Wichtig ist hierbei, dass es sich NICHT um einen Sichtbarkeitsmodifikator
@@ -85,7 +84,7 @@ open class OpenClass(private val init: Int) {
  * Diese Klasse leitet nun von `OpenClass` ab. Sie kann dabei aber nicht mehr weiter abgeleitet werden,
  * da sie selbst nicht `open` ist.
  */
-class InheritedClass: OpenClass(5) {
+class InheritedClass : OpenClass(5) {
 
     /**
      * Da `createX` open ist, können wir sie auch überladen.

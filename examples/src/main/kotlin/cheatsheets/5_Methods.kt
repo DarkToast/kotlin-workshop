@@ -25,12 +25,11 @@ Beim Aufruf können wir nun die Funktion auf drei Arten aufrufen:
         `getCustomer(true, false, true)` vs. `getCustomer(hasContract = true, superUser = false, enabled = true)`
       Der Code "kann" dadurch aber auch unlesbarer werden, wenn man z.B. in jedem Aufruf die Reihenfolge ändert.
  */
-fun main(args: Array<String>): Unit {
+fun main(args: Array<String>) {
     val field1 = area(10, 20)
     val field2 = area(5)
     val field3 = area(b = 2, a = 3)
 }
-
 
 /*
 Kotlin erlaubt das verschachteln von Funktionen.
@@ -45,7 +44,7 @@ fun recursiveSum(elements: List<Int>): Int {
 
         // In Kotlin sind IFs expressions und besitzen einen "Rückgabewert", der immer dem letzten Statement
         // eines Blocks entspricht.
-        return if(remainingList.isEmpty()) {
+        return if (remainingList.isEmpty()) {
             accumulator
         } else {
             recursiveStep(accumulator + remainingList.first(), remainingList.drop(1))

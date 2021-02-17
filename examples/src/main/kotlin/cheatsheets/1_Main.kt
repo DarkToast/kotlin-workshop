@@ -7,7 +7,6 @@ package cheatsheets
  *  - Alles sind Objekte
  */
 
-
 /* Kotlin erlaubt stand alone functions, sodass wir die main-Methode als einzelne Funktion im der Datei definieren können.
    Schauen wir sie uns ein wenig genauer an, um ein wenig die Syntax von Kotlin zu verstehen.
 
@@ -20,7 +19,7 @@ package cheatsheets
 
    So auch der Rückgabetyp `Unit` der Funktion `main`. `Unit` ist in Kotlin das Äquivalent zu `void` in Java oder C.
 */
-fun main(args: Array<String>): Unit {
+fun main(args: Array<String>) {
 
     // `val` definiert ein "immutable Value". Wie `final`-Variablen in Java.
     val intro: String = "Arguments: "
@@ -38,7 +37,7 @@ fun main(args: Array<String>): Unit {
     // `Array` ist in Kotlin normale Collectionklassen mit eigenen Methoden und kein Primitivtyp.
     // `forEach` übernimmt z.B. einen Funktionslambda, der als Parameter `element` hat. Diese Funktion wird nun für jedes Element des Arrays ausgeführt.
     args.forEach { element ->
-        buffer += "\n $counter: $element"   // Kotlin kennt Stringinterpolation.
+        buffer += "\n $counter: $element" // Kotlin kennt Stringinterpolation.
         counter++
     }
 

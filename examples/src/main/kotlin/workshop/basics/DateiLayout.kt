@@ -6,10 +6,9 @@ package workshop.basics
 import java.security.SecureRandom
 import kotlin.math.E
 
-
 // Die Mainmethode als zentraler Programmeinstieg ohne Klassenbezug.
 // Der Rückgabetyp `Unit` ist äquivalent zu `void` aus anderen Sprachen
-fun main(args: Array<String>): Unit {
+fun main(args: Array<String>) {
     println(SecureRandom().nextInt() + E)
 }
 
@@ -19,11 +18,6 @@ fun myStaticFunction(x: Int, y: Int): Int {
 }
 
 // Pro Datei lassen sich beliebig viele Klassen definieren
-class MyFirstClass() {
+class MyFirstClass()
 
-}
-
-class MySecondClass {
-
-}
-
+class MySecondClass

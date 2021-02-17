@@ -28,7 +28,7 @@ interface Arithmetic {
  * das Interface oder die abzuleitende Klasse gesetzt. Möchte man mehrere Interfaces implementieren, so werden diese nach
  * dem `:`, kommasepariert aufgelistet.
  */
-abstract class ExtendedArithmetic: Arithmetic {
+abstract class ExtendedArithmetic : Arithmetic {
 
     // Neue abstrakte Methode werden, anders als im Interface, mit einem `abstract` modifier versehen:
     abstract fun multiply(a: Int, b: Int): Int
@@ -65,7 +65,7 @@ fun iUseAStatic() {
  * `ConcreteArithmetic` leitet `ExtendedArithmetic` ab. Da es sich hier um eine Klasse handelt,
  * müssen wir in Kotlin den Konstruktor von `ExtendedArithmetic` aufrufen. Daher die `()`.
  */
-class ConcreteArithmetic: ExtendedArithmetic() {
+class ConcreteArithmetic : ExtendedArithmetic() {
 
     // Hier "implementieren" wir das Feld `basicInt`.
     override val basicInt: Int = 42

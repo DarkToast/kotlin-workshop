@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     // Eine Zuweisung des nullable Typs zu einem not nullable Typs wird nur dann erlaubt, wenn ein expliziter `null`-Check
     // getätigt wurde. In diesem Statement, wird `nullable` überprüft und nur dann erlaubt der Kotlin Compiler die
     // Zuweisung und den impliziten Typecast.
-    if(nullable != null) {
+    if (nullable != null) {
         notNullable = nullable
     }
 
@@ -41,11 +41,7 @@ fun main(args: Array<String>) {
     // Ist keiner der Ausdrücke `null`, so hat `baseFee` den Wert, der `getBaseFee()` zurückgegeben hat.
     val baseFee: Double = customer.getContract()?.getBaseFee() ?: 0.0
 
-
     // Ein etwas destruktiverer Weg bietet der `!!`-Operator. Mit ihm kann man tatsächlich einen `nullable` direkt in
     // einen nicht nullable type umwandeln. Hier geht man aber aktiv die Gefahr einer NullPointerException ein!
     val baseFee2: Double = customer.getContract()!!.getBaseFee()!!
 }
-
-
-

@@ -40,7 +40,6 @@ fun checkValueWithExpression(x: Int): String {
     }
 }
 
-
 // ---- Loops
 
 // Die `while`-loop ist in Kotlin zur Abwechslung mal wie in jeder anderen Sprache. ;-)
@@ -96,7 +95,6 @@ fun tryCatch() {
     println(name)
 }
 
-
 // ---- When
 
 /*
@@ -118,8 +116,8 @@ fun usingWhen() {
         0 -> {
             "zero"
         }
-        in 1..10 -> "between 1 and 10"  // Works for all ClosedRange<T>
-        "one" -> value.toString()                  // Smart cast to String
+        in 1..10 -> "between 1 and 10" // Works for all ClosedRange<T>
+        "one" -> value.toString() // Smart cast to String
         is String -> value
         else -> "something else"
     }

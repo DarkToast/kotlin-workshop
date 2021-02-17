@@ -1,6 +1,6 @@
 package workshop.collections
 
-import java.util.*
+import java.util.Optional
 
 fun functions() {
 
@@ -10,7 +10,7 @@ fun functions() {
 
     // und mutable Lists. Eine neue Liste kann per "Hand" erzeugt werden,
     // Kotlin bietet aber auch globale Helfermethoden an.
-    val mutableList: MutableList<String> = ArrayList()  // = mutableListOf("blue", "green", "red")
+    val mutableList: MutableList<String> = ArrayList() // = mutableListOf("blue", "green", "red")
     mutableList.add("blue")
     mutableList.add("green")
     mutableList.add("red")
@@ -32,9 +32,8 @@ fun functions() {
     val toUpperCase: (String) -> Int = { value -> Integer.parseInt(value) }
     val intList: List<Int> = list.map(toUpperCase)
 
-
     // Die Lambdaausdrücke und Funktionen sind auch mit dem Java 8 SDK kompatibel:
     val optional = Optional.of("Foobar")
-    val upperCase = optional.map { it.toUpperCase()}
+    val upperCase = optional.map { it.toUpperCase() }
     val upperCase2 = optional.map(toUpperCase)
 }

@@ -11,7 +11,6 @@ package cheatsheets
 // Die simpelste Klasse. Ohne Attribute oder Konstruktor.
 class Simple
 
-
 // Der Standardkonstruktor wird direkt hinter dem Namen angelegt. In diesem Fall mit dem Parameter `x: Int`.
 class Verbose constructor(x: Int) {
 }
@@ -38,13 +37,12 @@ class Account(val name: String, password: String, private val salt: String = "#s
     }
 }
 
-
 fun main(args: Array<String>) {
-    val s: Simple = Simple()       // Neuen Objekten muss in Kotlin kein `new` vorangestellt werden. Man ruft quasi
-                                   // "direkt" die Konstruktorfunktion auf.
+    val s: Simple = Simple() // Neuen Objekten muss in Kotlin kein `new` vorangestellt werden. Man ruft quasi
+    // "direkt" die Konstruktorfunktion auf.
 
     val account1 = Account("Max Mustermann", "s3cr3t", "mySalt")
-    val account2 = Account("Hans Dampf", "s3kr3t")  // --> Mit den default Argumenten können wir mit einem Konstruktor, viele Fälle unterscheiden.
+    val account2 = Account("Hans Dampf", "s3kr3t") // --> Mit den default Argumenten können wir mit einem Konstruktor, viele Fälle unterscheiden.
 
     // Wir haben nun Zugriff auf `name` und `authenticate`
     println(account1.name)

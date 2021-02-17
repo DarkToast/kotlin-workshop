@@ -12,8 +12,8 @@ data class EmailToken(val token: String) {
  * verknüpfbarer Typen bereitstellt.
  */
 sealed class Email
-data class UnverifiedEmail(val address: String): Email()
-data class VerifiedEmail(val address: String): Email()
+data class UnverifiedEmail(val address: String) : Email()
+data class VerifiedEmail(val address: String) : Email()
 
 /**
  * In Verbindung mit `when` ermöglicht uns eine `sealed class` einen eleganten Kontrollfluss auf Typenebene.
@@ -25,7 +25,7 @@ data class VerifiedEmail(val address: String): Email()
  *
  * Das heißt weniger Tetss, weniger manuelle Validierung und Abzweigungen.
  */
-fun isVerifiedMail(email: Email): Boolean = when(email) {
+fun isVerifiedMail(email: Email): Boolean = when (email) {
     is UnverifiedEmail -> false
     is VerifiedEmail -> true
 }
@@ -37,14 +37,14 @@ fun isVerifiedMail(email: Email): Boolean = when(email) {
  *      - LimitesCustomer     hat eine neue, unverifizierte Email.
  */
 sealed class Customer
-data class ActiveCustomer(val firstName: FirstName, val lastName: LastName, val email: VerifiedEmail): Customer()
-data class LimitedCustomer(val firstName: FirstName, val lastName: LastName, val email: UnverifiedEmail): Customer()
+data class ActiveCustomer(val firstName: FirstName, val lastName: LastName, val email: VerifiedEmail) : Customer()
+data class LimitedCustomer(val firstName: FirstName, val lastName: LastName, val email: UnverifiedEmail) : Customer()
 
 /**
  * Generell können wir mit `when` wieder überprüfen, ob ein generischer `Customer` aktiv ist oder nicht. Einzig und allein
  * anhand des Typs. Aufgrund der `sealed class` können wir jederzeit sicher sein, dass wir alle Verzweigungen behandelt haben.
  */
-fun isActive(customer: Customer) = when(customer) {
+fun isActive(customer: Customer) = when (customer) {
     is ActiveCustomer -> true
     is LimitedCustomer -> false
 }
@@ -55,7 +55,7 @@ fun isActive(customer: Customer) = when(customer) {
  * gegeben. Ob dieser nun erfolgreich aktiviert wurde oder nicht, sagt uns allein seine Typausprägung.
  */
 fun activateCustomer(customer: LimitedCustomer, token: EmailToken): Customer {
-    return if(token.isValid()) {
+    return if (token.isValid()) {
         ActiveCustomer(customer.firstName, customer.lastName, VerifiedEmail(customer.email.address))
     } else {
         customer

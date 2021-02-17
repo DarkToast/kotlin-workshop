@@ -14,7 +14,7 @@ interface Printer {
 /**
  * Diese Implementierung schreibt alle Eingaben einfach auf Stdout. Mal mit einem Newline, mal ohne.
  */
-class StdOutPrinter: Printer {
+class StdOutPrinter : Printer {
     override fun printMessage(value: String) = print(value)
     override fun printMessageLine(value: String) = println(value)
 }
@@ -29,7 +29,7 @@ class StdOutPrinter: Printer {
  * - Syntaktisch sieht es nun fast wie eine Ableitung aus. Wie sind nun aber wesentlich flexibler da wir selbst
  *   entscheiden können, zu welchem Zielobjekt wir delegieren können.
  */
-class PrinterFacade(printer: Printer): Printer by printer {
+class PrinterFacade(printer: Printer) : Printer by printer {
     override fun printMessageLine(message: String) = println("Hello $message")
 }
 

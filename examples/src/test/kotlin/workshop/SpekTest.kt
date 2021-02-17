@@ -9,9 +9,9 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
-class SpekTest: Spek({
+class SpekTest : Spek({
     describe("a calculator") {
-        val calculator = { x: Int, y: Int -> x +y }
+        val calculator = { x: Int, y: Int -> x + y }
 
         on("addition") {
             val sum = calculator(2, 4)

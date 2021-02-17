@@ -13,10 +13,10 @@ class Car {
     var passengers: Int = 0
         get() {
             val maxPassengers = 5
-            return if(field > maxPassengers) maxPassengers else field
+            return if (field > maxPassengers) maxPassengers else field
         }
         set(value) {
-            if(value < 0 || value > 5) {
+            if (value < 0 || value > 5) {
                 throw IllegalArgumentException("")
             } else {
                 field = value

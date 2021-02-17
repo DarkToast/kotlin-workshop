@@ -6,8 +6,7 @@ import java.io.Serializable
 
 // Eine Klasse namens `Simple'
 // Der Standardkonstruktor wird direkt hinter dem Namen angelegt. In diesem Fall mit dem Parameter `x: Int`.
-class Simple(x: Int) {
-}
+class Simple(x: Int)
 
 // Die Klasse `Account` besitzt einen Standardkonstruktur mit drei Parametern.
 // - Ein `val` definiert automatisch ein `public` Klassenattribut.
@@ -70,20 +69,8 @@ class MyArithmetic : Arithmetic {
     override fun subtract(a: Int, b: Int): Int = a - b
 }
 
-
 class MultipleConstructors(val value: String) {
 
     constructor(value: Int) : this(value.toString()) {
     }
 }
-
-
-
-
-
-
-
-
-
-
-

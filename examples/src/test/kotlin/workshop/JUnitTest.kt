@@ -1,7 +1,7 @@
 package workshop
 
-import org.junit.Test
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class JUnitTest {
     @Test
