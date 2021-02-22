@@ -9,7 +9,7 @@ import java.util.Optional
 open class JpaShoppingCartRepository(private val shoppingCartJPARepository: ShoppingCartJPARepository): ShoppingCartRepositoryPort {
 
     override fun load(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart> {
-        val optional: Optional<DbShoppingCart> = shoppingCartJPARepository.findById(shoppingCartUuid.toString())
+        val optional: Optional<DbShoppingCart> = shoppingCartJPARepository.findById(shoppingCartUuid.uuid)
 
         return optional
             .map { dbShoppingCart ->
@@ -25,7 +25,7 @@ open class JpaShoppingCartRepository(private val shoppingCartJPARepository: Shop
                 .toMutableList()
 
         val dbShoppingCart = DbShoppingCart(
-                shoppingCart.shoppingCartUuid.toString(),
+                shoppingCart.shoppingCartUuid.uuid,
                 shoppingCart.amount().valueInCent,
                 cartItemList
         )

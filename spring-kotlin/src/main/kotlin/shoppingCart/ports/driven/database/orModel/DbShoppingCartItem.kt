@@ -7,6 +7,11 @@ import shoppingCart.domain.Quantity
 import shoppingCart.domain.SKU
 import java.util.UUID
 import javax.persistence.CascadeType
+import javax.persistence.CascadeType.DETACH
+import javax.persistence.CascadeType.MERGE
+import javax.persistence.CascadeType.PERSIST
+import javax.persistence.CascadeType.REFRESH
+import javax.persistence.CascadeType.REMOVE
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.OneToOne
@@ -18,7 +23,7 @@ data class DbShoppingCartItem(
 
         val sku: String,
 
-        @OneToOne(cascade = [CascadeType.ALL])
+        @OneToOne(cascade = [PERSIST, REFRESH, DETACH, MERGE])
         val product: DbProduct,
 
         val quantity: Int
