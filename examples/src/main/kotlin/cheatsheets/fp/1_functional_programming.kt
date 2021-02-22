@@ -26,7 +26,7 @@ fun main() {
 fun functions() {
     val list: List<String> = listOf("blue", "green", "red")
 
-    // Funktionen, welche wir an andere Funktionen übergeben, haben für sich genommen ebenfalls einen Typ.
+    // Funktionen, welche wir an andere Funktionen als Parameter übergeben, haben für sich genommen ebenfalls einen Typ.
     // Im Fall der `filter`-Methode von `List` ist der Typ des Lambdaparameters `(T) -> kotlin.Boolean`.
     // `T` definiert dabei den Generic-Typ der Liste. In unserem Fall `String`
     list.filter({ value -> value == "blue" })
