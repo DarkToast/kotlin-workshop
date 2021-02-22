@@ -1,6 +1,7 @@
 package shoppingCart.ports.driven.database.orModel
 
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Id
 
 @Entity(name = "Product")
 data class DbProduct(

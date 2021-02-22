@@ -1,9 +1,9 @@
 package shoppingCart.ports.driven.productService
 
+import org.springframework.cache.annotation.Cacheable
 import shoppingCart.domain.Product
 import shoppingCart.domain.SKU
-import org.springframework.cache.annotation.Cacheable
-import java.util.*
+import java.util.Optional
 
 open class CachingProductRepository(private val delegate: ProductRepositoryPort): ProductRepositoryPort {
 

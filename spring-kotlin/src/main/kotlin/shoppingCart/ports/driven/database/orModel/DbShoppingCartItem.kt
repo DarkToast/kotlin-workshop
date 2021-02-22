@@ -1,7 +1,11 @@
 package shoppingCart.ports.driven.database.orModel
 
-import shoppingCart.domain.*
-import java.util.*
+import shoppingCart.domain.Name
+import shoppingCart.domain.Price
+import shoppingCart.domain.Product
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.Id

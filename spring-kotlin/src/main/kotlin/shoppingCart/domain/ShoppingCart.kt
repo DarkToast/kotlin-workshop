@@ -1,7 +1,7 @@
 package shoppingCart.domain
 
-import java.lang.RuntimeException
-import java.util.*
+import java.util.Optional
+import java.util.UUID
 
 class MaximumProductCountExceededException(productCount: Int):
         DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")

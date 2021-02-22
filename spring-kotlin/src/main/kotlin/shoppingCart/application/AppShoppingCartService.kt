@@ -1,13 +1,11 @@
 package shoppingCart.application
 
-import shoppingCart.domain.Quantity
+import org.springframework.stereotype.Service
 import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import shoppingCart.ports.driven.productService.ProductRepositoryPort
-import org.springframework.stereotype.Service
-import java.util.*
+import java.util.Optional
 
 class ProductNotFoundException(sku: SKU): ApplicationException("The product with the sku $sku is unknown.")
 

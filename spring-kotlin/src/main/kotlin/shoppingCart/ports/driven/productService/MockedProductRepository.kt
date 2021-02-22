@@ -4,7 +4,7 @@ import shoppingCart.domain.Name
 import shoppingCart.domain.Price
 import shoppingCart.domain.Product
 import shoppingCart.domain.SKU
-import java.util.*
+import java.util.Optional
 
 class MockedProductRepository: ProductRepositoryPort {
     override fun findProductBySku(sku: SKU): Optional<Product> {

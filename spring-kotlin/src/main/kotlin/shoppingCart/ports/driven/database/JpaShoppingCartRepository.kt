@@ -4,7 +4,7 @@ import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.driven.database.orModel.DbShoppingCart
 import shoppingCart.ports.driven.database.orModel.DbShoppingCartItem
-import java.util.*
+import java.util.Optional
 
 open class JpaShoppingCartRepository(private val shoppingCartJPARepository: ShoppingCartJPARepository): ShoppingCartRepositoryPort {
 
