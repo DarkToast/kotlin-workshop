@@ -1,13 +1,10 @@
 package workshop.oop
 
-import cheatsheets.Account
-import cheatsheets.Arithmetic
 import java.io.Serializable
 
 // Eine Klasse namens `Simple'
 // Der Standardkonstruktor wird direkt hinter dem Namen angelegt. In diesem Fall mit dem Parameter `x: Int`.
-class Simple(x: Int) {
-}
+class Simple(x: Int)
 
 // Die Klasse `Account` besitzt einen Standardkonstruktur mit drei Parametern.
 // - Ein `val` definiert automatisch ein `public` Klassenattribut.
@@ -16,7 +13,7 @@ class Simple(x: Int) {
 //   der Variableninitialisierung liegt.
 // Zusätzlich implementiert die Klasse das Interface `Serializable`
 
-class Account(val name: String, password: String, private val salt: String = "#salt#"): Serializable {
+class Account(val name: String, password: String, private val salt: String = "#salt#") : Serializable {
 
     // Ein klassisches Attribut der Klasse.
     private val passwordHash: String
@@ -63,27 +60,15 @@ interface Arithmetic {
     fun subtract(a: Int, b: Int): Int
 }
 
-class MyArithmetic: Arithmetic {
+class MyArithmetic : Arithmetic {
     // Implementierende oder abgeleitetete Methode müssen mit einem `override` versehen werden.
     override fun add(a: Int, b: Int): Int = a + b
 
     override fun subtract(a: Int, b: Int): Int = a - b
 }
 
-
 class MultipleConstructors(val value: String) {
 
-    constructor(value: Int): this(value.toString()) {
+    constructor(value: Int) : this(value.toString()) {
     }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -17,11 +17,11 @@ package cheatsheets
  * um einen Wrappertyp, der die neuen Methoden beinhaltet. Der Compiler bietet es uns lediglich als Teil der Zielklasse an.
  */
 fun JavaContract.getBaseFeePerYear(): Double {
-    return this.getBaseFee() * 12;
+    return this.getBaseFee() * 12
 }
 
 fun JavaContract.getReducedYearBaseFee(): Double {
-    return this.getBaseFeePerYear() * 0.95;
+    return this.getBaseFeePerYear() * 0.95
 }
 
 fun main(args: Array<String>) {
@@ -34,8 +34,3 @@ fun main(args: Array<String>) {
     println(contract.getBaseFeePerYear())
     println(contract.getReducedYearBaseFee())
 }
-
-
-
-
-

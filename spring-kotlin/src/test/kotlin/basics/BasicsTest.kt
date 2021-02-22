@@ -1,8 +1,6 @@
 package basics
 
-import io.kotlintest.specs.FeatureSpec
-import io.kotlintest.shouldBe
-
+import io.kotest.core.spec.style.FeatureSpec
 
 class BasicsTest : FeatureSpec() {
 /*

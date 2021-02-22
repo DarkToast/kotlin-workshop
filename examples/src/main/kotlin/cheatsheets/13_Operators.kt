@@ -16,8 +16,8 @@ class Rational(val numerator: Int, val denumerator: Int) {
     operator fun plus(b: Int): Rational = Rational(numerator + (b * denumerator), denumerator)
 
     operator fun plus(b: Rational): Rational = Rational(
-            numerator = numerator * b.denumerator + b.numerator * denumerator,
-            denumerator = denumerator * b.denumerator
+        numerator = numerator * b.denumerator + b.numerator * denumerator,
+        denumerator = denumerator * b.denumerator
     )
 
     /**

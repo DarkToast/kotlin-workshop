@@ -1,0 +1,24 @@
+/***********************************************************************************************************************
+ * Dependency Updates
+ ***********************************************************************************************************************/
+
+apply plugin: 'com.github.ben-manes.versions'
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[\d,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+def isSpockNonStable = { String version ->
+    def regex = /[\d.-]+[MRC]+[\d]-groovy[-\d.]+/
+    return version ==~ regex
+}
+
+dependencyUpdates {
+
+    rejectVersionIf {
+        isNonStable(it.candidate.version) && !isNonStable(it.currentVersion) ||
+            isSpockNonStable(it.candidate.version) && !isSpockNonStable(it.currentVersion)
+    }
+}

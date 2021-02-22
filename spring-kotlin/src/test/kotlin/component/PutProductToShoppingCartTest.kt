@@ -1,18 +1,17 @@
 package component
 
-import shoppingCart.Application
-import shoppingCart.ports.driver.rest.dto.GetProduct
-import io.kotlintest.matchers.string.shouldMatch
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.FeatureSpec
-import io.kotlintest.spring.SpringListener
+import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldMatch
+import io.kotest.spring.SpringListener
 import org.json.JSONArray
+import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.json.JSONObject
 import org.springframework.http.*
-import org.springframework.util.MultiValueMap
+import shoppingCart.Application
+import shoppingCart.ports.driver.rest.dto.GetProduct
 
 /*
  * Aufgabe: 7
@@ -43,7 +42,7 @@ class PutProductToShoppingCartTest : FeatureSpec() {
                 val response = createAndGetShoppingCart()
 
                 val json = JSONObject(response.body)
-                val link: JSONObject = json?.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
+                val link: JSONObject = json.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
 
                 link.optString("href") shouldMatch (Regex("""\/shoppingcart\/[\w\d-]+\/items"""))
                 link.optString("method") shouldBe "PUT"
@@ -157,10 +156,11 @@ class PutProductToShoppingCartTest : FeatureSpec() {
     private fun addProduct(location: String, product: String): ResponseEntity<String> {
         val response = getShoppingCart(location)
         val json = JSONObject(response.body)
-        val putProductLocation: String = json?.optJSONObject("links")?.optJSONObject("addProduct")?.optString("href") ?: ""
+        val putProductLocation: String = json.optJSONObject("links")?.optJSONObject("addProduct")?.optString("href")
+            ?: ""
 
         val header = HttpHeaders()
-        header.contentType = MediaType.APPLICATION_JSON_UTF8
+        header.contentType = MediaType.APPLICATION_JSON
 
         val entity = HttpEntity(product, header)
         return restTemplate.exchange(putProductLocation, HttpMethod.PUT, entity, String::class.java, "")

@@ -1,9 +1,7 @@
 package shoppingCart.domain
 
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldNotThrow
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.FeatureSpec
+import io.kotest.core.spec.style.FeatureSpec
+
 
 class SkuTest: FeatureSpec({
     /*

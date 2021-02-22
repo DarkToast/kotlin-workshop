@@ -1,0 +1,3 @@
+rootProject.name = 'kotlin-workshop'
+include 'examples'
+include 'spring-kotlin'
