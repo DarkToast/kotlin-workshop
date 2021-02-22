@@ -12,7 +12,7 @@ stages:
 test/build:
   image: gradle:jdk11
   stage: build
-  script: "./gradlew clean build"
+  script: "gradle clean build"
   artifacts:
     paths:
     - spring-kotlin/build/libs/*.jar
