@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableCaching
-open class Application
+class Application
 
 fun main(args: Array<String>) {
     SpringApplication.run(Application::class.java, *args)

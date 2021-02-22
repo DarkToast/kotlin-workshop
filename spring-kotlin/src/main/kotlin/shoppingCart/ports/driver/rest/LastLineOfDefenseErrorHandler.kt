@@ -1,17 +1,14 @@
 package shoppingCart.ports.driver.rest
 
-import shoppingCart.application.ApplicationException
-import shoppingCart.application.ProductNotFoundException
-import shoppingCart.domain.DomainException
-import shoppingCart.ports.PortException
-import shoppingCart.ports.driver.rest.dto.Failure
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus.BAD_REQUEST
-import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import java.lang.RuntimeException
+import shoppingCart.application.ApplicationException
+import shoppingCart.domain.DomainException
+import shoppingCart.ports.PortException
+import shoppingCart.ports.driver.rest.dto.Failure
 import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 

@@ -10,9 +10,9 @@ stages:
   - package
 
 test/build:
-  image: maven:3.6.0-jdk-11
+  image: gradle:jdk11
   stage: build
-  script: "mvn clean verify"
+  script: "gradle clean build"
   artifacts:
     paths:
-    - spring-kotlin/target/*.jar
+    - spring-kotlin/build/libs/*.jar

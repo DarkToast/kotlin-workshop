@@ -1,8 +1,17 @@
 package shoppingCart.ports.driven.database.orModel
 
-import shoppingCart.domain.*
-import java.util.*
+import shoppingCart.domain.Name
+import shoppingCart.domain.Price
+import shoppingCart.domain.Product
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import java.util.UUID
 import javax.persistence.CascadeType
+import javax.persistence.CascadeType.DETACH
+import javax.persistence.CascadeType.MERGE
+import javax.persistence.CascadeType.PERSIST
+import javax.persistence.CascadeType.REFRESH
+import javax.persistence.CascadeType.REMOVE
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.OneToOne
@@ -10,25 +19,21 @@ import javax.persistence.OneToOne
 @Entity(name = "ShoppingCartItem")
 data class DbShoppingCartItem(
         @Id
-        var id: UUID = UUID.randomUUID(),
+        val id: UUID = UUID.randomUUID(),
 
-        var sku: String?,
+        val sku: String,
 
-        @OneToOne(cascade = [CascadeType.ALL])
-        var product: DbProduct?,
+        @OneToOne(cascade = [PERSIST, REFRESH, DETACH, MERGE])
+        val product: DbProduct,
 
-        var quantity: Int?
+        val quantity: Int
 ) {
 
     fun toProductPair(): Pair<Product, Quantity> {
-        if(sku == null || product == null || quantity == null) {
-            throw IllegalStateException("DbShoppingCartItem has null values!")
-        }
-
-        val euro = product!!.price!! / 100
-        val cent = product!!.price!! % 100
-        val domainProduct = Product(SKU(sku!!), Price(euro, cent), Name(product!!.name!!))
-        val quantity = Quantity(quantity!!)
+        val euro = product.price / 100
+        val cent = product.price % 100
+        val domainProduct = Product(SKU(sku), Price(euro, cent), Name(product.name))
+        val quantity = Quantity(quantity)
 
         return Pair(domainProduct, quantity)
     }

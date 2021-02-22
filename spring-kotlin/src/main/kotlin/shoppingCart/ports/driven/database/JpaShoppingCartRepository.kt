@@ -4,17 +4,17 @@ import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.driven.database.orModel.DbShoppingCart
 import shoppingCart.ports.driven.database.orModel.DbShoppingCartItem
-import java.util.*
+import java.util.Optional
 
 open class JpaShoppingCartRepository(private val shoppingCartJPARepository: ShoppingCartJPARepository): ShoppingCartRepositoryPort {
 
     override fun load(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart> {
-        val optional: Optional<DbShoppingCart> = shoppingCartJPARepository.findById(shoppingCartUuid.toString())
+        val optional: Optional<DbShoppingCart> = shoppingCartJPARepository.findById(shoppingCartUuid.uuid)
 
         return optional
             .map { dbShoppingCart ->
-                val itemMap = dbShoppingCart.items!!.map { item -> item.toProductPair() }.toMap().toMutableMap()
-                ShoppingCart(ShoppingCartUuid(dbShoppingCart.shoppingCartUuid!!), itemMap)
+                val itemMap = dbShoppingCart.items.map { item -> item.toProductPair() }.toMap().toMutableMap()
+                ShoppingCart(ShoppingCartUuid(dbShoppingCart.shoppingCartUuid), itemMap)
             }
     }
 
@@ -25,7 +25,7 @@ open class JpaShoppingCartRepository(private val shoppingCartJPARepository: Shop
                 .toMutableList()
 
         val dbShoppingCart = DbShoppingCart(
-                shoppingCart.shoppingCartUuid.toString(),
+                shoppingCart.shoppingCartUuid.uuid,
                 shoppingCart.amount().valueInCent,
                 cartItemList
         )
