@@ -6,7 +6,7 @@ import javax.persistence.Id
 @Entity(name = "Product")
 data class DbProduct(
     @Id
-    var sku: String?,
-    var name: String?,
-    var price: Int?
+    val sku: String,
+    val name: String,
+    val price: Int
 )

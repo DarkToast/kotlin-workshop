@@ -13,8 +13,8 @@ open class JpaShoppingCartRepository(private val shoppingCartJPARepository: Shop
 
         return optional
             .map { dbShoppingCart ->
-                val itemMap = dbShoppingCart.items!!.map { item -> item.toProductPair() }.toMap().toMutableMap()
-                ShoppingCart(ShoppingCartUuid(dbShoppingCart.shoppingCartUuid!!), itemMap)
+                val itemMap = dbShoppingCart.items.map { item -> item.toProductPair() }.toMap().toMutableMap()
+                ShoppingCart(ShoppingCartUuid(dbShoppingCart.shoppingCartUuid), itemMap)
             }
     }
 

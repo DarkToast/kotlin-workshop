@@ -10,10 +10,10 @@ import javax.persistence.OneToMany
 @Entity(name = "ShoppingCart")
 data class DbShoppingCart (
     @Id
-    var shoppingCartUuid: String?,
+    val shoppingCartUuid: String,
 
-    var amount: Int?,
+    val amount: Int,
 
     @OneToMany(fetch = EAGER, cascade = [ALL])
-    var items: MutableList<DbShoppingCartItem>?
+    val items: List<DbShoppingCartItem>
 )
