@@ -1,7 +1,5 @@
 package workshop.oop
 
-import cheatsheets.Account
-import cheatsheets.Arithmetic
 import java.io.Serializable
 
 // Eine Klasse namens `Simple'

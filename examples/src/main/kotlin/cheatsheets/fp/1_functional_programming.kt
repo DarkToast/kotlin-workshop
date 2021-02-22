@@ -2,6 +2,8 @@ package cheatsheets
 
 import cheatsheets.oop.Employee
 import cheatsheets.oop.Salary
+import cheatsheets.oop.max
+import cheatsheets.oop.yvonne
 
 /**
  * Themen:
