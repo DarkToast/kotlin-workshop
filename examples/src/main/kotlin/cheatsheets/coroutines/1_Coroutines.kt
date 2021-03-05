@@ -1,11 +1,14 @@
-package cheatsheets
+package cheatsheets.coroutines
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
@@ -22,7 +25,6 @@ suspend fun createIntTwo(): Int {
 }
 
 fun main() {
-
     GlobalScope.launch {
         delay(1000)
         println("Hallo Welt")

@@ -19,11 +19,11 @@ import cheatsheets.oop.yvonne
 typealias EmployeeMapper = (Employee) -> Employee
 
 fun main() {
-    functions()
+    functionsAsFirstClassCitizen()
     higherOrderFunctions()
 }
 
-fun functions() {
+fun functionsAsFirstClassCitizen() {
     val list: List<String> = listOf("blue", "green", "red")
 
     // Funktionen, welche wir an andere Funktionen als Parameter übergeben, haben für sich genommen ebenfalls einen Typ.
