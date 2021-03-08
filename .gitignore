@@ -9,7 +9,7 @@
 *.ctxt
 
 # Package Files #
-*.jar
+**/build/*.jar
 *.war
 *.ear
 *.zip
