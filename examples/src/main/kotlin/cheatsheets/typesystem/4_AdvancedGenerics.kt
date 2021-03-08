@@ -1,5 +1,7 @@
 package cheatsheets.typesystem
 
+import java.io.Serializable
+
 open class Animal(var name: String)
 
 class Dog(name: String, val chipped: Boolean) : Animal(name)
@@ -11,50 +13,78 @@ class Canary(val green: Boolean) : Bird("Hansi")
 class Penguin : Bird("n/a")
 
 
-fun invariantGenerics() {
-    class InvariantCage<T>(private var animal: T, size: Int) {
+fun upperBounds() {
+    // Ohne Upper bound, kann Cage alle Typen ennahmen, welche von
+    // `Any` abgeleitet sind.
+    class Cage<T>(private var animal: T, size: Int) {
         fun get(): T = animal
-
-        fun rename(animal: T) {
-            (this.animal as Animal).name = (animal as Animal).name
+        fun put(animal: T) {
+            this.animal = animal
         }
     }
 
-    val dog = Dog("Wuffi", false)
-    var anyCage: InvariantCage<Any> = InvariantCage(Object(), 6)
-    var dogCage: InvariantCage<Dog> = InvariantCage(dog, 5)
+    // z.B. ein String
+    val cage = Cage<String>("Ein String?", 5)
 
-    // anyCage = dogCage // --> funktioniert nicht
-    // var animalCage: InvariantCage<Animal> = dogCage
-}
+    // --------------------------------------------------------------------------------------
 
-fun covariantGenerics() {
-    class CovariantCage<out T: Animal>(private var animal: T, size: Int) {
+    // Mit einem Upperbound (T: Supertype) kann man eine obere Typgrenze einführen:
+    class UpperBoundCage<T: Animal>(private var animal: T, size: Int) {
         fun get(): T = animal
-
-        fun rename(animalName: String) {
-            (this.animal as Animal).name = animalName
+        fun put(animal: T) {
+            this.animal = animal
         }
     }
 
-    val dog = Dog("Wuffi", false)
+    // Beispiel `Eagle`
+    val bird: Bird = Canary(false)
+    val dog: Dog = Dog("wuffi", false)
 
-    var dogCage: CovariantCage<Dog> = CovariantCage(dog, 5)
-    var animalCage: CovariantCage<Animal> = dogCage
+    val d = UpperBoundCage<Bird>(Eagle("Pupsi"), 5)
+//    // schreiben
+//    d.put(Eagle("Hansi"))
+//    d.put(Canary(true))
+//    d.put(bird)
+//    d.put(dog)
+//
+//    // lesen
+//    val a: Animal = d.get()
+//    val b: Bird = d.get()
+//    val c: Dog = d.get()
+//    val e: Eagle = d.get()
+//
+//    // Polymorph?
+//    val w: UpperBoundCage<Animal> = d
+//    val y: UpperBoundCage<Bird> = d
+//    val z: UpperBoundCage<Eagle> = d
+//    val x: UpperBoundCage<Dog> = d
 }
 
-fun contravariantGenerics() {
-    class ContravariantCage<in T: Animal>(private var animal: T, size: Int) {
-        fun getName(): String = animal.name
-
-        fun rename(animal: T) {
-            this.animal.name = animal.name
-        }
+fun whereClause() {
+    class WithWhere<T>() where T: Animal, T: Serializable {
+        // ...
     }
-
-    val dog = Dog("Wuffi", false)
-
-    var dogCage: ContravariantCage<Dog> = ContravariantCage(dog, 5)
-    // var animalCage: ContravariantCage<Animal> = dogCage
 }
 
+// ============
+
+interface Jsonable<T> {
+    fun fromJson(value: String): T
+}
+
+class Customer: Jsonable<Customer> {
+    override fun fromJson(value: String): Customer = TODO()
+}
+
+// Covariant
+// Wenn T ein Subtyp von U ist, ist auch eine List<T> eine List<U>
+// read only
+// out
+
+// Invariant
+// Keine Subtistition möglich!
+
+// Contravariant
+// Wenn ein U der Supertyp von T ist, ist auch eine List<U> eine List<T>
+// write only
+// in
