@@ -8,11 +8,20 @@ import cheatsheets.oop.max
 import cheatsheets.oop.yvonne
 
 /**
- * Themen:
- *  - Funktionstypen
- *  - Funktionen als first class citizens
- *  - Higher order functions
- *  - Typ aliases
+ +-------------------+
+ |   Funktionale     | (Mathematik, starke Abstraktion)
+ |   Programmierung  | (Lambda-Kalkül, Lisp, Standard ML, Haskell, F#)
+ +-------------------+
+          |
+          v              +---------------------+
+        KOTLIN   <------ |  Objektorientierte  | (Fortran, Smalltalk, Java)
+          ^              |  Programmierung     | (Domaingetrieben, schwächere Abstraktion)
+          |              +---------------------+
+          |
+ +------------------+
+ |  Imperative      |   (maschinennah, schwache Abstraktion, direkter Speicherzugriff)
+ |  Programmierung  |   (Assembler, C, C++)
+ +------------------+
  */
 
 // Typealiases ermöglich eine sytaktische Abkürzung. Sie bilden aber keinen neuen Typ!
