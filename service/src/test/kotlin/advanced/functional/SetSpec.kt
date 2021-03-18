@@ -1,4 +1,4 @@
-package functional
+package advanced.functional
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled

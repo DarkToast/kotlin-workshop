@@ -1,15 +1,20 @@
 package cheatsheets.fp
 
+import java.lang.Thread.sleep
 import java.util.Optional
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeUnit.SECONDS
 
 /**
  * Der Begriff "Monade" taucht immer dann auf, wenn man auf Artikel über "moderne" funktionale Prorammierung stößt.
  * Dann bekommt man meist eine Menge Mathematik und Begriffe wie "Kategorientheorie" vorgeworfen.
- * Einfacher ist es, wenn man sich dem Begriff nicht von der Mathematik, sondern als Design-Pattern nähert.
+ * Als Nicht-Mathemathiker ist es meist einfacher, wenn man sich dem Begriff nicht von der Mathematik,
+ * sondern als Design-Pattern nähert.
  *
  * Dabei muss man immer im Kopf behalten, dass diese funktionalen Konstrukte erst mal nichts von
  * objektorientierten Konstrukten "wissen". So lassen sich einige Basispattern wesentlich einfacher mit einer Klasse
- * lösen
+ * lösen.
  */
 
 // Motivation:
@@ -20,14 +25,14 @@ import java.util.Optional
 // Eine Monade soll daher einen Seiteneffekt kapseln und den Effekt soweit "schieben" wie möglich. Dadurch soll
 // das eigentliche Programm so wenig wie möglich tangiert werden.
 // Beispiel:
-//   Ein Parameter kann einen Wert darstellen, aber auch `null` sein. Aus dieser `nullable`-Eigenschaft folgert ein
-//   Seiteneffekt der, nimmt man es genau, bei jedem Lesenden Zugriff eintritt. Beim Fall eines `null` muss der
+//   Ein Parameter kann einen Wert darstellen, aber auch `null` sein. Aus dieser `nullable`-Eigenschaft folgt ein
+//   Seiteneffekt der, nimmt man es genau, bei jedem lesenden Zugriff eintritt. Beim Fall eines `null` muss der
 //   Programmfluss unterbrochen werden. Der Seiteneffekt tritt ein.
 
-// An diesem Beispiel wollen wir mal die Eigenschaften einer Monade ansehen:
+// An diesem Beispiel wollen wir die Eigenschaften einer Monade ansehen:
 //
 // 1: Eine Monade ist erst mal ein Container, welcher Elemente eines Typs ummanteln kann. In unserem Fall den Wert, den
-//    dessen potentielle `null`-Natur kapseln wollen.
+//    dessen potentielle `null`-Natur wir kapseln wollen.
 //    In Kotlin haben wir das Elemente der Klassen und Generics um diese Anforderung abzubilden:
 class Nullable1<T>
 
@@ -35,7 +40,7 @@ class Nullable1<T>
 
 // 2: Eine Monade muss die "Einheitsfunktion" besitzen um aus einem Typ `T` die Monade `M<T>` zu erzeugen.
 //    Kotlin macht es hier einfach: Das ist ein Konstruktor:
-class Nullable2<T>(private val value: T?)
+class Nullable2<T>(private val value: T?)   // `value` kann null sein!
 
 val value: String = "test"
 val m2: Nullable2<String> = Nullable2(value)
@@ -43,18 +48,19 @@ val m2: Nullable2<String> = Nullable2(value)
 
 
 
-// 3: Eine Monade muss den `Funktor`-Operator besitzen, sodass gilt:
+// 3: Eine Monade soll den `Funktor`-Operator besitzen, sodass gilt:
 //    funktor(M<T>, f: T -> U): M<U>
 //    Wir brauchen also ein Ding, welches eine Monade `M<T>` nimmt und eine Funktion, um aus einem T ein U zu machen.
 //    Als Ergebnis erhalten wir die Monade `M<U>`. In der freien Wildbahn kennt man diesen Funktor als `map`-Funktion.
-//    Auch "leben" die Funktoren in objektefunktionalen Sprachen nicht in einem globalen Scope, sondern im Scope der Monade:
+//    Auch existieren die Funktoren in objektefunktionalen Sprachen nicht in einem globalen Scope, sondern im Scope der Monade:
 class Nullable3<T>(private val value: T?) {
 
-    // Man sieht, dass hier der "Seiteneffekt" das erste mal eintritt. Sie wird aber weiterhin
+    // Man sieht, dass hier der "Seiteneffekt" das erste mal eintritt. Er wird aber weiterhin
     // in der Monade gekapselt. Nach Außen wirkt die Monade weiterhin als M<U>. Man nennt dies auch einen "circuit breaker".
     // Oder in Anlehnung an die quantenmechanische Unbestimmtheit: Eine Monade ist die Schrödingerkatze der Informatik.
-    fun <U> map(f: (T) -> U?): Nullable3<U> = if(value != null) {
-        Nullable3(f(value))
+    fun <U> map(transform: (T) -> U?): Nullable3<U> = if(value != null) {
+        val new: U? = transform(value)
+        Nullable3(new)
     } else {
         Nullable3(null)
     }
@@ -81,7 +87,7 @@ class Nullable4<T>(val value: T?) {
 
 // Aufgrund der type erasure Natur der JVM Generics, kann die flatten Methode in
 // Kotlin am einfachsten als Extension gebaut werden, da wir hier den genauen
-// rekursiven Typaufbau erweitern können:
+// rekursiven Typaufbau als Sonderfall erweitern können:
 fun <U> Nullable4<Nullable4<U>>.flatten(): Nullable4<U> = this.value ?: Nullable4(null)
 
 
@@ -126,7 +132,8 @@ val m5: Nullable5<String> = Nullable5(value)        // Nullable5<String>
 //    tot ist oder noch lebt.
 //    Generell gibt es hier keine formalen Methoden, da sie sehr oft Seiteneffektspezifisch sind. In unserem Fall
 //    können wir einfach ein get() machen, welche uns ein nullable Ergebnis zurückliefert. Zumindest ein transformiertes
-//    nullable. Oder wir geben die Möglichkeit eines default Values, welches zu guter Letzt die letzte
+//    nullable. Oder wir geben die Möglichkeit eines default Values, welches zu guter Letzt das letzte Abfangen des
+//    Seiteneffekt darstellt.
 class Nullable<T>(val value: T?) {
     fun <U> map(f: (T) -> U?): Nullable<U> = if(value != null) {
         Nullable(f(value))
@@ -152,12 +159,26 @@ val string: String = Nullable(value)                // Nullable<String>
     .getOrElse("My default")
 
 
-// Monadische Strukturen finden sich überall in der Kotlin, aber auch in der Java-API:
+// Monadische Strukturen finden sich überall in Kotlin, aber auch in der Java-API:
+
+// Javas Optional
 val opt: Int = Optional.of("Hallo Welt")
     .map { s -> s.length }
     .flatMap { len -> Optional.empty<Int>() }
     .orElse(42)
 
+// Kotlin List
 val list: String = listOf("Hallo", "Welt", ".", "Du", "bist", "so", "schön", ".")
     .flatMap { s -> s.asIterable() }
     .joinToString()
+
+// Und nochmal Javas cocurrent API
+val c: CompletableFuture<String> = CompletableFuture.supplyAsync {
+    sleep(1000)
+    "Hallo Welt"
+}
+
+val stringLength = c
+    .thenApply { str -> "s is $str" }
+    .thenApply { str -> str.length }
+    .get(2, SECONDS)
