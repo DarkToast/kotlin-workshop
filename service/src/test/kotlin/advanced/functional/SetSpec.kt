@@ -1,4 +1,4 @@
-package functional
+package advanced.functional
 
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
