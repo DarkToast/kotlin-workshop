@@ -1,5 +1,7 @@
 package cheatsheets;
 
+import cheatsheets.typesystem.Annotations;
+
 public class KotlinUsage {
     int x = Annotations.getJvmStaticField();
     int y = Annotations.Companion.getKotlinStaticField();

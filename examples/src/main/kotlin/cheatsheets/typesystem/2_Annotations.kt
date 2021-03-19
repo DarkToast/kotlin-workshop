@@ -1,4 +1,4 @@
-package cheatsheets
+package cheatsheets.typesystem
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 

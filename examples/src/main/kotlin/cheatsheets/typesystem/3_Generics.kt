@@ -2,7 +2,7 @@ package cheatsheets.typesystem
 
 import java.util.ArrayList
 
-class `2_Generics` {
+class `3_Generics` {
 
     /**
      * Kotlin unterstützt Generics, bzw. Typparameter

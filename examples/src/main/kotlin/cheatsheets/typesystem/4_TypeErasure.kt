@@ -6,7 +6,7 @@ package cheatsheets.typesystem
  * Die JVM speichert Typparameter allerdings nicht mit im Bytecode. Sie sind lediglich zur Compilezeit bekannt.
  * Dieses Prinzip nennt man "type erasure"
  */
-class `3_TypeErasure` {
+class `4_TypeErasure` {
 
     // Z.B. lassen sich Methoden mit verschiedenen Typen überladen, aber nicht mit verschiedenenen Typparametern.
     fun first(l: List<String>): String = TODO()
@@ -40,7 +40,7 @@ class `3_TypeErasure` {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val te = `3_TypeErasure`()
+            val te = `4_TypeErasure`()
             te.javaStyle(listOf(2, 4), Int::class.java)
             te.kotlinStyle(listOf(2, 4))
         }
