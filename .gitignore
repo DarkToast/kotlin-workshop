@@ -28,4 +28,5 @@ target
 
 # Gradle
 .gradle
+**/out/**
 **/build
