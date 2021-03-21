@@ -1,6 +1,11 @@
 package advanced.functional
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.beInstanceOf
 import java.lang.Thread.sleep
 import java.time.OffsetDateTime
 import java.util.UUID
@@ -111,12 +116,15 @@ fun placeOrder(productId: Int, quantity: Int, customer: ValidCustomer): PlacedOr
     return PlacedOrder(productId, quantity, report, customer)
 }
 
-fun fulfillOrder(placedOrder: PlacedOrder, fulfilledQuantity: Int): FulfilledOrder {
-    println("-> Fulfill order")
-    val report = sendEmail(placedOrder.customer, "order fulfilled")
-
-    println("-> Order fulfilled")
-    return FulfilledOrder(placedOrder, report, fulfilledQuantity)
+fun fulfillOrder(placedOrder: PlacedOrder, fulfilledQuantity: Int): Result {
+    return try {
+        println("-> Fulfill order")
+        val report = sendEmail(placedOrder.customer, "order fulfilled")
+        println("-> Order fulfilled")
+        Result(null, FulfilledOrder(placedOrder, report, fulfilledQuantity))
+    } catch (e: Throwable) {
+        Result(SystemFailure(e.message ?: ""), null)
+    }
 }
 
 /**
@@ -133,28 +141,112 @@ fun fulfillOrder(placedOrder: PlacedOrder, fulfilledQuantity: Int): FulfilledOrd
  * Ihr könnt also auch die Methoden wie `createCustomer` so umbauen, das sie statt eines Wert oder einer Exception,
  * immer eine Monade zurück geben und den Fehlertyp selbst in der Hand halten.
  */
+data class Result(private val failure: Failure?, private val value: Any?) {
+    fun hasFailure(): Boolean = failure != null
+    fun isSuccess(): Boolean = value != null
+
+    fun get(): Any? = value
+    fun getFailure(): Failure? = failure
+
+    fun recover(handle: (Failure) -> Any): Any = TODO()
+    fun map(transform: (Any) -> Any): Result = TODO()
+    fun flatMap(transform: (Any) -> Result): Result = TODO()
+
+    companion object {
+        fun ofFailure(failure: Failure): Result = TODO()
+        fun ofSuccess(success: Any): Result = TODO()
+    }
+}
+
 class MonadsSpec : FeatureSpec({
+    feature("Result") {
+        scenario("! Can be created of failure") {
+            val result: Result = Result.ofFailure(SystemFailure("something went wrong"))
+            result.hasFailure() shouldBe true
+        }
+
+        scenario("! Can be created of success") {
+            val result = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
+            result.isSuccess() shouldBe true
+        }
+
+        /*
+        scenario("Is generic in success") {
+            val result: Result<Failure, ValidCustomer> = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
+            result.isSuccess() shouldBe true
+        }
+
+        scenario("Is generic in failure") {
+            val result: Result<SystemFailure, ValidCustomer> = Result.ofFailure<ValidCustomer>(SystemFailure("something went wrong"))
+            result.isSuccess() shouldBe true
+        }
+        */
+
+        scenario("! Value can be mapped") {
+            val result = Result.ofSuccess("Hallo Welt")
+                .map { str -> (str as String).length }
+                .map { len -> (len as Int) == 10 }
+                .get()
+
+            result should beInstanceOf<Int>()
+            result shouldBe true
+        }
+
+        scenario("! Value can be flat mapped") {
+            val result = Result.ofSuccess("Hallo Welt")
+                .flatMap { str -> Result.ofSuccess((str as String).length) }
+                .flatMap { len -> Result.ofSuccess((len as Int) == 10) }
+                .get()
+
+            result should beInstanceOf<Int>()
+            result shouldBe 10
+        }
+
+        scenario("! recover gets the given success value") {
+            val result = Result.ofSuccess("Hallo Welt")
+                .recover { _ -> "Foobar" }
+
+            result should beInstanceOf<String>()
+            result shouldBe "Hallo Welt"
+        }
+
+        scenario("! recover gets the recover value") {
+            val result: String = Result.ofFailure(SystemFailure("System failure"))
+                .recover { _ -> "Foobar" } as String
+
+            result should beInstanceOf<String>()
+            result shouldBe "Foobar"
+        }
+    }
+
     feature("Customer journey") {
-        val validCustomer: ValidCustomer
+        scenario("! with failure") {
+            shouldNotThrow<Throwable> {
+                val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net2")
+                val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
+                val placedOrder = placeOrder(4, 10, validCustomer)
+                val result = fulfillOrder(placedOrder, 8)
 
-        try {
-            val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net")
-            validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
-        } catch(e: Exception) {
-            println("Ouh oh! Something went wrong... ${e.message}")
-            return@feature
+                result.hasFailure() shouldBe true
+                result.getFailure() should beInstanceOf<SystemFailure>()
+                (result.getFailure() as SystemFailure).failureMessage shouldBe "Email could not sent!"
+            }
         }
 
-        try {
-            val placedOrder = placeOrder(4, 10, validCustomer)
-            val fulfilledOrder = fulfillOrder(placedOrder, 8)
+        scenario("With success") {
+            shouldNotThrow<Throwable> {
+                val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net")
+                val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
+                val placedOrder = placeOrder(4, 10, validCustomer)
+                val result = fulfillOrder(placedOrder, 8)
 
-            println("Order was fulfilled!")
-        } catch (e: Exception) {
-            println("Ouh oh! Something went wrong on order... ${e.message}")
-            return@feature
+                result.hasFailure() shouldBe false
+                result.getFailure() shouldBe null
+                result.get() shouldNotBe null
+                (result.get() as FulfilledOrder).fulfilledQuantity shouldBe 8
+                (result.get() as FulfilledOrder).placedOrder.quantity shouldBe 10
+            }
         }
-
     }
 
 })
