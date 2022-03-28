@@ -29,7 +29,9 @@ class ServiceTest: FeatureSpec() {
     private val shoppingCart = ShoppingCart()
     private val milk = Product(sku, Price(10,0), Name("Milch"))
 
-    override fun beforeTest(testCase: TestCase) {
+
+
+    override suspend fun beforeTest(testCase: TestCase) {
         shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
     }
 

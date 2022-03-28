@@ -1,9 +1,10 @@
 package component
 
 import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldMatch
-import io.kotest.spring.SpringListener
+// import io.kotest.spring.SpringListener
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
@@ -31,7 +32,7 @@ import shoppingCart.ports.driver.rest.dto.GetProduct
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
 class PutProductToShoppingCartTest : FeatureSpec() {
-    override fun listeners() = listOf(SpringListener)
+    override fun extensions() = listOf(SpringExtension)
 
     @Autowired
     lateinit var restTemplate: TestRestTemplate

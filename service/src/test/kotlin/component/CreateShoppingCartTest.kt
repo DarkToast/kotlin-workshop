@@ -1,10 +1,11 @@
 package component
 
 import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldMatch
 import io.kotest.matchers.string.shouldNotContain
-import io.kotest.spring.SpringListener
+// import io.kotest.spring.SpringListener
 import shoppingCart.Application
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,7 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
 class CreateShoppingCartTest() : FeatureSpec() {
-    override fun listeners() = listOf(SpringListener)
+    override fun extensions() = listOf(SpringExtension)
 
     @Autowired
     lateinit var restTemplate: TestRestTemplate

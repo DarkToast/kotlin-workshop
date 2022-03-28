@@ -27,7 +27,7 @@ class ShoppingCartTest : FeatureSpec() {
     val sku = SKU("12345")
     val secondSku = SKU("54321")
 
-    override fun beforeTest(testCase: TestCase) {
+    override suspend fun beforeTest(testCase: TestCase) {
         cart = ShoppingCart()
     }
 
@@ -43,8 +43,8 @@ class ShoppingCartTest : FeatureSpec() {
 
             scenario("! level 1 - can calculate the amount of its items") {
                 val products: MutableMap<Product, Quantity> = mutableMapOf(
-                        aProduct(Price(2, 99)) to Quantity(2),
-                        anotherProduct(Price(3, 49)) to Quantity(3)
+                    aProduct(Price(2, 99)) to Quantity(2),
+                    anotherProduct(Price(3, 49)) to Quantity(3)
                 )
 
                 val cart = ShoppingCart(cartItems = products)
@@ -54,8 +54,8 @@ class ShoppingCartTest : FeatureSpec() {
 
             scenario("! level 1 - can be initialized with a predefined product set") {
                 val products: MutableMap<Product, Quantity> = mutableMapOf(
-                        aProduct(Price(10, 0)) to Quantity(2),
-                        anotherProduct(Price(2, 0)) to Quantity(4)
+                    aProduct(Price(10, 0)) to Quantity(2),
+                    anotherProduct(Price(2, 0)) to Quantity(4)
                 )
                 val uuid = ShoppingCartUuid()
 
@@ -110,7 +110,7 @@ class ShoppingCartTest : FeatureSpec() {
                     cart.putProductInto(aProduct(Price(100, 0)), Quantity(1))
                 }
 
-                cart.amount() shouldBe ShoppingCartAmount(299,99)
+                cart.amount() shouldBe ShoppingCartAmount(299, 99)
             }
 
             scenario("! level 3 - A shopping cart can not have more than 50 different products") {
