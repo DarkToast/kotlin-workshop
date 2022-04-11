@@ -15,4 +15,4 @@ test/build:
   script: "gradle clean build"
   artifacts:
     paths:
-    - spring-kotlin/build/libs/*.jar
+    - service/build/libs/*.jar
