@@ -20,68 +20,68 @@ class MoneyTest: FeatureSpec({
     feature("An amount") {
         scenario("can be zero") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(0, 0)
+                Amount(0, 0)
             }
         }
 
         scenario("can be 300,00 €") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(300, 0)
+                Amount(300, 0)
             }
         }
 
         scenario("are equals") {
-            (ShoppingCartAmount(300, 0) == ShoppingCartAmount(300, 0)) shouldBe true
+            (Amount(300, 0) == Amount(300, 0)) shouldBe true
         }
 
         scenario("can be 0,01 €") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(0, 1)
+                Amount(0, 1)
             }
         }
 
         scenario("has a value in cent") {
-            ShoppingCartAmount(10, 11).valueInCent shouldBe 1011
+            Amount(10, 11).valueInCent shouldBe 1011
         }
 
         scenario("can not be negative") {
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(10, -1)
+                Amount(10, -1)
             }
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(-1, 10)
+                Amount(-1, 10)
             }
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(-1, -1)
+                Amount(-1, -1)
             }
         }
 
         scenario("Cent can not exceed 99 cents") {
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(10, 100)
+                Amount(10, 100)
             }
         }
 
         scenario("A amounts can not exceed 300,00") {
             shouldThrow<MaximumShoppingCardAmountExceededException> {
-                ShoppingCartAmount(300, 1)
+                Amount(300, 1)
             }
         }
 
         scenario("two amounts can not exceed 300,00 €") {
             shouldThrow<MaximumShoppingCardAmountExceededException> {
-                ShoppingCartAmount(150, 0).plus(ShoppingCartAmount(150, 1))
+                Amount(150, 0).plus(Amount(150, 1))
             }
         }
 
         scenario("an amount can be added to another") {
-            ShoppingCartAmount(10,99).plus(ShoppingCartAmount(2,89)).valueInCent shouldBe 1388
-            ShoppingCartAmount(0,99).plus(ShoppingCartAmount(0,99)).valueInCent shouldBe 198
-            ShoppingCartAmount(111, 59).plus(ShoppingCartAmount(0 ,41)).valueInCent shouldBe 11200
+            Amount(10,99).plus(Amount(2,89)).valueInCent shouldBe 1388
+            Amount(0,99).plus(Amount(0,99)).valueInCent shouldBe 198
+            Amount(111, 59).plus(Amount(0 ,41)).valueInCent shouldBe 11200
         }
 
         scenario("a zero amount added to another does not have any effect") {
-            ShoppingCartAmount(10,99).plus(ShoppingCartAmount(0, 0)).valueInCent shouldBe 1099
+            Amount(10,99).plus(Amount(0, 0)).valueInCent shouldBe 1099
         }
     }
 
@@ -113,6 +113,12 @@ class MoneyTest: FeatureSpec({
         scenario("can be 0,01 €") {
             shouldNotThrow<Throwable> {
                 Price(0, 1)
+            }
+        }
+
+        scenario("can be created with cents") {
+            shouldNotThrow<Throwable> {
+                Price(Price(10, 15).valueInCent) shouldBe Price(10,15)
             }
         }
 

@@ -3,50 +3,63 @@ package shoppingCart.domain
 import java.util.Optional
 import java.util.UUID
 
-class MaximumProductCountExceededException(productCount: Int):
-        DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
+class MaximumProductCountExceededException(productCount: Int) :
+    DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
+
+data class Item(val product: Product, val effectivePrice: Price, val quantity: Quantity) {
+    val amount: Amount = product.price * quantity
+
+    fun addQuantity(q: Quantity) = Item(
+        product = product,
+        effectivePrice = effectivePrice,
+        quantity = this.quantity + q
+    )
+}
 
 class ShoppingCart(
-        val shoppingCartUuid: ShoppingCartUuid = ShoppingCartUuid(),
-        private val cartItems: MutableMap<Product, Quantity> = mutableMapOf()
+    val shoppingCartUuid: ShoppingCartUuid = ShoppingCartUuid(),
+    items: List<Item> = emptyList()
 ) {
+    private var cartItems: Map<SKU, Item> = items.associateBy { it.product.sku }
+        set(value) {
+            amount = value.amount()
+            field = value
+        }
 
-    private var overallAmount: ShoppingCartAmount = cartItems
-            .map { item -> item.key.price * item.value }
-            .fold(ShoppingCartAmount(0, 0)) { overall, shoppingCartAmount -> overall + shoppingCartAmount }
+    private var amount: Amount = cartItems.amount()
 
-    fun amount(): ShoppingCartAmount = overallAmount.copy()
+    private fun Map<SKU, Item>.amount() = this.values.fold(Amount(0, 0)) { amount, item ->
+        amount + item.amount
+    }
+
+    fun amount(): Amount = amount
 
     fun isEmpty(): Boolean = cartItems.isEmpty()
 
-    fun putProductInto(product: Product, quantity: Quantity): ShoppingCart {
+    fun addProduct(product: Product, quantity: Quantity): ShoppingCart {
         checkMaximumProductCount()
 
-        val newAmount: ShoppingCartAmount = overallAmount + (product.price * quantity)
-        val existingQuantity: Quantity? = cartItems[product]
+        val mutatedItems = cartItems.toMutableMap()
 
-        if(existingQuantity == null) {
-            cartItems[product] = quantity
-        } else {
-            cartItems[product] = existingQuantity.copy(value = existingQuantity.value + quantity.value)
-        }
+        val item = Optional.ofNullable(mutatedItems[product.sku])
+            .map { it.addQuantity(quantity) }
+            .orElseGet{ Item(product, product.price, quantity) }
 
-        overallAmount = newAmount
-
+        mutatedItems[product.sku] = item
+        cartItems = mutatedItems
         return this
     }
 
     fun quantityOfProduct(sku: SKU): Optional<Quantity> {
-        return Optional.ofNullable(cartItems.mapKeys { item -> item.key.sku }[sku])
+        return Optional.ofNullable(cartItems[sku]).map { it.quantity }
     }
 
-    fun content(): List<Pair<Product, Quantity>> {
-        return cartItems.map { entry -> Pair(entry.key, entry.value) }
+    fun items(): List<Item> {
+        return cartItems.values.toList()
     }
-
 
     private fun checkMaximumProductCount() {
-        if(cartItems.count() >= 50) {
+        if (cartItems.count() >= 50) {
             throw MaximumProductCountExceededException(cartItems.count())
         }
     }
@@ -62,7 +75,6 @@ class ShoppingCart(
 
         if (shoppingCartUuid != other.shoppingCartUuid) return false
         if (cartItems != other.cartItems) return false
-        if (overallAmount != other.overallAmount) return false
 
         return true
     }
@@ -70,14 +82,12 @@ class ShoppingCart(
     override fun hashCode(): Int {
         var result = shoppingCartUuid.hashCode()
         result = 31 * result + cartItems.hashCode()
-        result = 31 * result + overallAmount.hashCode()
         return result
     }
 }
 
 data class ShoppingCartUuid(val uuid: UUID = UUID.randomUUID()) {
-
-    constructor(uuid: String): this(UUID.fromString(uuid))
+    constructor(uuid: String) : this(UUID.fromString(uuid))
 
     override fun toString(): String = uuid.toString()
 }

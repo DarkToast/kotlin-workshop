@@ -21,9 +21,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0'
     implementation 'io.github.microutils:kotlin-logging-jvm:2.1.21'
 
-    // runtime 'org.jetbrains.kotlin:kotlin-reflect'
-
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.5'
 
     testImplementation 'io.kotest:kotest-assertions-core:5.2.1'

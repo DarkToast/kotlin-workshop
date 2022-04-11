@@ -20,7 +20,7 @@ class AppShoppingCartService(
         return shoppingCartRepositoryPort.load(shoppingCartUuid).map { shoppingCart ->
             productRepositoryPort.findProductBySku(productSku)
                     .map { foundProduct ->
-                        shoppingCart.putProductInto(foundProduct, quantity)
+                        shoppingCart.addProduct(foundProduct, quantity)
                     }
                     .orElseThrow {
                         ProductNotFoundException(productSku)

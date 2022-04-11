@@ -17,6 +17,8 @@ sealed class Money<T: Money<T>> (euro: Int, cent: Int) {
 }
 
 data class Price(val euro: Int, val cent: Int): Money<Price>(euro, cent) {
+    constructor(cent: Int): this(cent / 100, cent % 100)
+
     init {
         if(valueInCent > 12000) throw TooHighPriceException(valueInCent)
     }
@@ -26,17 +28,17 @@ data class Price(val euro: Int, val cent: Int): Money<Price>(euro, cent) {
         return Price(value / 100, value % 100)
     }
 
-    operator fun times(quantity: Quantity): ShoppingCartAmount = (1 .. quantity.value)
-            .fold(ShoppingCartAmount(0, 0)) { amount, _ -> amount + this }
+    operator fun times(quantity: Quantity): Amount = (1 .. quantity.value)
+            .fold(Amount(0, 0)) { amount, _ -> amount + this }
 }
 
-data class ShoppingCartAmount(val euro: Int, val cent: Int): Money<ShoppingCartAmount>(euro, cent) {
+data class Amount(val euro: Int, val cent: Int): Money<Amount>(euro, cent) {
     init {
         if(valueInCent > 30000) throw MaximumShoppingCardAmountExceededException(valueInCent)
     }
 
-    override fun plus(money: Money<*>): ShoppingCartAmount {
+    override fun plus(money: Money<*>): Amount {
         val value = this.valueInCent + money.valueInCent
-        return ShoppingCartAmount(value / 100, value % 100)
+        return Amount(value / 100, value % 100)
     }
 }

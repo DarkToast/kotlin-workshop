@@ -49,7 +49,7 @@ class AppShoppingCartServiceTest: FeatureSpec() {
                 result.isPresent shouldBe true
                 result.get().isEmpty() shouldBe false
                 result.get().quantityOfProduct(sku).get() shouldBe Quantity(2)
-                result.get().content() shouldContain Pair(milk, Quantity(2))
+                result.get().items() shouldContain Item(milk, Price(10,0), Quantity(2))
             }
 
             scenario("if exists the shopping cart has no product on a unknown SKU") {

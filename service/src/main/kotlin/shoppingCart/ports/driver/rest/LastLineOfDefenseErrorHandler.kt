@@ -1,6 +1,7 @@
 package shoppingCart.ports.driver.rest
 
 
+import mu.KotlinLogging
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
@@ -18,8 +19,12 @@ import javax.servlet.http.HttpServletRequest
 @ControllerAdvice
 class LastLineOfDefenseErrorHandler {
 
+    private val logger = KotlinLogging.logger {}
+
     @ExceptionHandler(IllegalArgumentException::class)
     fun handleBadRequest(ex: IllegalArgumentException, request: HttpServletRequest): ResponseEntity<Failure> {
+        logger.warn(ex) { "For request with illegal arguments. Returning ${BAD_REQUEST.name}" }
+
         val now = LocalDateTime.now().toString()
         val message = ex.message ?: ""
         val error = Failure(now, BAD_REQUEST.value(), BAD_REQUEST.reasonPhrase, message, request.requestURI)
@@ -34,6 +39,8 @@ class LastLineOfDefenseErrorHandler {
             is ShoppingCartNotFoundException -> NOT_FOUND
             else -> BAD_REQUEST
         }
+
+        logger.warn(ex) { "Got domain explicit failure. Returning ${httpStatus.name}" }
 
         val now = LocalDateTime.now().toString()
         val message = ex.message ?: ""

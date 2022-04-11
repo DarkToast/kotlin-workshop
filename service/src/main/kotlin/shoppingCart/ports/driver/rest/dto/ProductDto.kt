@@ -9,3 +9,8 @@ data class GetProduct(
     val sku: String,
     val name: String
 )
+
+data class GetItem(
+    val quantity: Int,
+    val product: GetProduct
+)
