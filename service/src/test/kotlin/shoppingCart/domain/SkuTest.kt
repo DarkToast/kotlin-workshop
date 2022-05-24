@@ -6,7 +6,7 @@ import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 
 
-class SkuTest: FeatureSpec({
+class SkuTest : FeatureSpec({
     /*
      * Aufgabe 2:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei

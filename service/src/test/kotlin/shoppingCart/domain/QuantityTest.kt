@@ -4,11 +4,9 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
-import shoppingCart.domain.Quantity
-import shoppingCart.domain.TooMuchItemsOfAProduct
 
 
-class QuantityTest: FeatureSpec({
+class QuantityTest : FeatureSpec({
     feature("A quantity") {
         scenario("can be zero") {
             shouldNotThrow<Throwable> {

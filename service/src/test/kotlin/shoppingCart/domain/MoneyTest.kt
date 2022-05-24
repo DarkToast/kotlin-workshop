@@ -5,7 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 
-class MoneyTest: FeatureSpec({
+class MoneyTest : FeatureSpec({
     /*
      * Aufgabe 3:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
@@ -75,13 +75,13 @@ class MoneyTest: FeatureSpec({
         }
 
         scenario("an amount can be added to another") {
-            Amount(10,99).plus(Amount(2,89)).valueInCent shouldBe 1388
-            Amount(0,99).plus(Amount(0,99)).valueInCent shouldBe 198
-            Amount(111, 59).plus(Amount(0 ,41)).valueInCent shouldBe 11200
+            Amount(10, 99).plus(Amount(2, 89)).valueInCent shouldBe 1388
+            Amount(0, 99).plus(Amount(0, 99)).valueInCent shouldBe 198
+            Amount(111, 59).plus(Amount(0, 41)).valueInCent shouldBe 11200
         }
 
         scenario("a zero amount added to another does not have any effect") {
-            Amount(10,99).plus(Amount(0, 0)).valueInCent shouldBe 1099
+            Amount(10, 99).plus(Amount(0, 0)).valueInCent shouldBe 1099
         }
     }
 
@@ -118,7 +118,7 @@ class MoneyTest: FeatureSpec({
 
         scenario("can be created with cents") {
             shouldNotThrow<Throwable> {
-                Price(Price(10, 15).valueInCent) shouldBe Price(10,15)
+                Price(Price(10, 15).valueInCent) shouldBe Price(10, 15)
             }
         }
 
@@ -151,13 +151,13 @@ class MoneyTest: FeatureSpec({
         }
 
         scenario("a price can be added to another") {
-            Price(10,99).plus(Price(2,89)).valueInCent shouldBe 1388
-            Price(0,99).plus(Price(0,99)).valueInCent shouldBe 198
-            Price(111, 59).plus(Price(0 ,41)).valueInCent shouldBe 11200
+            Price(10, 99).plus(Price(2, 89)).valueInCent shouldBe 1388
+            Price(0, 99).plus(Price(0, 99)).valueInCent shouldBe 198
+            Price(111, 59).plus(Price(0, 41)).valueInCent shouldBe 11200
         }
 
         scenario("a zero price added to another does not have any effect") {
-            Price(10,99).plus(Price(0, 0)).valueInCent shouldBe 1099
+            Price(10, 99).plus(Price(0, 0)).valueInCent shouldBe 1099
         }
 
         scenario("two combined prices can not exceed 120,00 €") {

@@ -7,20 +7,26 @@ import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import org.mockito.Mockito
 import org.mockito.Mockito.times
-import shoppingCart.domain.*
+import shoppingCart.domain.Item
+import shoppingCart.domain.Name
+import shoppingCart.domain.Price
+import shoppingCart.domain.Product
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
+import shoppingCart.domain.ShoppingCart
+import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
 import shoppingCart.ports.driven.productService.ProductRepositoryPort
-import java.util.*
+import java.util.Optional
 
-class AppShoppingCartServiceTest: FeatureSpec() {
+class AppShoppingCartServiceTest : FeatureSpec() {
     private var shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
     private val productPort = Mockito.mock(ProductRepositoryPort::class.java)
     private val sku = SKU("123456")
 
     private val uuid = ShoppingCartUuid()
     private val shoppingCart = ShoppingCart()
-    private val milk = Product(sku, Price(10,0), Name("Milch"))
-
+    private val milk = Product(sku, Price(10, 0), Name("Milch"))
 
 
     override suspend fun beforeTest(testCase: TestCase) {
@@ -49,7 +55,7 @@ class AppShoppingCartServiceTest: FeatureSpec() {
                 result.isPresent shouldBe true
                 result.get().isEmpty() shouldBe false
                 result.get().quantityOfProduct(sku).get() shouldBe Quantity(2)
-                result.get().items() shouldContain Item(milk, Price(10,0), Quantity(2))
+                result.get().items() shouldContain Item(milk, Price(10, 0), Quantity(2))
             }
 
             scenario("if exists the shopping cart has no product on a unknown SKU") {

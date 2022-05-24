@@ -11,5 +11,9 @@ interface ShoppingCartService {
 
     fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart>
 
-    fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): Optional<ShoppingCart>
+    fun putProductIntoShoppingCart(
+        shoppingCartUuid: ShoppingCartUuid,
+        productSku: SKU,
+        quantity: Quantity
+    ): Optional<ShoppingCart>
 }

@@ -2,7 +2,7 @@ package shoppingCart.ports.driver.rest.dto
 
 import java.net.URI
 
-abstract class Linked<out T: Linked<T>> {
+abstract class Linked<out T : Linked<T>> {
     val links: MutableMap<String, Link> = mutableMapOf()
 
     @Suppress("UNCHECKED_CAST")

@@ -1,7 +1,7 @@
 package shoppingCart.ports.driver.rest.dto
 
-import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.Amount
+import shoppingCart.domain.ShoppingCart
 import shoppingCart.ports.driver.rest.dto.Method.GET
 import java.net.URI
 import java.util.UUID
@@ -10,7 +10,7 @@ data class ShoppingCartDto(
     val uuid: UUID,
     val amount: Amount,
     val items: List<GetItem>
-): Linked<ShoppingCartDto>() {
+) : Linked<ShoppingCartDto>() {
 
     private fun withLinks(): ShoppingCartDto {
         return addLink("self", GET, URI("/shoppingcart/${uuid}"))

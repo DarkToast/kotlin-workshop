@@ -15,4 +15,11 @@ test/build:
   script: "gradle clean build"
   artifacts:
     paths:
-    - service/build/libs/*.jar
+      - service/build/libs/*.jar
+
+docker-build:
+  stage: package
+  script:
+    - docker build -t registry.gitlab.com/christian_schmidt/shopping-cart-service:latest .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker push registry.gitlab.com/christian_schmidt/shopping-cart-service:latest

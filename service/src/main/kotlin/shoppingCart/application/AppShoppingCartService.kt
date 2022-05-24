@@ -9,22 +9,27 @@ import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
 import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import java.util.Optional
 
-class ProductNotFoundException(sku: SKU): ApplicationException("The product with the sku $sku is unknown.")
+class ProductNotFoundException(sku: SKU) : ApplicationException("The product with the sku $sku is unknown.")
 
 @Service
 class AppShoppingCartService(
-        private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort,
-        private val productRepositoryPort: ProductRepositoryPort) : ShoppingCartService {
+    private val shoppingCartRepositoryPort: ShoppingCartRepositoryPort,
+    private val productRepositoryPort: ProductRepositoryPort
+) : ShoppingCartService {
 
-    override fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): Optional<ShoppingCart> {
+    override fun putProductIntoShoppingCart(
+        shoppingCartUuid: ShoppingCartUuid,
+        productSku: SKU,
+        quantity: Quantity
+    ): Optional<ShoppingCart> {
         return shoppingCartRepositoryPort.load(shoppingCartUuid).map { shoppingCart ->
             productRepositoryPort.findProductBySku(productSku)
-                    .map { foundProduct ->
-                        shoppingCart.addProduct(foundProduct, quantity)
-                    }
-                    .orElseThrow {
-                        ProductNotFoundException(productSku)
-                    }
+                .map { foundProduct ->
+                    shoppingCart.addProduct(foundProduct, quantity)
+                }
+                .orElseThrow {
+                    ProductNotFoundException(productSku)
+                }
         }.map { shoppingCart ->
             shoppingCartRepositoryPort.save(shoppingCart)
             shoppingCart
