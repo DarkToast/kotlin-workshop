@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.5'
+    id 'org.springframework.boot' version '2.7.0'
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.5.32'
     id "org.jetbrains.kotlin.plugin.spring" version "1.6.20-RC2"
@@ -11,12 +11,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.5'
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.5'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
 
     implementation 'net.logstash.logback:logstash-logback-encoder:7.0.1'
-    implementation 'com.h2database:h2:2.1.210'
+    implementation 'com.h2database:h2:2.1.212'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0'
     implementation 'io.github.microutils:kotlin-logging-jvm:2.1.21'
@@ -30,15 +30,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    main.java.srcDirs += 'src/main/kotlin'
+}
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-
-    kotlinOptions {
-        jvmTarget = '11'
-        apiVersion = '1.4'
-        languageVersion = '1.4'
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
