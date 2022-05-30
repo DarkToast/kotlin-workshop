@@ -1,40 +1,56 @@
 package shoppingCart.ports.driver.rest
 
+import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import shoppingCart.application.ShoppingCartService
+import shoppingCart.domain.Quantity
+import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.PortException
+import shoppingCart.ports.driver.rest.dto.PutProduct
 import shoppingCart.ports.driver.rest.dto.ShoppingCartDto
 import java.net.URI
 import java.util.UUID
 
-class ShoppingCartNotFoundException(uuid: ShoppingCartUuid): PortException("The shopping cart with id $uuid is unknown.")
+class ShoppingCartNotFoundException(uuid: ShoppingCartUuid) :
+    PortException("The shopping cart with id $uuid is unknown.")
 
 /**
  * Generell braucht in Spring nicht jede Controllermethode Exceptions behandeln.
  * Hierfür existieren explizite ExceptionHandler, welche Exception pro Typ behandeln, egal wo
  * so geworfen wurden.
- * 
+ *
  * @see LastLineOfDefenseErrorHandler
  */
 @Controller
 class ShoppingCartController(private val shoppingCartService: ShoppingCartService) {
 
+    private val logger = KotlinLogging.logger {}
+
     @RequestMapping(path = ["/shoppingcart/{uuid}"], method = [RequestMethod.GET])
     fun getShoppingCart(@PathVariable uuid: UUID): ResponseEntity<ShoppingCartDto> {
-        val shoppingCartUuid = ShoppingCartUuid(uuid)
+        logger.info { "GET shopping cart." }
 
+        val shoppingCartUuid = ShoppingCartUuid(uuid)
         return shoppingCartService.showShoppingCart(shoppingCartUuid)
-                .map { shoppingCart -> ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart)) }
-                .orElse( ResponseEntity.notFound().build())
+            .map { shoppingCart ->
+                ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
+            }
+            .orElseGet {
+                logger.warn { "Shopping cart was not found." }
+                ResponseEntity.notFound().build()
+            }
     }
 
     @RequestMapping(path = ["/shoppingcart"], method = [RequestMethod.POST])
     fun postNewShoppingCart(): ResponseEntity<ShoppingCartDto> {
+        logger.info { "POST - Create new shopping cart" }
+
         val cart = shoppingCartService.takeNewShoppingCart()
         val uri = URI("/shoppingcart/${cart.shoppingCartUuid}")
 
@@ -57,4 +73,27 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
      *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
      *   `ResponseEntity` kann aber auch normal instantiiert werden.
      */
+    @RequestMapping(path = ["/shoppingcart/{uuid}/items"], method = [RequestMethod.PUT])
+    fun putProductToShoppingCart(
+        @PathVariable uuid: UUID,
+        @RequestBody putProductDto: PutProduct
+    ): ResponseEntity<ShoppingCartDto> {
+        logger.info { "PUT - Adding product to shopping cart" }
+
+        val shoppingCartUuid = ShoppingCartUuid(uuid)
+        return if (putProductDto.sku != null && putProductDto.quantity != null) {
+            val sku = SKU(putProductDto.sku)
+            val quantity = Quantity(putProductDto.quantity)
+
+            shoppingCartService.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
+                .map { shoppingCart ->
+                    ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
+                }
+                .orElseThrow {
+                    ShoppingCartNotFoundException(shoppingCartUuid)
+                }
+        } else {
+            ResponseEntity.badRequest().build()
+        }
+    }
 }

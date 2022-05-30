@@ -5,7 +5,7 @@ import shoppingCart.domain.Product
 import shoppingCart.domain.SKU
 import java.util.Optional
 
-open class CachingProductRepository(private val delegate: ProductRepositoryPort): ProductRepositoryPort {
+open class CachingProductRepository(private val delegate: ProductRepositoryPort) : ProductRepositoryPort {
 
     @Cacheable("products")
     override fun findProductBySku(sku: SKU): Optional<Product> {

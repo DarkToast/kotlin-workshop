@@ -1,4 +1,5 @@
 package cheatsheets.oop
+
 /**
  * Eine "normale" Klasse haben wir bereits kennen gerlent:
  */

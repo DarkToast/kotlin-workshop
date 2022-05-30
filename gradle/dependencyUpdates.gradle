@@ -19,6 +19,6 @@ dependencyUpdates {
 
     rejectVersionIf {
         isNonStable(it.candidate.version) && !isNonStable(it.currentVersion) ||
-            isSpockNonStable(it.candidate.version) && !isSpockNonStable(it.currentVersion)
+                isSpockNonStable(it.candidate.version) && !isSpockNonStable(it.currentVersion)
     }
 }

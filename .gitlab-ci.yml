@@ -10,9 +10,29 @@ stages:
   - package
 
 test/build:
-  image: gradle:jdk11
+  image: gradle:jdk17
   stage: build
   script: "gradle clean build"
   artifacts:
     paths:
-    - spring-kotlin/build/libs/*.jar
+      - service/build/libs/*.jar
+
+docker-build:
+  stage: package
+  except:
+    refs:
+      - master
+  script:
+    - cd service
+    - docker build .
+
+docker-push:
+  stage: package
+  only:
+    refs:
+      - master
+  script:
+    - cd service
+    - docker build -t registry.gitlab.com/christian_schmidt/shopping-cart-service:latest .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker push registry.gitlab.com/christian_schmidt/shopping-cart-service:latest

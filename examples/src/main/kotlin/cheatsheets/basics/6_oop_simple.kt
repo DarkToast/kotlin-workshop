@@ -42,7 +42,10 @@ fun main(args: Array<String>) {
     // "direkt" die Konstruktorfunktion auf.
 
     val account1 = Account("Max Mustermann", "s3cr3t", "mySalt")
-    val account2 = Account("Hans Dampf", "s3kr3t") // --> Mit den default Argumenten können wir mit einem Konstruktor, viele Fälle unterscheiden.
+    val account2 = Account(
+        "Hans Dampf",
+        "s3kr3t"
+    ) // --> Mit den default Argumenten können wir mit einem Konstruktor, viele Fälle unterscheiden.
 
     // Wir haben nun Zugriff auf `name` und `authenticate`
     println(account1.name)

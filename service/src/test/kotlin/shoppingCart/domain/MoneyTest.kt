@@ -1,9 +1,11 @@
 package shoppingCart.domain
 
+import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
-import shoppingCart.domain.*
+import io.kotest.matchers.shouldBe
 
-class MoneyTest: FeatureSpec({
+class MoneyTest : FeatureSpec({
     /*
      * Aufgabe 3:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
@@ -16,71 +18,71 @@ class MoneyTest: FeatureSpec({
      * enthält.
     */
     feature("An amount") {
-        /*scenario("can be zero") {
+        scenario("can be zero") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(0, 0)
+                Amount(0, 0)
             }
         }
 
         scenario("can be 300,00 €") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(300, 0)
+                Amount(300, 0)
             }
         }
 
         scenario("are equals") {
-            (ShoppingCartAmount(300, 0) == ShoppingCartAmount(300, 0)) shouldBe true
+            (Amount(300, 0) == Amount(300, 0)) shouldBe true
         }
 
         scenario("can be 0,01 €") {
             shouldNotThrow<Throwable> {
-                ShoppingCartAmount(0, 1)
+                Amount(0, 1)
             }
         }
 
-        scenario("!has a value in cent") {
-            ShoppingCartAmount(10, 11).valueInCent shouldBe 1011
+        scenario("has a value in cent") {
+            Amount(10, 11).valueInCent shouldBe 1011
         }
 
-        scenario("!can not be negative") {
+        scenario("can not be negative") {
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(10, -1)
+                Amount(10, -1)
             }
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(-1, 10)
+                Amount(-1, 10)
             }
             shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(-1, -1)
-            }
-        }
-
-        scenario("!Cent can not exceed 99 cents") {
-            shouldThrow<IllegalArgumentException> {
-                ShoppingCartAmount(10, 100)
+                Amount(-1, -1)
             }
         }
 
-        scenario("!A amounts can not exceed 300,00") {
+        scenario("Cent can not exceed 99 cents") {
+            shouldThrow<IllegalArgumentException> {
+                Amount(10, 100)
+            }
+        }
+
+        scenario("A amounts can not exceed 300,00") {
             shouldThrow<MaximumShoppingCardAmountExceededException> {
-                ShoppingCartAmount(300, 1)
+                Amount(300, 1)
             }
         }
 
-        scenario("!two amounts can not exceed 300,00 €") {
+        scenario("two amounts can not exceed 300,00 €") {
             shouldThrow<MaximumShoppingCardAmountExceededException> {
-                ShoppingCartAmount(150, 0).plus(ShoppingCartAmount(150, 1))
+                Amount(150, 0).plus(Amount(150, 1))
             }
         }
 
-        scenario("!an amount can be added to another") {
-            ShoppingCartAmount(10,99).plus(ShoppingCartAmount(2,89)).valueInCent shouldBe 1388
-            ShoppingCartAmount(0,99).plus(ShoppingCartAmount(0,99)).valueInCent shouldBe 198
-            ShoppingCartAmount(111, 59).plus(ShoppingCartAmount(0 ,41)).valueInCent shouldBe 11200
+        scenario("an amount can be added to another") {
+            Amount(10, 99).plus(Amount(2, 89)).valueInCent shouldBe 1388
+            Amount(0, 99).plus(Amount(0, 99)).valueInCent shouldBe 198
+            Amount(111, 59).plus(Amount(0, 41)).valueInCent shouldBe 11200
         }
 
-        scenario("!a zero amount added to another does not have any effect") {
-            ShoppingCartAmount(10,99).plus(ShoppingCartAmount(0, 0)).valueInCent shouldBe 1099
-        }*/
+        scenario("a zero amount added to another does not have any effect") {
+            Amount(10, 99).plus(Amount(0, 0)).valueInCent shouldBe 1099
+        }
     }
 
     /*
@@ -92,7 +94,7 @@ class MoneyTest: FeatureSpec({
      * enthält.
     */
     feature("the price") {
-        /*scenario("can be zero") {
+        scenario("can be zero") {
             shouldNotThrow<Throwable> {
                 Price(0, 0)
             }
@@ -114,11 +116,17 @@ class MoneyTest: FeatureSpec({
             }
         }
 
-        scenario("!has a value in cent") {
+        scenario("can be created with cents") {
+            shouldNotThrow<Throwable> {
+                Price(Price(10, 15).valueInCent) shouldBe Price(10, 15)
+            }
+        }
+
+        scenario("has a value in cent") {
             Price(10, 11).valueInCent shouldBe 1011
         }
 
-        scenario("!can not be negative") {
+        scenario("can not be negative") {
             shouldThrow<IllegalArgumentException> {
                 Price(10, -1)
             }
@@ -130,44 +138,44 @@ class MoneyTest: FeatureSpec({
             }
         }
 
-        scenario("!Cent can not exceed 99 cents") {
+        scenario("Cent can not exceed 99 cents") {
             shouldThrow<IllegalArgumentException> {
                 Price(10, 100)
             }
         }
 
-        scenario("!A price can not exceed 120,00") {
+        scenario("A price can not exceed 120,00") {
             shouldThrow<TooHighPriceException> {
                 Price(120, 1)
             }
         }
 
-        scenario("!a price can be added to another") {
-            Price(10,99).plus(Price(2,89)).valueInCent shouldBe 1388
-            Price(0,99).plus(Price(0,99)).valueInCent shouldBe 198
-            Price(111, 59).plus(Price(0 ,41)).valueInCent shouldBe 11200
+        scenario("a price can be added to another") {
+            Price(10, 99).plus(Price(2, 89)).valueInCent shouldBe 1388
+            Price(0, 99).plus(Price(0, 99)).valueInCent shouldBe 198
+            Price(111, 59).plus(Price(0, 41)).valueInCent shouldBe 11200
         }
 
-        scenario("!a zero price added to another does not have any effect") {
-            Price(10,99).plus(Price(0, 0)).valueInCent shouldBe 1099
+        scenario("a zero price added to another does not have any effect") {
+            Price(10, 99).plus(Price(0, 0)).valueInCent shouldBe 1099
         }
 
-        scenario("!two combined prices can not exceed 120,00 €") {
+        scenario("two combined prices can not exceed 120,00 €") {
             shouldThrow<TooHighPriceException> {
                 Price(50, 99).plus(Price(69, 2))
             }
         }
 
-        scenario("!can be multiply with a quantity") {
+        scenario("can be multiply with a quantity") {
             Price(10, 0).times(Quantity(2)).valueInCent shouldBe 2000
         }
 
-        scenario("!can be multiply with a quantity 0") {
+        scenario("can be multiply with a quantity 0") {
             Price(10, 0).times(Quantity(0)).valueInCent shouldBe 0
         }
 
-        scenario("!can be multiply with a quantity 1") {
+        scenario("can be multiply with a quantity 1") {
             Price(10, 0).times(Quantity(1)).valueInCent shouldBe 1000
-        }*/
+        }
     }
 })
