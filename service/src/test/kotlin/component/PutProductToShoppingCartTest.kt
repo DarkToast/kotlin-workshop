@@ -148,7 +148,6 @@ class PutProductToShoppingCartTest() {
     }
 
     @Test
-    @Disabled
     fun `level 2 - adding a unknown product returns status 404`() {
         val location = createShoppingCart()
         val product = """{ "sku": "4711unknown", "quantity": "2" }"""
