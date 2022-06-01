@@ -39,7 +39,6 @@ import org.junit.jupiter.api.assertThrows
  * - Ein ShoppingCart kann nicht mehr als 300,00€ wert sein.                -> MaximumShoppingCardAmountExceededException
  * - Ein ShoppingCart kann nicht mehr als 50 verschiedene Produkte haben.   -> MaximumProductCountExceededException
 */
-@Disabled
 class ShoppingCartTest {
     lateinit var cart: ShoppingCart
 
