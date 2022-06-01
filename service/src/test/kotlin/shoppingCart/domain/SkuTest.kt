@@ -2,19 +2,20 @@ package shoppingCart.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
+/*
+ * Aufgabe 2:
+ * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
+ * `shoppingCart/domain/Product.kt` die Klasse SKU, die Dort der Klasse `Product` fehlt.
+ *
+ * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren.
+*/
+@Disabled
 class SkuTest() {
-    /*
-     * Aufgabe 2:
-     * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
-     * `shoppingCart/domain/Product.kt` die Klasse SKU, die Dort der Klasse `Product` fehlt.
-     *
-     * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren.
-    */
-
     @Test
     fun `can contain up to 20 alphanumeric characters`() {
         assertDoesNotThrow {

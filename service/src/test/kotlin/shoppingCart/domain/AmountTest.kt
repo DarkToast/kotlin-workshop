@@ -2,6 +2,7 @@ package shoppingCart.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.assertThrows
  * - Zwei Amounts können über `plus` addiert werden.
  * - Ein addierter Amount muss den oberen Invarianten entsprechen.
 */
+@Disabled
 class AmountTest() {
     @Test
     fun `can be zero`() {

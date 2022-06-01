@@ -7,7 +7,7 @@ class MaximumProductCountExceededException(productCount: Int) :
     DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
 
 data class Item(val product: Product, val quantity: Quantity) {
-    val amount: Amount = product.price * quantity
+    val amount: Amount = product.price.times(quantity)
 
     fun addQuantity(q: Quantity) = Item(
         product = product,
@@ -17,76 +17,20 @@ data class Item(val product: Product, val quantity: Quantity) {
 
 class ShoppingCart(
     val shoppingCartUuid: ShoppingCartUuid = ShoppingCartUuid(),
-    items: List<Item> = emptyList()
+    private val items: List<Item> = emptyList()
 ) {
-    private var cartItems: Map<SKU, Item> = items.associateBy { it.product.sku }
-        set(value) {
-            amount = value.amount()
-            field = value
-        }
 
-    private var amount: Amount = cartItems.amount()
+    fun items() = items
 
-    private fun Map<SKU, Item>.amount() = this.values.fold(Amount(0, 0)) { amount, item ->
-        amount + item.amount
-    }
+    fun amount(): Amount = Amount(0, 0)
 
-    fun amount(): Amount = amount
+    fun isEmpty(): Boolean = false
 
-    fun isEmpty(): Boolean = cartItems.isEmpty()
+    fun addProduct(product: Product, quantity: Quantity): ShoppingCart = this
 
-    fun addProduct(product: Product, quantity: Quantity): ShoppingCart {
-        checkMaximumProductCount()
+    fun quantityOfProduct(sku: SKU): Optional<Quantity> = Optional.empty()
 
-        val mutatedItems = cartItems.toMutableMap()
-
-        val item = Optional.ofNullable(mutatedItems[product.sku])
-            .map { it.addQuantity(quantity) }
-            .orElseGet { Item(product, quantity) }
-
-        mutatedItems[product.sku] = item
-        cartItems = mutatedItems
-        return this
-    }
-
-    fun quantityOfProduct(sku: SKU): Optional<Quantity> {
-        return Optional.ofNullable(cartItems[sku]).map { it.quantity }
-    }
-
-    fun items(): List<Item> {
-        return cartItems.values.toList()
-    }
-
-    private fun checkMaximumProductCount() {
-        if (cartItems.count() >= 50) {
-            throw MaximumProductCountExceededException(cartItems.count())
-        }
-    }
-
-
-    // -- Equals - HashCode --
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as ShoppingCart
-
-        if (shoppingCartUuid != other.shoppingCartUuid) return false
-        if (cartItems != other.cartItems) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = shoppingCartUuid.hashCode()
-        result = 31 * result + cartItems.hashCode()
-        return result
-    }
-
-    override fun toString(): String {
-        return "ShoppingCart(shoppingCartUuid=$shoppingCartUuid)"
-    }
+    fun content(): List<Pair<Product, Quantity>> = listOf()
 }
 
 data class ShoppingCartUuid(val uuid: UUID = UUID.randomUUID()) {

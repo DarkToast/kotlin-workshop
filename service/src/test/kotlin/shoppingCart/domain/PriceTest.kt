@@ -2,12 +2,10 @@ package shoppingCart.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-
-class PriceTest() {
-
 
 /*
  * Aufgabe 4:
@@ -25,7 +23,8 @@ class PriceTest() {
  * - Ein Price kann mit `times` multipliziert werden.
  * - Ein addierter oder multiplizierter Price muss den oberen Invarianten entsprechen.
 */
-
+@Disabled
+class PriceTest() {
     @Test
     fun `can be zero`() {
         assertDoesNotThrow { Price(0, 0) }
@@ -48,7 +47,8 @@ class PriceTest() {
 
     @Test
     fun `can be created with cents`() {
-        assertEquals(Price(10, 15), Price(Price(10, 15).valueInCent))
+        // Bitte den unteren Kommentar verwerfen und die entsprechende Methode implementieren.
+        // assertEquals(Price(10, 15), Price(Price(10, 15).valueInCent))
     }
 
     @Test

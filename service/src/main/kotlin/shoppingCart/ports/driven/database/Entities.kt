@@ -66,5 +66,5 @@ class ProductEntity(
     val name: String,
     val price: Int
 ) {
-    fun toDomain() = Product(SKU(sku), Price(price), Name(name))
+    fun toDomain() = Product(SKU(sku), Price(price / 100, price % 100), Name(name))
 }

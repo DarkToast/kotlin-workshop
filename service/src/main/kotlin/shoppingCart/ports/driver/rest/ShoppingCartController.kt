@@ -4,15 +4,11 @@ import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import shoppingCart.application.ShoppingCartService
-import shoppingCart.domain.Quantity
-import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.PortException
-import shoppingCart.ports.driver.rest.dto.PutProduct
 import shoppingCart.ports.driver.rest.dto.ShoppingCartDto
 import java.net.URI
 import java.util.UUID
@@ -73,28 +69,4 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
      *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
      *   `ResponseEntity` kann aber auch normal instantiiert werden.
      */
-    @RequestMapping(path = ["/shoppingcart/{uuid}/items"], method = [RequestMethod.PUT])
-    fun putProductToShoppingCart(
-        @PathVariable uuid: UUID,
-        @RequestBody putProductDto: PutProduct
-    ): ResponseEntity<ShoppingCartDto> {
-        logger.info { "PUT - Adding product to shopping cart" }
-
-        val shoppingCartUuid = ShoppingCartUuid(uuid)
-        return if (putProductDto.sku != null && putProductDto.quantity != null) {
-            val sku = SKU(putProductDto.sku)
-            val quantity = Quantity(putProductDto.quantity)
-
-            val shoppingCart = shoppingCartService.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
-
-            return if(shoppingCart != null) {
-                ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
-            } else {
-                logger.warn { "Shopping cart was not found." }
-                ResponseEntity.notFound().build()
-            }
-        } else {
-            ResponseEntity.badRequest().build()
-        }
-    }
 }

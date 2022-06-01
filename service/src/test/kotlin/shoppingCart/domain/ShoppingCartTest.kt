@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -38,6 +39,7 @@ import org.junit.jupiter.api.assertThrows
  * - Ein ShoppingCart kann nicht mehr als 300,00€ wert sein.                -> MaximumShoppingCardAmountExceededException
  * - Ein ShoppingCart kann nicht mehr als 50 verschiedene Produkte haben.   -> MaximumProductCountExceededException
 */
+@Disabled
 class ShoppingCartTest {
     lateinit var cart: ShoppingCart
 
@@ -45,7 +47,6 @@ class ShoppingCartTest {
     val secondSku = SKU("54321")
 
     @BeforeEach
-    @Test
     fun setUp() {
         cart = ShoppingCart()
     }
