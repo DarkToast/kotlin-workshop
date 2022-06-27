@@ -6,18 +6,22 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
+/*
+ * Aufgabe 3:
+ * Entfernen Sie bitte die @Disabled annotation von der hier drunter liegenden Klasse und implementieren Sie in der Datei
+ * `shoppingCart/domain/Money.kt` die Klasse Amount und ihre Methoden.
+ *
+ * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren, welche auch ändernde Methoden
+ * enthält. Folgende Anforderungen sollen umgesetzt sein:
+ *
+ * - Ein Amount kann 0 sein
+ * - Ein Amount kann nicht negativ sein
+ * - Ein Amount kann nicht größer als 300,00€ sein. -> MaximumShoppingCardAmountExceededException
+ * - Ein Amount muss seinen Wert in Cents ausdrücken können
+ * - Zwei Amounts können über `plus` addiert werden.
+ * - Ein addierter Amount muss den oberen Invarianten entsprechen.
+*/
 class AmountTest() {
-    /*
-     * Aufgabe 3:
-     * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
-     * `shoppingCart/domain/Money.kt` die Klasse ShoppingCartAmount und ihre Methoden.
-     *
-     * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
-     * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
-     *
-     * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren, welche auch ändernde Methoden
-     * enthält.
-    */
     @Test
     fun `can be zero`() {
         assertDoesNotThrow { Amount(0, 0) }

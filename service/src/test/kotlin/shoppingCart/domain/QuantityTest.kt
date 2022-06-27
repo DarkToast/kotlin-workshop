@@ -6,6 +6,13 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
 
+
+/*
+ * Eine fertige Implementierung mit Tests.
+ * Folgende Anforderungen sind umgesetzt:
+ * - Eine Quantity kann 0 aber nicht negativ sein.
+ * - Eine Quantity kann maximal 10 sein. -> TooMuchItemsOfAProduct
+ */
 class QuantityTest {
     @Test
     fun `can be zero`() {

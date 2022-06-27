@@ -12,15 +12,31 @@ import org.junit.jupiter.api.assertThrows
 /*
  * Aufgabe: 5
  *
- * Bitte implementieren Sie nach und nach die einzelnen Teste der Klasse shoppingCart.domain.ShoppingCart.
+ * Entfernen Sie bitte die @Disabled annotation von der hier drunter liegenden Klasse und implementieren Sie nach
+ * und nach die einzelnen Teste der Klasse shoppingCart.domain.ShoppingCart.
  *
  * Die Teste sind mit Level 1 - 3 markiert und zeigen die steigende Komplexität der Klasse und auch der Implmenentierung
- * an.
- *
- * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
- * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
+ * an. Denken Sie sich bitte bei jedem Level ein paar zusätzliche Tests aus um die funktionale Abdeckung noch zu
+ * erhöhen.
  *
  * Das Ziel ist, kompliziertere Methoden mit Collections und nullable fields zu implementieren.
+ *
+ * Folgende Anforderungen sollen umgesetzt sein:
+ *
+ * level 1
+ * - Ein ShoppingCart hat eine UUID.
+ * - Ein ShoppingCart gibt über `isEmpty` Auskunft, ob er leer ist.
+ * - Ein ShoppingCart kann mit einer UUID und einer Liste an Produkten initialisiert werden.
+ * - Ein ShoppingCart kann per `amount` seinen Wert berechnen.
+ *
+ * level 2
+ * - Per `addProduct` kann ein Produkt mit Anzahl dem ShoppingCart hinzugefügt werden.
+ * - Ein ShoppingCart kann per `quantityOfProduct` Die Anzahl eines Produkts zurückgeben.
+ * - Die Menge eines Produkts kann 10 nicht überschreiten.                  -> TooMuchItemsOfAProduct
+ *
+ * level 3
+ * - Ein ShoppingCart kann nicht mehr als 300,00€ wert sein.                -> MaximumShoppingCardAmountExceededException
+ * - Ein ShoppingCart kann nicht mehr als 50 verschiedene Produkte haben.   -> MaximumProductCountExceededException
 */
 class ShoppingCartTest {
     lateinit var cart: ShoppingCart
@@ -40,12 +56,12 @@ class ShoppingCartTest {
     }
 
     @Test
-    fun ` level 1 - the new cart is empty and has no products`() {
+    fun `level 1 - the new cart is empty and has no products`() {
         assertTrue(cart.isEmpty())
     }
 
     @Test
-    fun ` level 1 - can calculate the amount of its items`() {
+    fun `level 1 - can calculate the amount of its items`() {
         val items: List<Item> = listOf(
             Item(aProduct(Price(2, 99)), Price(2, 99), Quantity(2)),
             Item(anotherProduct(Price(3, 49)), Price(3, 49), Quantity(3))
@@ -74,7 +90,7 @@ class ShoppingCartTest {
     }
 
     @Test
-    fun ` level 1 - can take items of different products`() {
+    fun `level 2 - can take items of different products`() {
         val items: MutableList<Item> = mutableListOf(
             Item(aProduct(), Price(10, 0), Quantity(5)),
             Item(anotherProduct(), Price(10, 0), Quantity(1))

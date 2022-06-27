@@ -11,11 +11,19 @@ class PriceTest() {
 
 /*
  * Aufgabe 4:
- * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
- * `shoppingCart/domain/Money.kt` die Klasse Price und ihre Methoden
+ * Entfernen Sie bitte die @Disabled annotation von der hier drunter liegenden Klasse und implementieren Sie in der Datei
+ * `shoppingCart/domain/Money.kt` die Klasse Price und ihre Methoden.
  *
  * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren, welche auch ändernde Methoden
- * enthält.
+ * enthält. Folgende Anforderungen sollen umgesetzt sein:
+ *
+ * - Ein Price kann 0 sein.
+ * - Ein Price kann nicht negativ sein.
+ * - Ein Price kann nicht größer als 120,00€ sein. --> TooHighPriceException
+ * - Ein Price muss seinen Wert in Cents ausdrücken können.
+ * - Zwei Price können über `plus` addiert werden.
+ * - Ein Price kann mit `times` multipliziert werden.
+ * - Ein addierter oder multiplizierter Price muss den oberen Invarianten entsprechen.
 */
 
     @Test
