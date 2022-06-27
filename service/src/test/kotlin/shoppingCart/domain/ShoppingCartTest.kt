@@ -1,11 +1,12 @@
 package shoppingCart.domain
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.core.test.TestCase
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.nulls.shouldNotBeNull
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 
 /*
@@ -21,108 +22,116 @@ import io.kotest.matchers.shouldBe
  *
  * Das Ziel ist, kompliziertere Methoden mit Collections und nullable fields zu implementieren.
 */
-class ShoppingCartTest : FeatureSpec() {
-    var cart: ShoppingCart = ShoppingCart()
+class ShoppingCartTest {
+    lateinit var cart: ShoppingCart
 
     val sku = SKU("12345")
     val secondSku = SKU("54321")
 
-    override suspend fun beforeTest(testCase: TestCase) {
+    @BeforeEach
+    @Test
+    fun setUp() {
         cart = ShoppingCart()
     }
 
-    init {
-        feature("A shopping cart") {
-            scenario("has an uuid") {
-                cart.shoppingCartUuid.uuid.shouldNotBeNull()
-            }
+    @Test
+    fun `has an uuid`() {
+        assertNotNull(cart.shoppingCartUuid.uuid)
+    }
 
-            scenario(" level 1 - the new cart is empty and has no products") {
-                cart.isEmpty().shouldBe(true)
-            }
+    @Test
+    fun ` level 1 - the new cart is empty and has no products`() {
+        assertTrue(cart.isEmpty())
+    }
 
-            scenario(" level 1 - can calculate the amount of its items") {
-                val items: List<Item> = listOf(
-                    Item(aProduct(Price(2, 99)), Price(2, 99), Quantity(2)),
-                    Item(anotherProduct(Price(3, 49)), Price(3, 49), Quantity(3))
-                )
+    @Test
+    fun ` level 1 - can calculate the amount of its items`() {
+        val items: List<Item> = listOf(
+            Item(aProduct(Price(2, 99)), Price(2, 99), Quantity(2)),
+            Item(anotherProduct(Price(3, 49)), Price(3, 49), Quantity(3))
+        )
 
-                val cart = ShoppingCart(items = items)
+        val cart = ShoppingCart(items = items)
 
-                cart.amount() shouldBe Amount(16, 45)
-            }
+        assertEquals(Amount(16, 45), cart.amount())
+    }
 
-            scenario(" level 1 - can be initialized with a predefined product set") {
-                val items: List<Item> = listOf(
-                    Item(aProduct(Price(10, 0)), Price(10, 0), Quantity(2)),
-                    Item(anotherProduct(Price(2, 0)), Price(2, 0), Quantity(4))
-                )
-                val uuid = ShoppingCartUuid()
+    @Test
+    fun ` level 1 - can be initialized with a predefined product set`() {
+        val items: List<Item> = listOf(
+            Item(aProduct(Price(10, 0)), Price(10, 0), Quantity(2)),
+            Item(anotherProduct(Price(2, 0)), Price(2, 0), Quantity(4))
+        )
+        val uuid = ShoppingCartUuid()
 
-                val cart = ShoppingCart(uuid, items)
+        val cart = ShoppingCart(uuid, items)
 
-                cart.shoppingCartUuid.shouldBe(uuid)
-                cart.amount().shouldBe(Amount(28, 0))
+        assertEquals(uuid, cart.shoppingCartUuid)
+        assertEquals(Amount(28, 0), cart.amount())
 
-                cart.quantityOfProduct(sku).get().shouldBe(Quantity(2))
-                cart.quantityOfProduct(secondSku).get().shouldBe(Quantity(4))
-            }
+        assertEquals(Quantity(2), cart.quantityOfProduct(sku).get())
+        assertEquals(Quantity(4), cart.quantityOfProduct(secondSku).get())
+    }
 
-            scenario(" level 1 - can take items of different products") {
-                val items: MutableList<Item> = mutableListOf(
-                    Item(aProduct(), Price(10, 0), Quantity(5)),
-                    Item(anotherProduct(), Price(10, 0), Quantity(1))
-                )
+    @Test
+    fun ` level 1 - can take items of different products`() {
+        val items: MutableList<Item> = mutableListOf(
+            Item(aProduct(), Price(10, 0), Quantity(5)),
+            Item(anotherProduct(), Price(10, 0), Quantity(1))
+        )
 
-                val cart = ShoppingCart(items = items)
+        val cart = ShoppingCart(items = items)
 
-                cart.quantityOfProduct(sku).get().value.shouldBe(5)
-                cart.quantityOfProduct(secondSku).get().value.shouldBe(1)
-            }
+        assertEquals(5, cart.quantityOfProduct(sku).get().value)
+        assertEquals(1, cart.quantityOfProduct(secondSku).get().value)
+    }
 
-            scenario(" level 2 - can put products into") {
-                cart.addProduct(aProduct(), Quantity(5))
-                cart.isEmpty().shouldBeFalse()
-            }
+    @Test
+    fun ` level 2 - can put products into`() {
+        cart.addProduct(aProduct(), Quantity(5))
+        assertFalse(cart.isEmpty())
+    }
 
-            scenario(" level 2 - can take items to a quantity of 10") {
-                val items: MutableList<Item> = mutableListOf(
-                    Item(aProduct(), Price(10, 0), Quantity(10))
-                )
+    @Test
+    fun ` level 2 - can take items to a quantity of 10`() {
+        val items: MutableList<Item> = mutableListOf(
+            Item(aProduct(), Price(10, 0), Quantity(10))
+        )
 
-                val cart = ShoppingCart(items = items)
+        val cart = ShoppingCart(items = items)
 
-                cart.quantityOfProduct(sku).get().value.shouldBe(10)
-            }
+        assertEquals(10, cart.quantityOfProduct(sku).get().value)
+    }
 
-            scenario(" level 2 - An exceeding quantity of a products result in an exception and has no effect on the shopping cart") {
-                cart.addProduct(aProduct(), Quantity(5))
+    @Test
+    fun ` level 2 - An exceeding quantity of a products result in an exception and has no effect on the shopping cart`() {
+        cart.addProduct(aProduct(), Quantity(5))
 
-                shouldThrow<TooMuchItemsOfAProduct> {
-                    cart.addProduct(aProduct(), Quantity(6))
-                }
+        assertThrows<TooMuchItemsOfAProduct> {
+            cart.addProduct(aProduct(), Quantity(6))
+        }
 
-                cart.quantityOfProduct(sku).get().value.shouldBe(5)
-            }
+        assertEquals(5, cart.quantityOfProduct(sku).get().value)
+    }
 
-            scenario(" level 3 - An exceeding total amount over 300,00 result in an exception and has no effect on the shopping cart") {
-                cart.addProduct(aProduct(Price(100, 0)), Quantity(2))
-                    .addProduct(anotherProduct(Price(99, 99)), Quantity(1))
+    @Test
+    fun ` level 3 - An exceeding total amount over 300,00 result in an exception and has no effect on the shopping cart`() {
+        cart.addProduct(aProduct(Price(100, 0)), Quantity(2))
+            .addProduct(anotherProduct(Price(99, 99)), Quantity(1))
 
-                shouldThrow<MaximumShoppingCardAmountExceededException> {
-                    cart.addProduct(aProduct(Price(100, 0)), Quantity(1))
-                }
+        assertThrows<MaximumShoppingCardAmountExceededException> {
+            cart.addProduct(aProduct(Price(100, 0)), Quantity(1))
+        }
 
-                cart.amount() shouldBe Amount(299, 99)
-            }
+        assertEquals(Amount(299, 99), cart.amount())
+    }
 
-            scenario(" level 3 - A shopping cart can not have more than 50 different products") {
-                val cart = aCartWithFiftyProducts()
+    @Test
+    fun ` level 3 - A shopping cart can not have more than 50 different products`() {
+        val cart = aCartWithFiftyProducts()
 
-                shouldThrow<MaximumProductCountExceededException> {
-                    cart.addProduct(Product(SKU("51"), Price(1, 0), Name("Milch")), Quantity(1))
-                }
-            }
+        assertThrows<MaximumProductCountExceededException> {
+            cart.addProduct(Product(SKU("51"), Price(1, 0), Name("Milch")), Quantity(1))
         }
     }
 

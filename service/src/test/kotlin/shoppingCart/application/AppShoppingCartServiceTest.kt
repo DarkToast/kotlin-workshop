@@ -1,10 +1,10 @@
 package shoppingCart.application
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.core.test.TestCase
-import io.kotest.matchers.collections.shouldContain
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import shoppingCart.domain.Item
@@ -19,7 +19,7 @@ import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
 import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import java.util.Optional
 
-class AppShoppingCartServiceTest : FeatureSpec() {
+class AppShoppingCartServiceTest {
     private var shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
     private val productPort = Mockito.mock(ProductRepositoryPort::class.java)
     private val sku = SKU("123456")
@@ -29,54 +29,54 @@ class AppShoppingCartServiceTest : FeatureSpec() {
     private val milk = Product(sku, Price(10, 0), Name("Milch"))
 
 
-    override suspend fun beforeTest(testCase: TestCase) {
-        shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
+    @Test
+    fun `if not existing, the service returns empty`() {
+        val service = AppShoppingCartService(shoppingCartPort, productPort)
+
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.empty())
+
+        val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        assertFalse(result.isPresent)
     }
 
-    init {
-        feature("The shopping cart service") {
-            scenario("if not existing, the service returns empty") {
-                val service = AppShoppingCartService(shoppingCartPort, productPort)
+    @Test
+    fun `if exists the shopping cart has the product`() {
+        val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-                Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.empty())
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
 
-                val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
-                result.isPresent shouldBe false
-            }
+        val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        assertTrue(result.isPresent)
 
-            scenario("if exists the shopping cart has the product") {
-                val service = AppShoppingCartService(shoppingCartPort, productPort)
+        val shoppingCart = result.get()
+        assertFalse(result.get().isEmpty())
+        assertEquals(Quantity(2), shoppingCart.quantityOfProduct(sku).get())
 
-                Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-                Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
+        val items: List<Item> = result.get().items()
+        assertEquals(1, items.size)
+        assertEquals(Item(milk, Price(10, 0), Quantity(2)), items[0])
+    }
 
-                val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+    @Test
+    fun `if exists the shopping cart has no product on a unknown SKU`() {
+        val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-                result.isPresent shouldBe true
-                result.get().isEmpty() shouldBe false
-                result.get().quantityOfProduct(sku).get() shouldBe Quantity(2)
-                result.get().items() shouldContain Item(milk, Price(10, 0), Quantity(2))
-            }
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.empty())
 
-            scenario("if exists the shopping cart has no product on a unknown SKU") {
-                val service = AppShoppingCartService(shoppingCartPort, productPort)
+        assertThrows<ProductNotFoundException> { service.putProductIntoShoppingCart(uuid, sku, Quantity(2)) }
+    }
 
-                Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-                Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.empty())
+    @Test
+    fun `if exists the shopping cart should be saved`() {
+        val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-                shouldThrow<ProductNotFoundException> { service.putProductIntoShoppingCart(uuid, sku, Quantity(2)) }
-            }
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
 
-            scenario("if exists the shopping cart should be saved") {
-                val service = AppShoppingCartService(shoppingCartPort, productPort)
+        service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
 
-                Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-                Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
-
-                service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
-
-                Mockito.verify(shoppingCartPort, times(1)).save(shoppingCart)
-            }
-        }
+        Mockito.verify(shoppingCartPort, times(1)).save(shoppingCart)
     }
 }

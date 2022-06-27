@@ -1,75 +1,79 @@
 package component
 
-// import io.kotest.spring.SpringListener
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.extensions.spring.SpringExtension
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldMatch
-import io.kotest.matchers.string.shouldNotContain
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import shoppingCart.Application
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
-class CreateShoppingCartTest() : FeatureSpec() {
-    override fun extensions() = listOf(SpringExtension)
+class CreateShoppingCartTest {
 
     @Autowired
     lateinit var restTemplate: TestRestTemplate
 
-    init {
-        feature("The shopping cart service") {
-            scenario("a POST on /shoppingcart returns HTTP 201") {
-                val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
+    @Test
+    fun `a POST on shoppingcart returns HTTP 201`() {
+        val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
 
-                response.statusCodeValue shouldBe 201
-            }
+        assertEquals(201, response.statusCodeValue)
+    }
 
-            scenario("a POST on /shoppingcart returns a Location URI") {
-                val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
+    @Test
+    fun `a POST on shoppingcart returns a Location URI`() {
+        val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
 
-                response.headers.get("LOCATION")?.get(0)!! shouldMatch (Regex("""\/shoppingcart\/[\w\d-]+"""))
-            }
+        val location = response.headers["LOCATION"]?.get(0)!!
+        assertNotNull(location)
+        assertTrue(location.contains("""\/shoppingcart\/[\w\d-]+""".toRegex()))
+    }
 
-            scenario("a created shoppingcart can be received by a GET") {
-                val location = createShoppingCart()
+    @Test
+    fun `a created shoppingcart can be received by a GET`() {
+        val location = createShoppingCart()
 
-                val response = restTemplate.getForEntity(location, String::class.java)
+        val response = restTemplate.getForEntity(location, String::class.java)
 
-                response.statusCodeValue shouldBe 200
-            }
+        assertEquals(200, response.statusCodeValue)
+    }
 
-            scenario("receiving a not existing shopping cart returns 404") {
-                val location = "/shoppingcart/123e4567-e89b-12d3-a456-426655440000"
+    @Test
+    fun `receiving a not existing shopping cart returns 404`() {
+        val location = "/shoppingcart/123e4567-e89b-12d3-a456-426655440000"
 
-                val response = restTemplate.getForEntity(location, String::class.java)
+        val response = restTemplate.getForEntity(location, String::class.java)
 
-                response.statusCodeValue shouldBe 404
-            }
+        assertEquals(404, response.statusCodeValue)
+    }
 
-            scenario("malformed uuid return 400") {
-                val location = "/shoppingcart/not_a_uuid"
+    @Test
+    fun `malformed uuid return 400`() {
+        val location = "/shoppingcart/not_a_uuid"
 
-                val response = restTemplate.getForEntity(location, String::class.java)
+        val response = restTemplate.getForEntity(location, String::class.java)
 
-                response.statusCodeValue shouldBe 400
-            }
+        assertEquals(400, response.statusCodeValue)
+    }
 
-            scenario("a bad request does not exposure the internal runtime") {
-                val location = "/shoppingcart/not_a_uuid"
 
-                val response = restTemplate.getForEntity(location, String::class.java)
+    @Test
+    fun `a bad request does not exposure the internal runtime`() {
+        val location = "/shoppingcart/not_a_uuid"
 
-                response.body shouldNotContain "java.lang.String"
-                response.body shouldNotContain "java.util.UUID"
-            }
-        }
+        val response = restTemplate.getForEntity(location, String::class.java)
+        val body = response.body!!
+        assertNotNull(body)
+        assertFalse(body.contains("java.lang.String"))
+        assertFalse(body.contains("java.util.UUID"))
     }
 
     private fun createShoppingCart(): String {
         val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
-        return response.headers.get("LOCATION")?.get(0) ?: ""
+        return response.headers["LOCATION"]?.get(0) ?: ""
     }
-
 }
+

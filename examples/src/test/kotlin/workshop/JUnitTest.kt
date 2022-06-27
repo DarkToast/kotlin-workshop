@@ -1,7 +1,7 @@
 package workshop
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class JUnitTest {
     @Test
@@ -13,6 +13,6 @@ class JUnitTest {
         val sum = calculator(2, 4)
 
         // then: 6
-        assertEquals("2 + 4 is 6", 6, sum)
+        assertEquals( 6, sum, "2 + 4 is 6")
     }
 }

@@ -1,12 +1,12 @@
 package shoppingCart.domain
 
-import io.kotest.assertions.throwables.shouldNotThrow
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 
-
-class SkuTest : FeatureSpec({
+class SkuTest() {
     /*
      * Aufgabe 2:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
@@ -15,44 +15,49 @@ class SkuTest : FeatureSpec({
      * Das Ziel ist, eine Kotlinklasse mit Vor- und Nachbedingungen zu implementieren.
     */
 
-    feature("A SKU") {
-        scenario("can contain up to 20 alphanumeric characters") {
-            shouldNotThrow<IllegalArgumentException> {
-                SKU("12345678901234567890")
-            }
-        }
-
-        scenario("A SKU can contain 1 character") {
-            shouldNotThrow<IllegalArgumentException> {
-                SKU("1")
-            }
-        }
-
-        scenario("are equals") {
-            (SKU("1234567") == SKU("1234567")) shouldBe true
-        }
-
-        scenario("must not be empty") {
-            shouldThrow<IllegalArgumentException> {
-                SKU("")
-            }
-        }
-
-        scenario("must not exceed 20 characters") {
-            shouldThrow<IllegalArgumentException> {
-                SKU("123456789013245678901")
-            }
-        }
-
-        scenario("must contain alphanumeric characters") {
-            shouldThrow<IllegalArgumentException> {
-                SKU("13246<7890")
-            }
-        }
-
-
-        scenario("A SKU can be represented as string") {
-            SKU("12345678901234567890").toString() shouldBe "12345678901234567890"
+    @Test
+    fun `can contain up to 20 alphanumeric characters`() {
+        assertDoesNotThrow {
+            SKU("12345678901234567890")
         }
     }
-})
+
+    @Test
+    fun `A SKU can contain 1 character`() {
+        assertDoesNotThrow {
+            SKU("1")
+        }
+    }
+
+    @Test
+    fun `are equals`() {
+        assertTrue(SKU("1234567") == SKU("1234567"))
+    }
+
+    @Test
+    fun `must not be empty`() {
+        assertThrows<IllegalArgumentException> {
+            SKU("")
+        }
+    }
+
+    @Test
+    fun `must not exceed 20 characters`() {
+        assertThrows<IllegalArgumentException> {
+            SKU("123456789013245678901")
+        }
+    }
+
+    @Test
+    fun `must contain alphanumeric characters`() {
+        assertThrows<IllegalArgumentException> {
+            SKU("13246<7890")
+        }
+    }
+
+
+    @Test
+    fun `A SKU can be represented as string`() {
+        assertEquals("12345678901234567890", SKU("12345678901234567890").toString())
+    }
+}

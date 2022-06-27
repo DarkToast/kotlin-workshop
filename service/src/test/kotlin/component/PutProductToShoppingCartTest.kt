@@ -1,12 +1,9 @@
 package component
 
-// import io.kotest.spring.SpringListener
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.extensions.spring.SpringExtension
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldMatch
 import org.json.JSONArray
 import org.json.JSONObject
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -35,100 +32,97 @@ import shoppingCart.ports.driver.rest.dto.GetProduct
 */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
-class PutProductToShoppingCartTest : FeatureSpec() {
-    override fun extensions() = listOf(SpringExtension)
+class PutProductToShoppingCartTest() {
 
     @Autowired
     lateinit var restTemplate: TestRestTemplate
 
-    init {
-        feature("Adding products to the shopping cart") {
-            scenario("an existing shopping cart has an addProduct link") {
-                val response = createAndGetShoppingCart()
+    fun `an existing shopping cart has an addProduct link`() {
+        val response = createAndGetShoppingCart()
 
-                val json = JSONObject(response.body)
-                val link: JSONObject = json.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
+        val json = JSONObject(response.body)
+        val link: JSONObject = json.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
+        val href = link.optString("href")
 
-                link.optString("href") shouldMatch (Regex("""\/shoppingcart\/[\w\d-]+\/items"""))
-                link.optString("method") shouldBe "PUT"
-            }
-
-            scenario("a new shopping cart has no products") {
-                val response = createAndGetShoppingCart()
-
-                val products = extractProducts(response)
-                products.size shouldBe 0
-            }
-
-            scenario("level 1 - adding a new product returns status 200") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "123456", "quantity": "2" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 200
-            }
-
-            scenario("level 1 - an added product can be received") {
-                val location = createShoppingCart()
-                val newProduct = """{ "sku": "123456", "quantity": "2" }"""
-
-                addProduct(location, newProduct)
-
-                val response = getShoppingCart(location)
-
-                val products = extractProducts(response)
-                products.size shouldBe 1
-                products[0].name shouldBe "Brot"
-                products[0].sku shouldBe "123456"
-            }
-
-            scenario("level 1 - two products are added and received") {
-                val location = createShoppingCart()
-                val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
-                val secondProduct = """{ "sku": "654321", "quantity": "3" }"""
-
-                addProduct(location, firstProduct)
-                addProduct(location, secondProduct)
-
-                val response = getShoppingCart(location)
-
-                val products = extractProducts(response)
-                products.size shouldBe 2
-                products[0].name shouldBe "Brot"
-                products[0].sku shouldBe "123456"
-                products[1].name shouldBe "Milch"
-                products[1].sku shouldBe "654321"
-            }
-
-            scenario("level 2 - adding a invalid SKU returns status 400") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "-1", "quantity": "2" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 400
-            }
-
-            scenario("level 2 - adding two much quantity return status 400") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "123456", "quantity": "11" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 400
-            }
-
-            scenario("level 2 - adding a unknown product returns status 404") {
-                val location = createShoppingCart()
-                val product = """{ "sku": "4711unknown", "quantity": "2" }"""
-
-                val response = addProduct(location, product)
-
-                response.statusCodeValue shouldBe 404
-            }
-        }
+        assertTrue(href.contains("""\/shoppingcart\/[\w\d-]+\/items""".toRegex()))
+        assertEquals("PUT", link.optString("method"))
     }
+
+    fun `a new shopping cart has no products`() {
+        val response = createAndGetShoppingCart()
+
+        val products = extractProducts(response)
+        assertEquals(0, products.size)
+    }
+
+    fun `level 1 - adding a new product returns status 200`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "123456", "quantity": "2" }"""
+
+        val response = addProduct(location, product)
+
+        assertEquals(200, response.statusCodeValue)
+    }
+
+    fun `level 1 - an added product can be received`() {
+        val location = createShoppingCart()
+        val newProduct = """{ "sku": "123456", "quantity": "2" }"""
+
+        addProduct(location, newProduct)
+
+        val response = getShoppingCart(location)
+
+        val products = extractProducts(response)
+        assertEquals(1, products.size)
+        assertEquals("Brot", products[0].name)
+        assertEquals("123456", products[0].sku)
+    }
+
+    fun `level 1 - two products are added and received`() {
+        val location = createShoppingCart()
+        val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
+        val secondProduct = """{ "sku": "654321", "quantity": "3" }"""
+
+        addProduct(location, firstProduct)
+        addProduct(location, secondProduct)
+
+        val response = getShoppingCart(location)
+
+        val products = extractProducts(response)
+        assertEquals(2, products.size)
+        assertEquals("Brot", products[0].name)
+        assertEquals("123456", products[0].sku)
+        assertEquals("Milch", products[1].name)
+        assertEquals("654321", products[1].sku)
+    }
+
+    fun `level 2 - adding a invalid SKU returns status 400`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "-1", "quantity": "2" }"""
+
+        val response = addProduct(location, product)
+
+        assertEquals(400, response.statusCodeValue)
+    }
+
+    fun `level 2 - adding two much quantity return status 400`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "123456", "quantity": "11" }"""
+
+        val response = addProduct(location, product)
+
+        assertEquals(400, response.statusCodeValue)
+    }
+
+    fun `level 2 - adding a unknown product returns status 404`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "4711unknown", "quantity": "2" }"""
+
+        val response = addProduct(location, product)
+
+        assertEquals(404, response.statusCodeValue)
+    }
+
 
     private fun extractProducts(getShoppingCartResponse: ResponseEntity<String>): List<GetProduct> {
         val json = JSONObject(getShoppingCartResponse.body)

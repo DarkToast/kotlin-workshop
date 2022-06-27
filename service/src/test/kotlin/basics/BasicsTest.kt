@@ -1,8 +1,7 @@
 package basics
 
-import io.kotest.core.spec.style.FeatureSpec
 
-class BasicsTest : FeatureSpec() {
+class BasicsTest() {
 /*
  * Aufgabe 1:
  * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie unter diesem
@@ -10,69 +9,75 @@ class BasicsTest : FeatureSpec() {
  *
  * Das Ziel ist, Ihnen die Grundzüge der Kotlinsyntax näher zu bringen.
 */
-
-/*
-    init {
-        feature("sum") {
-            scenario("add") {
-                sum(1, 2).shouldBe(3)
-            }
-
-            scenario("add negative") {
-                sum(1, -2).shouldBe(-1)
-            }
-
-            scenario("add zero") {
-                sum(0, 2).shouldBe(2)
-            }
-
-            scenario("add zero as default") {
-                sum(4).shouldBe(4)
-            }
-        }
-
-        feature("get string") {
-            scenario("returns default") {
-                getString().shouldBe("Hallo")
-            }
-
-            scenario("Add a name") {
-                getString("Max").shouldBe("Hallo Max")
-            }
-
-            scenario("Add a name and a lastname") {
-                getString("Max", "Musterfrau").shouldBe("Hallo Max Musterfrau")
-            }
-
-            scenario("Only add a last name") {
-                getString(lastname = "Musterfrau").shouldBe("Hallo Musterfrau")
-            }
-        }
-
-        feature("json factory") {
-            fun toPlainJson(json: String): String {
-                return json.replace("\\s+".toRegex(), "")
-            }
-
-            scenario("returns default") {
-                toPlainJson(getJson()).shouldBe("{}")
-            }
-
-            scenario("Add a name") {
-                val expectedJson = """{"firstname":"Max"}"""
-                toPlainJson(getJson("Max")).shouldBe(expectedJson)
-            }
-
-            scenario("Add a name and a lastname") {
-                val expectedJson = """{"firstname":"Max","lastname":"Musterfrau"}"""
-                val json = toPlainJson(getJson("Max", "Musterfrau")).shouldBe(expectedJson)
-            }
-
-            scenario("Only add a lastname") {
-                val expectedJson = """{"lastname":"Musterfrau"}"""
-                val json = toPlainJson(getJson(lastname = "Musterfrau")).shouldBe(expectedJson)
-            }
-        }
+    /*
+    // sum
+    @Test
+    fun add() {
+        assertEquals(3, sum(1, 2))
     }
- */
+
+    @Test
+    fun `add negative`() {
+        assertEquals(-1, sum(1, -2))
+    }
+
+    @Test
+    fun `add zero`() {
+        assertEquals(2, sum(0, 2))
+    }
+
+    @Test
+    fun `add zero as default`() {
+        assertEquals(4, sum(4))
+    }
+
+    // get string
+    @Test
+    fun `getString returns default`() {
+        assertEquals("Hallo", getString())
+    }
+
+    @Test
+    fun `getString adds a name`() {
+        assertEquals("Hallo Max", getString("Max"))
+    }
+
+    @Test
+    fun `getString adds a name and a lastname`() {
+        assertEquals("Hallo Max Musterfrau", getString("Max", "Musterfrau"))
+    }
+
+    @Test
+    fun `getString only adds a last name`() {
+        assertEquals("Hallo Musterfrau", getString(lastname = "Musterfrau"))
+    }
+
+    // json factory
+    @Test
+    fun `toPlainJson returns default`() {
+        assertEquals("{}", toPlainJson(getJson()))
+    }
+
+    @Test
+    fun `toPlainJson adds a name`() {
+        val expectedJson = """{"firstname":"Max"}"""
+        assertEquals(expectedJson, toPlainJson(getJson("Max")))
+    }
+
+    @Test
+    fun `toPlainJson adds a name and a lastname`() {
+        val expectedJson = """{"firstname":"Max","lastname":"Musterfrau"}"""
+        assertEquals(expectedJson, toPlainJson(getJson("Max", "Musterfrau")))
+    }
+
+    @Test
+    fun `toPlainJson only adds a lastname`() {
+        val expectedJson = """{"lastname":"Musterfrau"}"""
+        assertEquals(expectedJson, toPlainJson(getJson(lastname = "Musterfrau")))
+    }
+
+    private fun toPlainJson(json: String): String {
+        return json.replace("\\s+".toRegex(), "")
+    }
+    */
 }
