@@ -1,4 +1,4 @@
-package workshop.basics
+package workshop.kbasics
 
 fun basics() {
     // Immutable `value` - Erst der Name, dann der Typ!

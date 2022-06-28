@@ -1,5 +1,5 @@
 // Paketdekleration. Muss äquvivalent zur Verzeichnisstruktur sein
-package workshop.basics
+package workshop.kbasics
 
 // Import statements um Klassen, aber auch statische Elemente
 // zu importieren

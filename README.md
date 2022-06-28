@@ -64,6 +64,9 @@ Jedes Modul hat eine feste Verzeichnisstruktur:
 
 Diese Links liefern Informationen zu Kotlin und den genutzten Testframeworks.
 
+Ein gutes GIT Cheatsheet
+* https://education.github.com/git-cheat-sheet-education.pdf
+
 Informationen zu Kotlin, der Syntax und APIs.
 
 * https://kotlinlang.org/docs/getting-started.html
