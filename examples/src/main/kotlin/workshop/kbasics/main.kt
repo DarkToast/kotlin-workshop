@@ -1,4 +1,4 @@
-package workshop.fundamentals
+package workshop.git
 
 // kotlinc main.kt
 // kotlin workshop/basics/MainKt.class
