@@ -14,7 +14,7 @@ Wir nutzen GIT als Versionskontrollsystem. Eine Version um 2.20 oder höher soll
 
 Unser Schulungsservice wird auf einer Java Virtual Machine (JVM) laufen. Die Java Runtime sollte in der Version 17 oder höher vorliegen: 
 
-     java --version
+    java --version
 
 Um Kotlincode kompilieren zu können, wird neben der Java Virtual Machine das Java Development Kit (JDK)). Der Compiler sollte dieselbe Version wie die Runtime besitzen.
 
@@ -40,6 +40,28 @@ Per `git clone` wird das Projekt zunächst von der Git Hostingplattform gitlab k
 
 Der Aufruf von `gradlew` lädt das Gradle-Builtool herunter. Im Anschluss wird `gradle` selbst ausgeführt
 und lädt alle Abhängigkeiten des Repositories herunter und führt dann den Compiler und die Testsuites aus. Der Projektbuild muss mit einem `BUILD SUCCESSFULL` am Ende quittieren. Etwaige Warning und Exceptions während des Build können ignoriert werden. Dies sind Artefakte aus den Schulungsunterlagen.  
+
+## Build
+
+Buildartefakte löschen und das Projekt aufräumen
+        
+    ./gradlew clean
+
+Tests ausführen
+
+    ./gradlew test
+
+Projekt paketieren.
+
+    ./gradlew assemble
+
+Projekt paketieren und tests ausführen.
+
+    ./gradlew build
+
+Service starten 
+
+    ./gradlew bootRun
 
 ## Übersicht
 In den einzelnen Modulen innerhalb des Projekts finden sich folgende Inhalte:
