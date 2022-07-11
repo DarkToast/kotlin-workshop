@@ -1,11 +1,12 @@
 package advanced.functional
 
-import io.kotest.assertions.throwables.shouldNotThrow
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.matchers.should
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
-import io.kotest.matchers.types.beInstanceOf
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import java.lang.Thread.sleep
 import java.time.OffsetDateTime
 import java.util.UUID
@@ -130,7 +131,7 @@ fun fulfillOrder(placedOrder: PlacedOrder, fulfilledQuantity: Int): Result {
 /**
  * Diese kleine customer journey ist vollgestopft mit Seiteneffekten in Form von Exceptions.
  * Einige sind eigentlich Validierungsfehler, andere Fehler weil ggf. Umsysteme nicht vorhanden sind
- * oder gesuchte Daten nicht gefunden wurden.
+ * oder gesuchte Daten nicht ge@Test funden wurden.
  *
  * Die Aufgabe besteht darin, sich eine Monade auszudenken, die entweder einen korrekten Wert oder einen Fehler
  * darstellt. Also ähnlich einem Nullable, nur das wir ein Entweder-Oder darstellen.
@@ -158,95 +159,101 @@ data class Result(private val failure: Failure?, private val value: Any?) {
     }
 }
 
-class MonadsSpec : FeatureSpec({
-    feature("Result") {
-        scenario("! Can be created of failure") {
-            val result: Result = Result.ofFailure(SystemFailure("something went wrong"))
-            result.hasFailure() shouldBe true
-        }
+class MonadsSpec {
+    @Test
+    fun `Can be created of failure`() {
+        val result: Result = Result.ofFailure(SystemFailure("something went wrong"))
+        assertTrue(result.hasFailure())
+    }
 
-        scenario("! Can be created of success") {
-            val result = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
-            result.isSuccess() shouldBe true
-        }
+    @Test
+    fun `Can be created of success`() {
+        val result = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
+        assertTrue(result.isSuccess())
+    }
 
-        /*
-        scenario("Is generic in success") {
-            val result: Result<Failure, ValidCustomer> = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
-            result.isSuccess() shouldBe true
-        }
+    /*
+    @Test
+    fun `Is generic in success`() {
+        val result: Result<Failure, ValidCustomer> = Result.ofSuccess(ValidCustomer(UUID.randomUUID(), "Hans", "Dampf", "ich@inter.net"))
+        assertTrue(result.isSuccess)
+    }
 
-        scenario("Is generic in failure") {
-            val result: Result<SystemFailure, ValidCustomer> = Result.ofFailure<ValidCustomer>(SystemFailure("something went wrong"))
-            result.isSuccess() shouldBe true
-        }
-        */
+    @Test
+    fun `Is generic in failure`() {
+        val result: Result<SystemFailure, ValidCustomer> = Result.ofFailure<ValidCustomer>(SystemFailure("something went wrong"))
+        assertTrue(result.isSuccess())
+    }
+    */
 
-        scenario("! Value can be mapped") {
-            val result = Result.ofSuccess("Hallo Welt")
-                .map { str -> (str as String).length }
-                .map { len -> (len as Int) == 10 }
-                .get()
+    @Test
+    fun `Value can be mapped`() {
+        val result: Any? = Result.ofSuccess("Hallo Welt")
+            .map { str -> (str as String).length }
+            .map { len -> (len as Int) == 10 }
+            .get()
 
-            result should beInstanceOf<Int>()
-            result shouldBe true
-        }
+        assertTrue(result is Boolean)
+        assertTrue(result as Boolean)
+    }
 
-        scenario("! Value can be flat mapped") {
-            val result = Result.ofSuccess("Hallo Welt")
-                .flatMap { str -> Result.ofSuccess((str as String).length) }
-                .flatMap { len -> Result.ofSuccess((len as Int) == 10) }
-                .get()
+    @Test
+    fun `Value can be flat mapped`() {
+        val result = Result.ofSuccess("Hallo Welt")
+            .flatMap { str -> Result.ofSuccess((str as String).length) }
+            .flatMap { len -> Result.ofSuccess((len as Int) == 10) }
+            .get()
 
-            result should beInstanceOf<Int>()
-            result shouldBe 10
-        }
+        assertTrue(result is Boolean)
+        assertTrue(result as Boolean)
+    }
 
-        scenario("! recover gets the given success value") {
-            val result = Result.ofSuccess("Hallo Welt")
-                .recover { _ -> "Foobar" }
+    @Test
+    fun `recover gets the given success value`() {
+        val result = Result.ofSuccess("Hallo Welt")
+            .recover { _ -> "Foobar" }
 
-            result should beInstanceOf<String>()
-            result shouldBe "Hallo Welt"
-        }
+        assertTrue(result is String)
+        assertEquals("Hallo Welt", result)
+    }
 
-        scenario("! recover gets the recover value") {
-            val result: String = Result.ofFailure(SystemFailure("System failure"))
-                .recover { _ -> "Foobar" } as String
+    @Test
+    fun `recover gets the recover value`() {
+        val result: String = Result.ofFailure(SystemFailure("System failure"))
+            .recover { _ -> "Foobar" } as String
 
-            result should beInstanceOf<String>()
-            result shouldBe "Foobar"
+        assertTrue(result is String)
+        assertEquals("Foobar", result)
+    }
+
+
+    @Test
+    fun `with failure`() {
+        assertDoesNotThrow {
+            val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net2")
+            val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
+            val placedOrder = placeOrder(4, 10, validCustomer)
+            val result = fulfillOrder(placedOrder, 8)
+
+            assertTrue(result.hasFailure())
+            assertTrue(result.getFailure() is SystemFailure)
+            assertEquals("Email could not sent!", (result.getFailure() as SystemFailure).failureMessage)
         }
     }
 
-    feature("Customer journey") {
-        scenario("! with failure") {
-            shouldNotThrow<Throwable> {
-                val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net2")
-                val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
-                val placedOrder = placeOrder(4, 10, validCustomer)
-                val result = fulfillOrder(placedOrder, 8)
+    @Test
+    fun `with success`() {
+        assertDoesNotThrow {
+            val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net")
+            val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
+            val placedOrder = placeOrder(4, 10, validCustomer)
+            val result = fulfillOrder(placedOrder, 8)
 
-                result.hasFailure() shouldBe true
-                result.getFailure() should beInstanceOf<SystemFailure>()
-                (result.getFailure() as SystemFailure).failureMessage shouldBe "Email could not sent!"
-            }
-        }
-
-        scenario("With success") {
-            shouldNotThrow<Throwable> {
-                val unregisteredCustomer = createCustomer("Max", "Musterfrau", "ich@inter.net")
-                val validCustomer = validateToken(unregisteredCustomer, "some wrong stuff")
-                val placedOrder = placeOrder(4, 10, validCustomer)
-                val result = fulfillOrder(placedOrder, 8)
-
-                result.hasFailure() shouldBe false
-                result.getFailure() shouldBe null
-                result.get() shouldNotBe null
-                (result.get() as FulfilledOrder).fulfilledQuantity shouldBe 8
-                (result.get() as FulfilledOrder).placedOrder.quantity shouldBe 10
-            }
+            assertFalse(result.hasFailure())
+            assertNull(result.getFailure())
+            assertNotNull(result.get())
+            assertEquals(8, (result.get() as FulfilledOrder).fulfilledQuantity)
+            assertEquals(10, (result.get() as FulfilledOrder).placedOrder.quantity)
         }
     }
-
-})
+}
