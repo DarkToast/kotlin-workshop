@@ -48,7 +48,7 @@ data class ItemEntity(
     @OneToOne(cascade = [PERSIST, MERGE])
     val product: ProductEntity
 ) {
-    fun toDomain() = Item(product.toDomain(), Price(effectivePrice), Quantity(quantity))
+    fun toDomain() = Item(product.toDomain(), Quantity(quantity))
 }
 
 @Entity(name = "product")

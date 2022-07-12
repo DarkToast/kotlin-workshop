@@ -63,8 +63,8 @@ class ShoppingCartTest {
     @Test
     fun `level 1 - can calculate the amount of its items`() {
         val items: List<Item> = listOf(
-            Item(aProduct(Price(2, 99)), Price(2, 99), Quantity(2)),
-            Item(anotherProduct(Price(3, 49)), Price(3, 49), Quantity(3))
+            Item(aProduct(Price(2, 99)), Quantity(2)),
+            Item(anotherProduct(Price(3, 49)), Quantity(3))
         )
 
         val cart = ShoppingCart(items = items)
@@ -75,8 +75,8 @@ class ShoppingCartTest {
     @Test
     fun ` level 1 - can be initialized with a predefined product set`() {
         val items: List<Item> = listOf(
-            Item(aProduct(Price(10, 0)), Price(10, 0), Quantity(2)),
-            Item(anotherProduct(Price(2, 0)), Price(2, 0), Quantity(4))
+            Item(aProduct(Price(10, 0)), Quantity(2)),
+            Item(anotherProduct(Price(2, 0)), Quantity(4))
         )
         val uuid = ShoppingCartUuid()
 
@@ -92,8 +92,8 @@ class ShoppingCartTest {
     @Test
     fun `level 2 - can take items of different products`() {
         val items: MutableList<Item> = mutableListOf(
-            Item(aProduct(), Price(10, 0), Quantity(5)),
-            Item(anotherProduct(), Price(10, 0), Quantity(1))
+            Item(aProduct(), Quantity(5)),
+            Item(anotherProduct(), Quantity(1))
         )
 
         val cart = ShoppingCart(items = items)
@@ -111,7 +111,7 @@ class ShoppingCartTest {
     @Test
     fun ` level 2 - can take items to a quantity of 10`() {
         val items: MutableList<Item> = mutableListOf(
-            Item(aProduct(), Price(10, 0), Quantity(10))
+            Item(aProduct(), Quantity(10))
         )
 
         val cart = ShoppingCart(items = items)

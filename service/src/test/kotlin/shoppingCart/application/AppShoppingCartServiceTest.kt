@@ -55,7 +55,7 @@ class AppShoppingCartServiceTest {
 
         val items: List<Item> = result.get().items()
         assertEquals(1, items.size)
-        assertEquals(Item(milk, Price(10, 0), Quantity(2)), items[0])
+        assertEquals(Item(milk, Quantity(2)), items[0])
     }
 
     @Test

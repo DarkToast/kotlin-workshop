@@ -47,7 +47,7 @@ private fun ShoppingCart.toEntity() = ShoppingCartEntity(
 private fun Item.toEntity(shoppingCartId: UUID) = ItemEntity(
     sku = this.product.sku.value,
     shoppingCartId = shoppingCartId,
-    effectivePrice = this.effectivePrice.valueInCent,
+    effectivePrice = this.product.price.valueInCent,
     quantity = this.quantity.value,
     product = this.product.toEntity()
 )

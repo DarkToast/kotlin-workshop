@@ -6,12 +6,11 @@ import java.util.UUID
 class MaximumProductCountExceededException(productCount: Int) :
     DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
 
-data class Item(val product: Product, val effectivePrice: Price, val quantity: Quantity) {
+data class Item(val product: Product, val quantity: Quantity) {
     val amount: Amount = product.price * quantity
 
     fun addQuantity(q: Quantity) = Item(
         product = product,
-        effectivePrice = effectivePrice,
         quantity = this.quantity + q
     )
 }
@@ -43,7 +42,7 @@ class ShoppingCart(
 
         val item = Optional.ofNullable(mutatedItems[product.sku])
             .map { it.addQuantity(quantity) }
-            .orElseGet { Item(product, product.price, quantity) }
+            .orElseGet { Item(product, quantity) }
 
         mutatedItems[product.sku] = item
         cartItems = mutatedItems
