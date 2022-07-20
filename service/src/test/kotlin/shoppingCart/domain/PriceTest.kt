@@ -23,7 +23,6 @@ class PriceTest() {
  * - Ein Price muss seinen Wert in Cents ausdrücken können.
  * - Zwei Price können über `plus` addiert werden.
  * - Ein Price kann mit `times` multipliziert werden.
- * - Ein addierter oder multiplizierter Price muss den oberen Invarianten entsprechen.
 */
 
     @Test
