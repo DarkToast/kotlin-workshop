@@ -16,7 +16,7 @@ import cheatsheets.oop.yvonne
 // Typealiases ermöglich eine sytaktische Abkürzung. Sie bilden aber keinen neuen Typ!
 typealias EmployeeMapper = (Employee) -> Employee
 
-fun main(args: Array<String>) {
+fun main() {
     functions()
     higherOrderFunctions()
 }

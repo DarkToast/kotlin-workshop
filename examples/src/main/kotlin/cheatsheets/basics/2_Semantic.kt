@@ -32,7 +32,7 @@ class Foo() {
 
 class Bar
 
-fun main(args: Array<String>) {
+fun main() {
     // Generell ist in Kotlin alles ein Objekt. Hier handelt es sich um ein `Int`-Typ.
     val x: Int = 42
     val y: Int = 42

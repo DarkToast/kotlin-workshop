@@ -6,6 +6,6 @@ package workshop.git
 
 fun getHello(): String = "Hallo Welt"
 
-fun main(args: Array<String>) {
+fun main() {
     println(getHello())
 }

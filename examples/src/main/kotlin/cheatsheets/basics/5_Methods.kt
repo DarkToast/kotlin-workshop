@@ -25,7 +25,7 @@ Beim Aufruf können wir nun die Funktion auf drei Arten aufrufen:
         `getCustomer(true, false, true)` vs. `getCustomer(hasContract = true, superUser = false, enabled = true)`
       Der Code "kann" dadurch aber auch unlesbarer werden, wenn man z.B. in jedem Aufruf die Reihenfolge ändert.
  */
-fun main(args: Array<String>) {
+fun main() {
     val field1 = area(10, 20)
     val field2 = area(5)
     val field3 = area(b = 2, a = 3)
