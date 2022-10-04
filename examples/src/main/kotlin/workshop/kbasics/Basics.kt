@@ -72,6 +72,6 @@ fun basics() {
 }
 
 // Die Hauptmethode ist `main` und steht alleine.
-fun main(args: Array<String>) {
+fun main() {
     println("My first kotlin application")
 }

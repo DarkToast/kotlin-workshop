@@ -31,7 +31,7 @@ Solange wir aber mit Kotlin arbeiten, sollte die kotlin-stdlib vorzuziehen sein.
 
 // Die Mainmethode als zentraler Programmeinstieg ohne Klassenbezug.
 // Der Rückgabetyp `Unit` ist äquivalent zu `void` aus anderen Sprachen
-fun main(args: Array<String>) {
+fun main() {
     println(SecureRandom().nextInt() + E)
 }
 

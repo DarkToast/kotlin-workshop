@@ -4,7 +4,7 @@ import cheatsheets.JavaCustomer
 
 val customer = JavaCustomer()
 
-fun main(args: Array<String>) {
+fun main() {
     // Generell können "normale" Typen in Kotlin keine `null`-Referenz enthalten.
     // Ein `notNullable = null` ist nicht möglich.
     var notNullable: String = "Hallo"

@@ -24,7 +24,7 @@ fun JavaContract.getReducedYearBaseFee(): Double {
     return this.getBaseFeePerYear() * 0.95
 }
 
-fun main(args: Array<String>) {
+fun main() {
 
     // Wenn wir nun ein konkretes JavaContract Objekt besitzen...
     val contract = JavaContract()

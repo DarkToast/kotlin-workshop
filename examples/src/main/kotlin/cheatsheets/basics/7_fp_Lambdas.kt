@@ -6,7 +6,7 @@ package cheatsheets.basics
  *  - CollectionAPI
  */
 
-fun main(args: Array<String>) {
+fun main() {
     lambdas()
 }
 

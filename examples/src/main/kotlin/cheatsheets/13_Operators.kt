@@ -34,7 +34,7 @@ class Rational(val numerator: Int, val denumerator: Int) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     println(Rational(1, 3) + Rational(2, 3))
 
     println(Rational(1, 3) + 1)

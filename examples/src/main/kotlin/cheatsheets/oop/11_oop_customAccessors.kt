@@ -28,7 +28,7 @@ class Car {
  * Wird nun per `car.passengers = 6` auf das Attribut geschrieben, so wird der überladende Accessor aufgerufen, der
  * wiederum eine `IllegalArgumentException` wirft.
  */
-fun main(args: Array<String>) {
+fun main() {
     val car = Car()
     car.passengers = 6
 }

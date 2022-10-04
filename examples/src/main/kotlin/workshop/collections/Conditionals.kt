@@ -9,7 +9,7 @@ package workshop.collections
  *  - When
  */
 
-fun main(args: Array<String>) {
+fun main() {
     val x = 42
     println(checkValueClassic(x))
     println(checkValueWithExpression(x))

@@ -37,7 +37,7 @@ class Account(val name: String, password: String, private val salt: String = "#s
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val s: Simple = Simple() // Neuen Objekten muss in Kotlin kein `new` vorangestellt werden. Man ruft quasi
     // "direkt" die Konstruktorfunktion auf.
 
