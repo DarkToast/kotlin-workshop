@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import java.lang.Thread.sleep
@@ -159,6 +160,7 @@ data class Result(private val failure: Failure?, private val value: Any?) {
     }
 }
 
+@Disabled
 class MonadsSpec {
     @Test
     fun `Can be created of failure`() {

@@ -1,7 +1,5 @@
 package advanced.coroutine
 
-import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -9,6 +7,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 data class Telemetry(val value: String)
 data class Measurement(val id: Int, val temp: Int)
@@ -22,7 +23,8 @@ fun <T, U, V> CoroutineScope.merge(
     ch1: ReceiveChannel<T>,
     ch2: ReceiveChannel<U>,
     channelSize: Int,
-    transform: (T, U) -> V): ReceiveChannel<V> {
+    transform: (T, U) -> V
+): ReceiveChannel<V> {
 
     val channel: Channel<V> = Channel(channelSize)
     GlobalScope.launch {
@@ -81,7 +83,10 @@ class TelemetrySource() {
 /**
  * TODO: Implement the first computation. Merge two channels to Telemetry. Hint: You can use the merge method from above.
  */
-class TelemetryToMeasurement(private val numberCh: ReceiveChannel<Int>, private val telemetryChan: ReceiveChannel<Telemetry>) {
+class TelemetryToMeasurement(
+    private val numberCh: ReceiveChannel<Int>,
+    private val telemetryChan: ReceiveChannel<Telemetry>
+) {
     fun start(): ReceiveChannel<Measurement> {
         numberCh.cancel()
         telemetryChan.cancel()
@@ -118,33 +123,34 @@ class View(private val modelCh: ReceiveChannel<ViewModel>) {
 /**
  * The actual test. ;-)
  */
-class ChannelSpec : FeatureSpec({
+@Disabled
+class ChannelSpec {
 
     /**
      * Number Generator ->      +                     + -> Database<Measurement>
      *  Telemetry<String> ->    + --> Measurement --> + -> Aggregator<>   --> View
      */
-    feature("! A temperature IoT system") {
-        val numberGenerator = NumberGenerator()
-        val telSource = TelemetrySource()
-        val service = TelemetryToMeasurement(numberGenerator.generate(), telSource.start(10))
 
-        val measurementChannel = service.start()
-        val aggregator = Aggregator(measurementChannel)
+    val numberGenerator = NumberGenerator()
+    val telSource = TelemetrySource()
+    val service = TelemetryToMeasurement(numberGenerator.generate(), telSource.start(10))
 
-        val database = Database(measurementChannel)
-        val view = View(aggregator.start())
+    val measurementChannel = service.start()
+    val aggregator = Aggregator(measurementChannel)
 
-        scenario("aggregates and shows") {
-            database.start()
-            view.start()
+    val database = Database(measurementChannel)
+    val view = View(aggregator.start())
 
-            while(!measurementChannel.isClosedForReceive) {
-                delay(100)
-            }
+    @Test
+    suspend fun `aggregates and shows`() {
+        database.start()
+        view.start()
 
-            database.database.size shouldBe 20
-            view.view shouldBe "Aggregated temp is 0"
+        while (!measurementChannel.isClosedForReceive) {
+            delay(100)
         }
+
+        assertEquals(20, database.database.size)
+        assertEquals("Aggregated temp is 0", view.view)
     }
-})
+}
