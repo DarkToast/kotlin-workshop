@@ -25,7 +25,7 @@ fun functions() {
     val blueList = list.filter({ value: String -> value == "blue" })
 
     // Die runden Klammern kann man auch weg lassen:
-    val upperCaseList = list.map { value -> value.toUpperCase() }
+    val upperCaseList = list.map { value -> value.toIntOrNull() }
 
     // Lambdas kann man in Kotlin auch direkt als Funktionen einer Variable zuweisen.
     // Der Typ der FUnktion setzt sich dabei aus den Eingabe- und Ausgabetypen zusammen:
