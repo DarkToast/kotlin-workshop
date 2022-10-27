@@ -42,7 +42,7 @@ class ShoppingCart(
 
         val item = Optional.ofNullable(mutatedItems[product.sku])
             .map { it.addQuantity(quantity) }
-            .orElseGet { Item(product, product.price, quantity) }
+            .orElseGet { Item(product, quantity) }
 
         mutatedItems[product.sku] = item
         cartItems = mutatedItems
