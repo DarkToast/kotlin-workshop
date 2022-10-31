@@ -83,6 +83,10 @@ class ShoppingCart(
         result = 31 * result + cartItems.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "ShoppingCart(shoppingCartUuid=$shoppingCartUuid)"
+    }
 }
 
 data class ShoppingCartUuid(val uuid: UUID = UUID.randomUUID()) {
