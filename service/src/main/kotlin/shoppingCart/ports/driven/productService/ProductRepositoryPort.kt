@@ -5,5 +5,5 @@ import shoppingCart.domain.SKU
 import java.util.Optional
 
 interface ProductRepositoryPort {
-    fun findProductBySku(sku: SKU): Optional<Product>
+    fun findProductBySku(sku: SKU): Product?
 }

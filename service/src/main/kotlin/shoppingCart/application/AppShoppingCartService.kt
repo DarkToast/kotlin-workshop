@@ -21,19 +21,14 @@ class AppShoppingCartService(
         shoppingCartUuid: ShoppingCartUuid,
         productSku: SKU,
         quantity: Quantity
-    ): Optional<ShoppingCart> {
-        return shoppingCartRepositoryPort.load(shoppingCartUuid).map { shoppingCart ->
-            productRepositoryPort.findProductBySku(productSku)
-                .map { foundProduct ->
-                    shoppingCart.addProduct(foundProduct, quantity)
-                }
-                .orElseThrow {
-                    ProductNotFoundException(productSku)
-                }
-        }.map { shoppingCart ->
-            shoppingCartRepositoryPort.save(shoppingCart)
-            shoppingCart
-        }
+    ): ShoppingCart? {
+        val shoppingCart = shoppingCartRepositoryPort.load(shoppingCartUuid) ?: return null
+        val product = productRepositoryPort.findProductBySku(productSku) ?: throw ProductNotFoundException(productSku)
+
+        shoppingCart.addProduct(product, quantity)
+        shoppingCartRepositoryPort.save(shoppingCart)
+
+        return shoppingCart
     }
 
     override fun takeNewShoppingCart(): ShoppingCart {
@@ -42,7 +37,7 @@ class AppShoppingCartService(
         return shoppingCart
     }
 
-    override fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart> {
+    override fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): ShoppingCart? {
         return shoppingCartRepositoryPort.load(shoppingCartUuid)
     }
 }

@@ -2,6 +2,8 @@ package shoppingCart.application
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -33,27 +35,25 @@ class AppShoppingCartServiceTest {
     fun `if not existing, the service returns empty`() {
         val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.empty())
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(null)
 
-        val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
-        assertFalse(result.isPresent)
+        val shoppingCart = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        assertNull(shoppingCart)
     }
 
     @Test
     fun `if exists the shopping cart has the product`() {
         val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(milk)
 
-        val result = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
-        assertTrue(result.isPresent)
-
-        val shoppingCart = result.get()
-        assertFalse(result.get().isEmpty())
+        val shoppingCart = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        assertNotNull(shoppingCart)
+        assertFalse(shoppingCart!!.isEmpty())
         assertEquals(Quantity(2), shoppingCart.quantityOfProduct(sku).get())
 
-        val items: List<Item> = result.get().items()
+        val items: List<Item> = shoppingCart.items()
         assertEquals(1, items.size)
         assertEquals(Item(milk, Quantity(2)), items[0])
     }
@@ -62,8 +62,8 @@ class AppShoppingCartServiceTest {
     fun `if exists the shopping cart has no product on a unknown SKU`() {
         val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.empty())
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(null)
 
         assertThrows<ProductNotFoundException> { service.putProductIntoShoppingCart(uuid, sku, Quantity(2)) }
     }
@@ -72,8 +72,8 @@ class AppShoppingCartServiceTest {
     fun `if exists the shopping cart should be saved`() {
         val service = AppShoppingCartService(shoppingCartPort, productPort)
 
-        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(Optional.of(shoppingCart))
-        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(Optional.of(milk))
+        Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
+        Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(milk)
 
         service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
 

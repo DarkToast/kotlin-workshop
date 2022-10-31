@@ -37,14 +37,14 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
         logger.info { "GET shopping cart." }
 
         val shoppingCartUuid = ShoppingCartUuid(uuid)
-        return shoppingCartService.showShoppingCart(shoppingCartUuid)
-            .map { shoppingCart ->
-                ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
-            }
-            .orElseGet {
-                logger.warn { "Shopping cart was not found." }
-                ResponseEntity.notFound().build()
-            }
+        val shoppingCart = shoppingCartService.showShoppingCart(shoppingCartUuid)
+
+        return if(shoppingCart != null) {
+            ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
+        } else {
+            logger.warn { "Shopping cart was not found." }
+            ResponseEntity.notFound().build()
+        }
     }
 
     @RequestMapping(path = ["/shoppingcart"], method = [RequestMethod.POST])
@@ -85,13 +85,14 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
             val sku = SKU(putProductDto.sku)
             val quantity = Quantity(putProductDto.quantity)
 
-            shoppingCartService.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
-                .map { shoppingCart ->
-                    ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
-                }
-                .orElseThrow {
-                    ShoppingCartNotFoundException(shoppingCartUuid)
-                }
+            val shoppingCart = shoppingCartService.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
+
+            return if(shoppingCart != null) {
+                ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
+            } else {
+                logger.warn { "Shopping cart was not found." }
+                ResponseEntity.notFound().build()
+            }
         } else {
             ResponseEntity.badRequest().build()
         }
