@@ -4,6 +4,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -37,6 +38,7 @@ class PutProductToShoppingCartTest() {
     @Autowired
     lateinit var restTemplate: TestRestTemplate
 
+    @Test
     fun `an existing shopping cart has an addProduct link`() {
         val response = createAndGetShoppingCart()
 
@@ -48,6 +50,7 @@ class PutProductToShoppingCartTest() {
         assertEquals("PUT", link.optString("method"))
     }
 
+    @Test
     fun `a new shopping cart has no products`() {
         val response = createAndGetShoppingCart()
 
@@ -55,6 +58,7 @@ class PutProductToShoppingCartTest() {
         assertEquals(0, products.size)
     }
 
+    @Test
     fun `level 1 - adding a new product returns status 200`() {
         val location = createShoppingCart()
         val product = """{ "sku": "123456", "quantity": "2" }"""
@@ -64,6 +68,7 @@ class PutProductToShoppingCartTest() {
         assertEquals(200, response.statusCodeValue)
     }
 
+    @Test
     fun `level 1 - an added product can be received`() {
         val location = createShoppingCart()
         val newProduct = """{ "sku": "123456", "quantity": "2" }"""
@@ -78,6 +83,7 @@ class PutProductToShoppingCartTest() {
         assertEquals("123456", products[0].sku)
     }
 
+    @Test
     fun `level 1 - two products are added and received`() {
         val location = createShoppingCart()
         val firstProduct = """{ "sku": "123456", "quantity": "2" }"""
@@ -96,6 +102,7 @@ class PutProductToShoppingCartTest() {
         assertEquals("654321", products[1].sku)
     }
 
+    @Test
     fun `level 2 - adding a invalid SKU returns status 400`() {
         val location = createShoppingCart()
         val product = """{ "sku": "-1", "quantity": "2" }"""
@@ -105,6 +112,7 @@ class PutProductToShoppingCartTest() {
         assertEquals(400, response.statusCodeValue)
     }
 
+    @Test
     fun `level 2 - adding two much quantity return status 400`() {
         val location = createShoppingCart()
         val product = """{ "sku": "123456", "quantity": "11" }"""
@@ -114,6 +122,7 @@ class PutProductToShoppingCartTest() {
         assertEquals(400, response.statusCodeValue)
     }
 
+    @Test
     fun `level 2 - adding a unknown product returns status 404`() {
         val location = createShoppingCart()
         val product = """{ "sku": "4711unknown", "quantity": "2" }"""
