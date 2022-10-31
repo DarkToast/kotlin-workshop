@@ -54,24 +54,24 @@ class BasicsTest() {
 
     // json factory
     @Test
-    fun `toPlainJson returns default`() {
+    fun `getJson returns default`() {
         assertEquals("{}", toPlainJson(getJson()))
     }
 
     @Test
-    fun `toPlainJson adds a name`() {
+    fun `getJson adds a name`() {
         val expectedJson = """{"firstname":"Max"}"""
         assertEquals(expectedJson, toPlainJson(getJson("Max")))
     }
 
     @Test
-    fun `toPlainJson adds a name and a lastname`() {
+    fun `getJson adds a name and a lastname`() {
         val expectedJson = """{"firstname":"Max","lastname":"Musterfrau"}"""
         assertEquals(expectedJson, toPlainJson(getJson("Max", "Musterfrau")))
     }
 
     @Test
-    fun `toPlainJson only adds a lastname`() {
+    fun `getJson only adds a lastname`() {
         val expectedJson = """{"lastname":"Musterfrau"}"""
         assertEquals(expectedJson, toPlainJson(getJson(lastname = "Musterfrau")))
     }
