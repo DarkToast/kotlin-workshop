@@ -9,11 +9,11 @@ import java.util.Optional
 interface ShoppingCartService {
     fun takeNewShoppingCart(): ShoppingCart
 
-    fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart>
+    fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): ShoppingCart?
 
     fun putProductIntoShoppingCart(
         shoppingCartUuid: ShoppingCartUuid,
         productSku: SKU,
         quantity: Quantity
-    ): Optional<ShoppingCart>
+    ): ShoppingCart?
 }

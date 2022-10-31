@@ -8,7 +8,7 @@ import java.util.Optional
 open class CachingProductRepository(private val delegate: ProductRepositoryPort) : ProductRepositoryPort {
 
     @Cacheable("products")
-    override fun findProductBySku(sku: SKU): Optional<Product> {
+    override fun findProductBySku(sku: SKU): Product? {
         return delegate.findProductBySku(sku)
     }
 

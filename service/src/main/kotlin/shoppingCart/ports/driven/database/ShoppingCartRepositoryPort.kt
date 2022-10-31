@@ -7,5 +7,5 @@ import java.util.Optional
 interface ShoppingCartRepositoryPort {
     fun save(shoppingCart: ShoppingCart)
 
-    fun load(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart>
+    fun load(shoppingCartUuid: ShoppingCartUuid): ShoppingCart?
 }

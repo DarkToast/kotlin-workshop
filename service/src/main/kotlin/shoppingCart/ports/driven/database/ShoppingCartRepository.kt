@@ -2,6 +2,8 @@ package shoppingCart.ports.driven.database
 
 import mu.KotlinLogging
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import shoppingCart.domain.Item
 import shoppingCart.domain.Product
@@ -16,14 +18,14 @@ class ShoppingCartRepository(private val jpaRepo: JpaShoppingCartRepo) : Shoppin
     private val logger = KotlinLogging.logger {}
 
     @Transactional
-    override fun load(shoppingCartUuid: ShoppingCartUuid): Optional<ShoppingCart> {
+    override fun load(shoppingCartUuid: ShoppingCartUuid): ShoppingCart? {
         logger.info { "Loading shopping cart '${shoppingCartUuid.uuid}' from database" }
 
-        val value = jpaRepo
-            .findById(shoppingCartUuid.uuid)
-            .map { it.toDomain() }
-        logger.info { "Found $value" }
-        logger.info { "Found all ${jpaRepo.findAll()}" }
+        val value = jpaRepo.findByIdOrNull(shoppingCartUuid.uuid)?.toDomain()
+
+        if(value != null) {
+            logger.info { "Found $value" }
+        }
 
         return value
 
@@ -32,12 +34,12 @@ class ShoppingCartRepository(private val jpaRepo: JpaShoppingCartRepo) : Shoppin
     @Transactional
     override fun save(shoppingCart: ShoppingCart) {
         logger.info { "Persisting shopping cart to database" }
-        jpaRepo.saveAndFlush(shoppingCart.toEntity())
+        jpaRepo.save(shoppingCart.toEntity())
     }
 }
 
 @Repository
-interface JpaShoppingCartRepo : JpaRepository<ShoppingCartEntity, UUID>
+interface JpaShoppingCartRepo : CrudRepository<ShoppingCartEntity, UUID>
 
 private fun ShoppingCart.toEntity() = ShoppingCartEntity(
     uuid = this.shoppingCartUuid.uuid,
