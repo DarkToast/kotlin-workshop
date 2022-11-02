@@ -164,3 +164,61 @@ und sie im Anschluss per Hands-On ausprobieren und einen Beispielservice nach un
 
 ### Hands-On
 * Wir deployen unseren Service in die private Cloud
+
+# Glossar
+## Objektorientierte Programmierung
+
+* **Klasse**
+* **Objekt**
+* **Instanz**
+* **Attribut**
+* **Methode**
+* **State**
+* **Behaviour**
+* **Konstruktor**
+* **Objekt-Komposition**
+* **public / private / protected**
+* **immutability**
+* **Interface**
+* **Delegation**
+* **Pattern / Antipattern*
+* **Inheritance**
+* **Baseclass**
+* **Subclass**
+* **abstrakte Klasse**
+* **Implementierung**
+* **Polymorphie**
+
+## Domain und Service Modellierung
+* **Entity**
+* **Value Object**
+* **Aggregate**
+* **Aggregate Root**
+* **Repository**
+* **Service**
+* **Controller**
+
+## Hexagonale Architektur
+* **Domain**
+* **Application-Layer**
+* **Port**
+* **Adapter**
+
+## Funktionale Programmierung
+* **First Class Citizens**
+* **Higher Order Function**
+* **Lambda**
+* **Closure**
+
+## Kotlin 
+* **Data class** 
+* **Sealed class**
+* **Collection API**
+* **Annotations**
+
+## Spring
+* **Bean**
+* **Spring Context**
+* **Bean Annotations**
+* **Spring Web**
+* **Spring JPA**
