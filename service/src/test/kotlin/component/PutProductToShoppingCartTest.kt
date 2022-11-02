@@ -46,7 +46,7 @@ class PutProductToShoppingCartTest() {
         val link: JSONObject = json.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
         val href = link.optString("href")
 
-        assertTrue(href.contains("""\/shoppingcart\/[\w\d-]+\/items""".toRegex()))
+        assertTrue(href.contains("""/shoppingcart/[\w\d-]+/items""".toRegex()))
         assertEquals("PUT", link.optString("method"))
     }
 
@@ -100,6 +100,23 @@ class PutProductToShoppingCartTest() {
         assertEquals("123456", products[0].sku)
         assertEquals("Milch", products[1].name)
         assertEquals("654321", products[1].sku)
+    }
+
+    @Test
+    fun `level 1 - a product update is performed`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "123456", "quantity": "2" }"""
+        val productUpdate = """{ "sku": "123456", "quantity": "4" }"""
+
+        addProduct(location, product)
+        addProduct(location, productUpdate)
+
+        val response = getShoppingCart(location)
+
+        val products = extractProducts(response)
+        assertEquals(4, products.size)
+        assertEquals("Brot", products[0].name)
+        assertEquals("123456", products[0].sku)
     }
 
     @Test
