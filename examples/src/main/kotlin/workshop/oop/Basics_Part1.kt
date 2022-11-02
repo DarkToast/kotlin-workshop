@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "unused", "UNUSED_PARAMETER")
+
 import java.time.LocalDateTime
 
 /**
@@ -96,7 +98,7 @@ class Name(val name: String) {
 fun constructor() {
     val max = Name("Max")
     val fraukeLaraChristiane = Name("FraukeLaraChristiane")  // dieses Objekt wird nicht erzeugt.
-                                                             // Der Constructor schmeißt eine Exception
+    // Der Constructor schmeißt eine Exception
 }
 
 /**
@@ -120,6 +122,7 @@ class Person(
     val vorname: String,
     val nachname: String,
 )
+
 class Schiff(val name: String)
 
 class Schiffsreise(

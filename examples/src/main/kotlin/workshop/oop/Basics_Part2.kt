@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "unused")
+
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -101,7 +103,7 @@ class Customer(
     }
 
     fun getPrimaryContact(): String? {
-        return if(isPrivateCustomer()) {
+        return if (isPrivateCustomer()) {
             telefonnummer
         } else {
             emailadresse
@@ -120,7 +122,7 @@ fun validate(customer: Customer) {
 
     val isEnergieversorger = !isPrivateCustomer && customer.energieart != null
 
-    val hasValidContactInformation = if(isPrivateCustomer) {
+    val hasValidContactInformation = if (isPrivateCustomer) {
         customer.emailadresse != null || customer.telefonnummer != null
     } else {
         customer.emailadresse != null || customer.telefonnummer != null || customer.faxnummer != null
@@ -219,13 +221,16 @@ class Address(
 abstract class Contact(val contactInfo: String) {
     abstract val type: String
 }
-class Telephone(phoneNumber: String): Contact(phoneNumber) {
+
+class Telephone(phoneNumber: String) : Contact(phoneNumber) {
     override val type = "telephone"
 }
-class Email(emailAddress: String): Contact(emailAddress) {
+
+class Email(emailAddress: String) : Contact(emailAddress) {
     override val type = "email"
 }
-class Fax(faxNumber: String): Contact(faxNumber) {
+
+class Fax(faxNumber: String) : Contact(faxNumber) {
     override val type = "fax"
 }
 
@@ -243,7 +248,7 @@ abstract class Customer2(
     val name: Name2,
     private var address: Address,
     val contact: List<Contact>
-): CustomerInterface {
+) : CustomerInterface {
     fun getAddress() = address
 
     override fun umzug(address: Address) {
@@ -262,7 +267,7 @@ class PrivateCustomer2(
     address: Address,
     contact: List<Contact>,
     val geburtstag: LocalDate
-): Customer2(name, address, contact) {
+) : Customer2(name, address, contact) {
     fun isAdult(): Boolean = geburtstag.isBefore(LocalDate.now().minusYears(18))
 
     override fun getPrimaryContact(): Contact = contact.first { it is Telephone }
@@ -278,7 +283,7 @@ abstract class B2BCustomer(
     name: Name2,
     address: Address,
     contact: List<Contact>
-): Customer2(name, address, contact) {
+) : Customer2(name, address, contact) {
     override fun getPrimaryContact(): Contact = contact.first { it is Email }
 
     override fun isPrivateCustomer(): Boolean = false
@@ -294,7 +299,7 @@ class CompanyCustomer2(
     contact: List<Contact>,
     val branche: String,
     val handelsregisterEintrag: String,
-): B2BCustomer(name, address, contact)
+) : B2BCustomer(name, address, contact)
 
 class ProviderCustomer2(
     name: Name2,
@@ -302,7 +307,7 @@ class ProviderCustomer2(
     contact: List<Contact>,
     val haendlerId: String,
     val energieart: String,
-): B2BCustomer(name, address, contact) {
+) : B2BCustomer(name, address, contact) {
     fun isStromProvider(): Boolean = energieart == "Strom"
 }
 

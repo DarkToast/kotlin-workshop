@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "KotlinConstantConditions", "unused")
+
 package workshop.collections
 
 /**

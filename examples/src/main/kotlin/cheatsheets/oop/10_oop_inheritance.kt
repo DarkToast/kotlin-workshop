@@ -1,3 +1,5 @@
+@file:Suppress("USELESS_IS_CHECK", "unused", "RedundantExplicitType", "CanBeVal")
+
 package cheatsheets.oop
 
 /**
@@ -140,7 +142,7 @@ abstract class Animal(val name: String, val height: Int) {
  * Als letztes implementiert `Bird` die abstrakte Methode `move` von `Animal`. Diese Implementierung gilt
  * für alle abgeleiteten Vögel. (Wir klammern mal Hühner oder den Vogel-Strauss aus)
  */
-abstract class Bird(name: String, height: Int): Animal(name, height) {
+abstract class Bird(name: String, height: Int) : Animal(name, height) {
     abstract val wingspan: Int
     abstract fun tweet(): String
 
@@ -173,10 +175,10 @@ class Raven(name: String, height: Int, override val wingspan: Int) : Bird(name, 
  * - `name` wird analog per Konstruktorargument "durchgeschleift"
  * - `tweet` wird analog fest implementiert.
  */
-class Budgie(name: String): Bird(name, 18) {
+class Budgie(name: String) : Bird(name, 18) {
     override val wingspan: Int = 25
 
-    override fun tweet(): String  = "piep!"
+    override fun tweet(): String = "piep!"
 }
 
 /**
@@ -185,7 +187,7 @@ class Budgie(name: String): Bird(name, 18) {
  *
  * `Dog` definiert für sich einen weiteren Wert `chipped`. `move` wird hier direkt implementiert.
  */
-class Dog(name: String, height: Int, val chipped: Boolean): Animal(name, height) {
+class Dog(name: String, height: Int, val chipped: Boolean) : Animal(name, height) {
     override fun move(): String = "run"
 }
 
@@ -194,7 +196,7 @@ class Dog(name: String, height: Int, val chipped: Boolean): Animal(name, height)
  *
  * Auch `Cat` definiert für sich einen weiteren Wert `wild`. `move` wird ebenfalls direkt implementiert.
  */
-class Cat(name: String, height: Int, val wild: Boolean): Animal(name, height) {
+class Cat(name: String, height: Int, val wild: Boolean) : Animal(name, height) {
     override fun move(): String = "sneak"
 }
 
@@ -256,13 +258,13 @@ fun main() {
 
     animal.height       // Ein `Animal` besitzt `wingspan` nicht, also können wir auf diesen Wert nicht zugreifen, auch
     animal.move()       // wenn das darunter liegende Objekt diesen Wert besitzt. Wir sehen diesen Wert einfach nicht,
-                        // da wir uns hier nur allgemein für `Animals` interessieren.
+    // da wir uns hier nur allgemein für `Animals` interessieren.
 
     // Die Referenz auf `Animal` ermöglicht daher auch, einen `Dog`, wie einen `Raven` gleichermaßen zu betrachten,
     // da beide Klassen auch ein `Animal` sind:
     animal = wuffi      // Hier wird auch klar, warum wir von `friedolin` nicht die `wingspan` sehen konnten. Der
-                        // Compiler schützt hier die Referenz vor einem ungültigen Zugriff, da z.B. `Dog` diesen Wert
-                        // nicht besitzt.
+    // Compiler schützt hier die Referenz vor einem ungültigen Zugriff, da z.B. `Dog` diesen Wert
+    // nicht besitzt.
 
     // Mächtig wird diese Abstraktion vor allem, wenn wir mit Listen von verschiedenen Objekten arbeiten wollen:
     // Die Liste arbeiten lediglich mit dem abstrakten Typ, interessiert sich aber eben auch nur für die gemeinsamen
@@ -275,14 +277,14 @@ fun main() {
     // so bietet uns Kotlin hier typsichere Abfragen an. Je nach Ergebnisbranch bekommen wir auch einen
     // automatischen Typecast:
     println()
-    when(animal) {
+    when (animal) {
         is Dog -> println("Animal is a Dog and it is ${if (animal.chipped) "chipped" else "not chipped"}")
         is Bird -> println("Animal is a Bird and has a wingspan of ${animal.wingspan}")
         else -> println("Aninal is something else and has the name ${animal.name}")
     }
 
     // Alternativ per if
-    if(animal is Dog) {
+    if (animal is Dog) {
         println("Animal is a Dog and it is ${if (animal.chipped) "chipped" else "not chipped"}")
     }
 
@@ -300,8 +302,8 @@ fun main() {
     fun justHandleDogs(dog: Dog): Unit = println("Dog is chipped: ${dog.chipped}")
 
     justHandleDogs(wuffi)  // Das funktioniert. Ein Aufruf mit `justHandleDogs(bird)` würde dagegen scheitern.
-                           // Das Typsystem zwingt uns hier also zu einer fachlichen Fallunterscheidung bereits zur
-                           // Compilezeit. Einer der großen Stärken objektorientierter Sprachen.
+    // Das Typsystem zwingt uns hier also zu einer fachlichen Fallunterscheidung bereits zur
+    // Compilezeit. Einer der großen Stärken objektorientierter Sprachen.
 
     // Beispiel für eine Fallunterscheidung innerhalb der Liste. Der Compiler erlaubt uns keinen direkten Aufruf der
     // Listenelemente auf `justHandleDogs`, sondern zwingt uns dazu die Elemente erst zu filtern um nur die korrekten
@@ -314,7 +316,7 @@ fun main() {
     // späteren Zeitpunkt. `justHandleDogs2` kapselt damit nicht den korrekten fachlichen Ablauf, sondern erlaubt den
     // Aufruf mit fachlich falschen Typen. Dies erhöht die Komplexität und erschwert die Lesbarkeit.
     fun justHandleDogs2(dog: Animal) {
-        if(dog is Dog) {
+        if (dog is Dog) {
             println("Dog is chipped: ${dog.chipped}")
         } else {
             throw IllegalArgumentException("Given animal is not a dog!")

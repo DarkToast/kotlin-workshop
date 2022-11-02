@@ -1,3 +1,9 @@
+@file:Suppress(
+    "UNUSED_VARIABLE", "SENSELESS_COMPARISON", "RedundantNullableReturnType", "UNREACHABLE_CODE",
+    "ALWAYS_NULL", "KotlinConstantConditions", "unused", "UNUSED_VALUE", "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+    "RedundantExplicitType"
+)
+
 package workshop.oop
 
 fun NonNullable() {
