@@ -9,3 +9,6 @@ spring:
     password: ""
   jpa:
     generate-ddl: true
+
+logging:
+  config: classpath:logback.xml
