@@ -1,3 +1,7 @@
+@file:Suppress("UNUSED_VALUE", "UNUSED_VARIABLE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE", "RedundantExplicitType",
+    "KotlinConstantConditions", "CanBeVal"
+)
+
 package cheatsheets.basics
 
 import cheatsheets.JavaCustomer

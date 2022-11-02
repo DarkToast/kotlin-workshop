@@ -1,3 +1,9 @@
+@file:Suppress(
+    "UNUSED_VARIABLE", "SENSELESS_COMPARISON", "RedundantNullableReturnType", "UNREACHABLE_CODE",
+    "ALWAYS_NULL", "KotlinConstantConditions", "unused", "UNUSED_VALUE", "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+    "RedundantExplicitType"
+)
+
 package workshop.oop
 
 fun NonNullable() {
@@ -18,7 +24,9 @@ fun NonNullable() {
     }
 
     // Alternativ sind checks per Elvisoperator möglich:
-    val y = nullable ?: 42 // -> wenn null, 42
+    val y: Int = nullable ?: 42 // -> wenn null, 42
+
+
     val s: Int = nullable?.toString()?.length ?: 42 // -> wenn null, wird `toString` nicht aufgerufen.
     // Der gesamte Ausdruck bleibt `null`.
 

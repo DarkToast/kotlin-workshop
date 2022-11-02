@@ -1,18 +1,17 @@
 # GIT COMMANDS
-    
+
 ## initialization and configuration
 
 Configure your personal name for your commits.
 
     git config --global user.name “[firstname lastname]”
 
-
 Configure your personal email for your commits.
 
     git config --global user.email “[valid-email]”
 
 Initialize a new git repository in the current directory
-    
+
     git init
 
 Clone an existing GIT repository to the current directory
@@ -22,10 +21,10 @@ Clone an existing GIT repository to the current directory
 ## Current stage
 
 Get the current git status. Changed files, staged files, current branch.
-    
+
     git status
 
-Add changed filed or all changed files in a directory to the stage. 
+Add changed filed or all changed files in a directory to the stage.
 
     git add [file|directory]
 
@@ -36,7 +35,7 @@ Create a new commit with the staged files and a nice commit message.
 Get the diff of the current file system and the stage.
 
     git diff
-    
+
 Get the diff of the stage and the last commit
 
     git diff --staged
@@ -44,7 +43,7 @@ Get the diff of the stage and the last commit
 ## Branching
 
 List all local branches
-    
+
     git branch
 
 Create a new branch at the current commit
@@ -68,5 +67,5 @@ Creating a local branch on the remote repository
     git push --set-upstream origin foobar
 
 Pulling all new changes from a remote repository
-    
+
     git pull [REMOTE NAME]

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER", "unused", "RedundantVisibilityModifier")
+
 package cheatsheets.oop
 
 /**

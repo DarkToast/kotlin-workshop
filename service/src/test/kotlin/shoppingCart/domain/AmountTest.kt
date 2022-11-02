@@ -20,7 +20,6 @@ import org.junit.jupiter.api.assertThrows
  * - Ein Amount kann nicht größer als 300,00€ sein. -> MaximumShoppingCardAmountExceededException
  * - Ein Amount muss seinen Wert in Cents ausdrücken können
  * - Zwei Amounts können über `plus` addiert werden.
- * - Ein addierter Amount muss den oberen Invarianten entsprechen.
 */
 @Disabled
 class AmountTest() {

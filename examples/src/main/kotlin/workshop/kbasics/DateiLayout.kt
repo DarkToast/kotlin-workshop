@@ -1,4 +1,6 @@
 // Paketdekleration. Muss äquvivalent zur Verzeichnisstruktur sein
+@file:Suppress("unused")
+
 package workshop.kbasics
 
 // Import statements um Klassen, aber auch statische Elemente
@@ -44,3 +46,19 @@ fun myStaticFunction(x: Int, y: Int): Int {
 class MyFirstClass()
 
 class MySecondClass
+
+
+val one: Int = 1 // Int
+val threeBillion: Long = 3000000000 // Long
+val oneLong: Long = 1L // Long
+val oneByte: Byte = 1
+
+val b: UByte = 1u  // UByte, expected type provided
+val s: UShort = 1u // UShort, expected type provided
+val l: ULong = 1u  // ULong, expected type provided
+
+val bool: Boolean = true
+val aChar: Char = 'a'
+
+val str: String = "abcd 123"
+val arr: Array<Int> = arrayOf(1, 2, 3, 4, 5)
