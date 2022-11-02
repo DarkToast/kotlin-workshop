@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package shoppingCart.ports.driven.database
 
 import org.hibernate.annotations.Type
@@ -14,19 +16,23 @@ import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.CascadeType.MERGE
 import javax.persistence.CascadeType.PERSIST
+import javax.persistence.CascadeType.REFRESH
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.IdClass
+import javax.persistence.JoinColumn
 import javax.persistence.OneToMany
 import javax.persistence.OneToOne
 
 @Entity(name = "shopping_cart")
-data class ShoppingCartEntity(
+class ShoppingCartEntity(
     @Id
-    @Type(type = "org.hibernate.type.UUIDCharType")
+    @Column(columnDefinition = "varbinary not null")
     val uuid: UUID,
 
     @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "shoppingCartId")
     val items: List<ItemEntity>
 ) {
     fun toDomain(): ShoppingCart = ShoppingCart(ShoppingCartUuid(uuid), items.map { it.toDomain() })
@@ -38,21 +44,23 @@ class ItemPK(val sku: String?, val shoppingCartId: UUID?) : Serializable {
 
 @Entity(name = "item")
 @IdClass(ItemPK::class)
-data class ItemEntity(
+class ItemEntity(
     @Id
     val sku: String,
     @Id
+    @Column(columnDefinition = "varbinary not null")
     val shoppingCartId: UUID,
     val effectivePrice: Int,
     val quantity: Int,
-    @OneToOne(cascade = [PERSIST, MERGE])
+    @OneToOne(cascade = [PERSIST, MERGE, REFRESH])
+    @JoinColumn(name = "sku", insertable = false, updatable = false)
     val product: ProductEntity
 ) {
     fun toDomain() = Item(product.toDomain(), Quantity(quantity))
 }
 
 @Entity(name = "product")
-data class ProductEntity(
+class ProductEntity(
     @Id
     val sku: String,
     val name: String,
