@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER", "unused", "UNUSED_VARIABLE")
+
 package workshop.oop
 
 import java.io.Serializable

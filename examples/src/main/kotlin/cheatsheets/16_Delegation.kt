@@ -15,8 +15,8 @@ interface Printer {
  * Diese Implementierung schreibt alle Eingaben einfach auf Stdout. Mal mit einem Newline, mal ohne.
  */
 class StdOutPrinter : Printer {
-    override fun printMessage(value: String) = print(value)
-    override fun printMessageLine(value: String) = println(value)
+    override fun printMessage(message: String) = print(message)
+    override fun printMessageLine(message: String) = println(message)
 }
 
 /**

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE", "UNUSED_VALUE")
+
 package workshop.collections
 
 import java.util.Optional
@@ -25,7 +27,7 @@ fun main() {
     var blueList = list.filter({ value: String -> value == "blue" })
 
     // Die runden Klammern können auch weggelassen werden.
-    blueList  = list.filter { value: String -> value == "blue" }
+    blueList = list.filter { value: String -> value == "blue" }
 
     // Alternativ ein imperativer Ansatz. Sehr grob gesagt ist der Unterschied wie folgt:
     // Beim imperativen Ansatz geben wir einer Funktion ein Objekt zur Manipulation.
@@ -41,16 +43,17 @@ fun main() {
     // Wir haben einen Contract, welcher eine ID und einen Vertragstyp im Energiesektor widerspiegelt.
     // Damit werden einige Collectionmethoden gezeigt, die im Alltag häufig vorkommen.
     data class Contract(val id: Int, val type: String)
+
     val contractList: List<Contract> = listOf(
         Contract(1, "Strom"), Contract(2, "Gas"), Contract(3, "Wasser"), Contract(4, "Wasser")
     )
 
     println(contractList)                                                  // Gibt die gesamte Liste aus.
     println(contractList.filter { c: Contract -> c.type == "Strom" })      // Filter alle Elemente mit dem Typ "Strom" aus.
-    println(contractList.find { c: Contract -> c.type == "Wasser"})        // Findet das erste Element mit dem Typ "Wasser".
+    println(contractList.find { c: Contract -> c.type == "Wasser" })        // Findet das erste Element mit dem Typ "Wasser".
     println(contractList.map { c: Contract -> c.type })                    // Transformiert alle Elemente der Liste in den
-                                                                           // entsprechenden Typ um. Also eine List<Contract>
-                                                                           // zu einer List<String>.
+    // entsprechenden Typ um. Also eine List<Contract>
+    // zu einer List<String>.
 
     // Flatten ist eine Methode um verschachtelte Listen, also 2-dimensionale Listen in einem 1-dimensionale Liste
     // umzuwandeln.

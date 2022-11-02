@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 package cheatsheets
 
 import cheatsheets.oop.Employee

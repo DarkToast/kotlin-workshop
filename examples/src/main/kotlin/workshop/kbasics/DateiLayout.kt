@@ -1,4 +1,6 @@
 // Paketdekleration. Muss äquvivalent zur Verzeichnisstruktur sein
+@file:Suppress("unused")
+
 package workshop.kbasics
 
 // Import statements um Klassen, aber auch statische Elemente
@@ -48,7 +50,7 @@ class MySecondClass
 
 val one: Int = 1 // Int
 val threeBillion: Long = 3000000000 // Long
-val oneLong:Long = 1L // Long
+val oneLong: Long = 1L // Long
 val oneByte: Byte = 1
 
 val b: UByte = 1u  // UByte, expected type provided

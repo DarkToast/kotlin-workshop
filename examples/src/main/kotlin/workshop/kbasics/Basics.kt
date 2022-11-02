@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "unused", "RedundantExplicitType", "KotlinConstantConditions")
+
 package workshop.kbasics
 
 fun basics() {
