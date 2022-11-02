@@ -14,6 +14,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import shoppingCart.Application
+import shoppingCart.ports.driver.rest.dto.GetItem
 import shoppingCart.ports.driver.rest.dto.GetProduct
 
 /*
@@ -46,7 +47,7 @@ class PutProductToShoppingCartTest() {
         val link: JSONObject = json.optJSONObject("links")?.optJSONObject("addProduct") ?: JSONObject("{}")
         val href = link.optString("href")
 
-        assertTrue(href.contains("""\/shoppingcart\/[\w\d-]+\/items""".toRegex()))
+        assertTrue(href.contains("""/shoppingcart/[\w\d-]+/items""".toRegex()))
         assertEquals("PUT", link.optString("method"))
     }
 
@@ -54,7 +55,7 @@ class PutProductToShoppingCartTest() {
     fun `a new shopping cart has no products`() {
         val response = createAndGetShoppingCart()
 
-        val products = extractProducts(response)
+        val products = extractItems(response)
         assertEquals(0, products.size)
     }
 
@@ -77,10 +78,11 @@ class PutProductToShoppingCartTest() {
 
         val response = getShoppingCart(location)
 
-        val products = extractProducts(response)
-        assertEquals(1, products.size)
-        assertEquals("Brot", products[0].name)
-        assertEquals("123456", products[0].sku)
+        val items = extractItems(response)
+        assertEquals(1, items.size)
+        assertEquals(2, items[0].quantity)
+        assertEquals("Brot", items[0].product.name)
+        assertEquals("123456", items[0].product.sku)
     }
 
     @Test
@@ -94,12 +96,34 @@ class PutProductToShoppingCartTest() {
 
         val response = getShoppingCart(location)
 
-        val products = extractProducts(response)
-        assertEquals(2, products.size)
-        assertEquals("Brot", products[0].name)
-        assertEquals("123456", products[0].sku)
-        assertEquals("Milch", products[1].name)
-        assertEquals("654321", products[1].sku)
+        val items = extractItems(response)
+        assertEquals(2, items.size)
+
+        assertEquals(2, items[0].quantity)
+        assertEquals("Brot", items[0].product.name)
+        assertEquals("123456", items[0].product.sku)
+
+        assertEquals(3, items[1].quantity)
+        assertEquals("Milch", items[1].product.name)
+        assertEquals("654321", items[1].product.sku)
+    }
+
+    @Test
+    fun `level 1 - a product update is performed`() {
+        val location = createShoppingCart()
+        val product = """{ "sku": "123456", "quantity": "2" }"""
+        val productUpdate = """{ "sku": "123456", "quantity": "4" }"""
+
+        addProduct(location, product)
+        addProduct(location, productUpdate)
+
+        val response = getShoppingCart(location)
+
+        val items = extractItems(response)
+        assertEquals(1, items.size)
+        assertEquals(6, items[0].quantity)
+        assertEquals("Brot", items[0].product.name)
+        assertEquals("123456", items[0].product.sku)
     }
 
     @Test
@@ -133,17 +157,21 @@ class PutProductToShoppingCartTest() {
     }
 
 
-    private fun extractProducts(getShoppingCartResponse: ResponseEntity<String>): List<GetProduct> {
+    private fun extractItems(getShoppingCartResponse: ResponseEntity<String>): List<GetItem> {
         val json = JSONObject(getShoppingCartResponse.body)
         val items: JSONArray = json.optJSONArray("items")
 
-        val productList: MutableList<GetProduct> = mutableListOf()
+        val productList: MutableList<GetItem> = mutableListOf()
 
         for (i in 0 until items.length()) {
             val product = (items.get(i) as JSONObject).getJSONObject("product")
-            productList += GetProduct(product.optString("sku"), product.optString("name"))
-        }
+            val quantity: Int = (items.get(i) as JSONObject).getInt("quantity")
 
+            productList += GetItem(
+                quantity,
+                GetProduct(product.optString("sku"), product.optString("name"))
+            )
+        }
 
         return productList.toList()
     }

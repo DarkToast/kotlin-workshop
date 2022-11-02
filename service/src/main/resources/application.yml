@@ -9,6 +9,12 @@ spring:
     password: ""
   jpa:
     generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: true
+      path: /h2
 
 logging:
   config: classpath:logback.xml

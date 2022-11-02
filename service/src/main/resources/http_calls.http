@@ -1,0 +1,13 @@
+POST localhost:8080/shoppingcart
+
+###
+PUT localhost:8080/shoppingcart/b6bb07cd-d30d-440b-ae01-cc91bd12d397/items
+Content-Type: application/json
+
+{
+  "sku": "123456",
+  "quantity": 4
+}
+
+###
+GET localhost:8080/shoppingcart/b6bb07cd-d30d-440b-ae01-cc91bd12d397
