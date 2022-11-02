@@ -21,6 +21,7 @@ import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
 import shoppingCart.ports.driven.productService.ProductRepositoryPort
 import java.util.Optional
 
+/* Aufgabe 6 */
 class AppShoppingCartServiceTest {
     private var shoppingCartPort = Mockito.mock(ShoppingCartRepositoryPort::class.java)
     private val productPort = Mockito.mock(ProductRepositoryPort::class.java)
