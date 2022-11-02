@@ -22,8 +22,8 @@ CREATE TABLE item
     shopping_cart_id UUID        NOT NULL,
     sku              VARCHAR(40) NOT NULL,
     effective_price  INTEGER     NOT NULL,
-    quantity         INTEGER     NOT NULL
---     CONSTRAINT item_pk PRIMARY KEY (shopping_cart_id, sku),
---     CONSTRAINT item_sc_fk FOREIGN KEY (shopping_cart_id) REFERENCES shopping_cart (uuid),
---     CONSTRAINT item_product_fk FOREIGN KEY (sku) REFERENCES product (sku)
+    quantity         INTEGER     NOT NULL,
+    CONSTRAINT item_pk PRIMARY KEY (shopping_cart_id, sku),
+    CONSTRAINT item_sc_fk FOREIGN KEY (shopping_cart_id) REFERENCES shopping_cart (uuid),
+    CONSTRAINT item_product_fk FOREIGN KEY (sku) REFERENCES product (sku)
 );
