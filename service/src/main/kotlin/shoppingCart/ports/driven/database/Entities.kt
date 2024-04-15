@@ -2,7 +2,17 @@
 
 package shoppingCart.ports.driven.database
 
-import org.hibernate.annotations.Type
+import jakarta.persistence.CascadeType
+import jakarta.persistence.CascadeType.MERGE
+import jakarta.persistence.CascadeType.PERSIST
+import jakarta.persistence.CascadeType.REFRESH
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.IdClass
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToMany
+import jakarta.persistence.OneToOne
 import shoppingCart.domain.Item
 import shoppingCart.domain.Name
 import shoppingCart.domain.Price
@@ -13,22 +23,11 @@ import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
 import java.io.Serializable
 import java.util.UUID
-import javax.persistence.CascadeType
-import javax.persistence.CascadeType.MERGE
-import javax.persistence.CascadeType.PERSIST
-import javax.persistence.CascadeType.REFRESH
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.IdClass
-import javax.persistence.JoinColumn
-import javax.persistence.OneToMany
-import javax.persistence.OneToOne
 
 @Entity(name = "shopping_cart")
 class ShoppingCartEntity(
     @Id
-    @Column(columnDefinition = "varbinary not null")
+    @Column
     val uuid: UUID,
 
     @OneToMany(cascade = [CascadeType.ALL])
@@ -48,7 +47,7 @@ class ItemEntity(
     @Id
     val sku: String,
     @Id
-    @Column(columnDefinition = "varbinary not null")
+    @Column
     val shoppingCartId: UUID,
     val effectivePrice: Int,
     val quantity: Int,
