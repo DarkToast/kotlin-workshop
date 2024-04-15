@@ -10,32 +10,32 @@ test/build:
     paths:
       - service/build/libs/*.jar
 
-docker-build:
-  stage: package
-  image: docker:latest
-  services:
-    - docker:dind
-  variables:
-    DOCKER_DRIVER: overlay
-  only:
-    variables:
-      - $BUILD_DOCKER == "true" && "main" != $CI_COMMIT_REF_NAME
-  script:
-    - cd service
-    - docker build .
+# docker-build:
+#   stage: package
+#   image: docker:latest
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_DRIVER: overlay
+#   only:
+#     variables:
+#       - $BUILD_DOCKER == "true" && "main" != $CI_COMMIT_REF_NAME
+#   script:
+#     - cd service
+#     - docker build .
 
-docker-push:
-  stage: package
-  image: docker:latest
-  services:
-    - docker:dind
-  variables:
-    DOCKER_DRIVER: overlay
-  only:
-    variables:
-      - $BUILD_DOCKER == "true" && "main" == $CI_COMMIT_REF_NAME
-  script:
-    - cd service
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/christian_schmidt/kotlin-workshop:latest .
-    - docker push $CI_REGISTRY/christian_schmidt/kotlin-workshop:latest
+# docker-push:
+#   stage: package
+#   image: docker:latest
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_DRIVER: overlay
+#   only:
+#     variables:
+#       - $BUILD_DOCKER == "true" && "main" == $CI_COMMIT_REF_NAME
+#   script:
+#     - cd service
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build -t $CI_REGISTRY/christian_schmidt/kotlin-workshop:latest .
+#     - docker push $CI_REGISTRY/christian_schmidt/kotlin-workshop:latest
