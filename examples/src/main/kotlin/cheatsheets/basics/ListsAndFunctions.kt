@@ -1,29 +1,59 @@
 @file:Suppress("UNUSED_VARIABLE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE", "UNUSED_VALUE")
 
-package workshop.collections
+package cheatsheets.basics
 
 import java.util.Optional
 
 fun main() {
-    // Kotlin bringt seine eigene Colletions-API mit.
-    // Die Sprache unterscheidet zwischen immutable Collections, wie hier der `List`
-    val list: List<String> = listOf("blueblue", "green", "red", "1")
+    // Kotlin bringt seine eigene Collections-API mit.
+    // Die Sprache unterscheidet zwischen immutable Collections, wie hier der immutable `List`
+    val list: List<String> = listOf("blue", "green", "red", "1")
 
-    // und mutable Lists. Eine neue Liste kann per "Hand" erzeugt werden,
-    // Kotlin bietet aber auch globale Helfermethoden an.
+    // Immutable Listen können nicht verändert, aber für neue Listen verwendet werden. Das macht sie im Bereich
+    // der parallelen Verarbeitung essenziell um z.B. race Conditions zu vermeiden.
+    val sublist = list.subList(0, 2)    // Erzeugt eine neue Liste mit den ersten beiden Elementen von `list`
+    val newList = list + sublist        // Mit dem `+`-Operator können zwei Listen zu einer neuen Liste konkateniert
+                                        // werden.
+    // Intern werden die Werte allerdings nicht kopiert, sondern nur deren Referenzen!
+
+
+    // Der Gegenpart ist die mutable List. Eine neue Liste kann per "Hand" erzeugt werden, Kotlin bietet aber auch
+    // hier Helferfunktionen an, welche mehr Komfortfunktionen bieten.
+    val manualList: MutableList<String> = ArrayList()
     val mutableList: MutableList<String> = mutableListOf("blue", "green", "red")
+
+    // Mutable List können direkt bearbeitet werde.
     mutableList.add("blue")
     mutableList.add("green")
     mutableList.add("red")
+    mutableList.remove("blue")
 
-    // Danaben gibt auch viele andere
+    // Daneben gibt weitere Strukturen:
+    // Die Map bietet eine klassische key-value Struktur, wobei der Key eineindeutig vergeben wird.
     val map: Map<String, String> = mapOf(Pair("foo", "FOO"), Pair("bar", "BAR"))
+    // Die Map existiert wie die Liste in einer immutable und einer mutable-Form
     val mutableMap: Map<String, String> = mutableMapOf(Pair("foo", "FOO"), Pair("bar", "BAR"))
+
+    val v1: String? = map["foo"]                // sucht anhand eines Keys einen Wert. Gibt immer einen nullable-Wert zurück.
+    val e: Boolean = map.containsKey("bar")     // Einige Methoden bieten eine vorherige Abfrage an.
+
+    // Das Set bietet das Kotlin Äquivalent einer endlichen Menge. Wie in einer mathematischen Menge, so k̈́önnen
+    // Elemente auch hier nur einmal vorkommen. Dubletten werden ignoriert.
     val set: Set<String> = setOf("blue", "blue", "green", "red")
+    val subset = set - "blue"
+    val disjunction = set + setOf("yellow", "gray")
+
+    // Sets gibt es ebenfalls als mutable-Variante.
+    val mSet: MutableSet<String> = mutableSetOf("blue", "green", "red")
+    mSet -= "blue"
+    mSet += setOf("yellow", "gray")
 
 
-    // Die Collections haben, wie z.B. auch bei Java 8 Streams, monadische Methoden, welche einen Lambdaausdruck
-    // entgegennehmen. Hier als Beispiel ein Filter:
+    // Die Collections haben monadische Methoden, welche eine Tranformationsfunktion entgegennehmen. Einen so genannten
+    // Lambda ausdruck.
+    // Hier als Beispiel ein Filter, welcher aus der Liste
+    //   listOf("blue", "green", "red", "1")
+    // alle Elemente "blue" herausfiltert.
     var blueList = list.filter({ value: String -> value == "blue" })
 
     // Die runden Klammern können auch weggelassen werden.

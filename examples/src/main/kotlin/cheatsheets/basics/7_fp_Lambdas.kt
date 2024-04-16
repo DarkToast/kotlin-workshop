@@ -11,11 +11,13 @@ fun main() {
 }
 
 fun lambdas() {
+    // Als Basis dient uns eine
     val aList: List<Int> = listOf(1, 2, 3, 4, 5)
 
     // `{ int -> int * int }` ist ein Lambdaausdruck, also eine anonyme Funktion, die wir `map` als Parameter
-    // übergeben. Das `int` vor dem `->` ist dabei der erste Paramerter der Funktion. Alles was nach dem `->` steht
-    // ist der Funktionskörper. Der Rückgabetyp der Funktion basiert auf dem Typ des letzten Statements.
+    // übergeben. Das `int` vor dem `->` ist dabei der erste Parameter der Funktion. Alles was nach dem `->` steht
+    // ist der Funktionskörper. Der Rückgabetyp der Funktion basiert auf dem Typ des letzten Statements. Ein `return`
+    // ist nicht nötig und hier auch nicht erlaubt.
 
     // `map` wendet nun die übergebene Funktion auf jedes Element der Liste an. Die Resultate der Funktion werden
     // dann in einer neuen Liste zusammengefasst und von `map` zurück gegeben.

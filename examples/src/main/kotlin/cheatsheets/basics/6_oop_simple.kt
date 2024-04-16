@@ -18,7 +18,7 @@ class Verbose constructor(x: Int) {
 }
 
 
-// Die Klasse `Account` besitzt einen Standardkonstruktur mit drei Parametern. Das `constructor`-Wort wurde hier weg gelassen.
+// Die Klasse `Account` besitzt einen Standardkonstruktur mit drei Parametern. Das `constructor`-Wort wurde hier weggelassen.
 // - Ein `val` definiert automatisch ein `public` Klassenattribut.
 // - `private val` erzeugt ein `private` Attribut.
 // - Ohne `val` handelt es sich lediglich um einen Konstruktorparameter, dessen Scope nur innerhalb des `init`-Blocks und
