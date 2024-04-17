@@ -16,21 +16,22 @@ package cheatsheets
  * "Extensions" können nur auf die `public`-Elemente des Zieltyps zugreifen. Intern handelt es sich dabei lediglich
  * um einen Wrappertyp, der die neuen Methoden beinhaltet. Der Compiler bietet es uns lediglich als Teil der Zielklasse an.
  */
-fun JavaContract.getBaseFeePerYear(): Double {
-    return this.getBaseFee() * 12
+fun Contract.getBaseFeePerYear(): Double {
+    val baseFee: Double = this.getBaseFee() ?: 0.0
+    return baseFee * 12
 }
 
-fun JavaContract.getReducedYearBaseFee(): Double {
+fun Contract.getReducedYearBaseFee(): Double {
     return this.getBaseFeePerYear() * 0.95
 }
 
 fun main() {
-
-    // Wenn wir nun ein konkretes JavaContract Objekt besitzen...
-    val contract = JavaContract()
+    // Wenn wir nun ein konkretes Contract Objekt besitzen...
+    val contract = Contract()
 
     // ... so können wir neben den eigentlichen Methoden auch die erweiteren Methoden benutzen.
-    println(contract.baseFee)
+    println(contract.getBaseFee())
     println(contract.getBaseFeePerYear())
     println(contract.getReducedYearBaseFee())
 }
+
