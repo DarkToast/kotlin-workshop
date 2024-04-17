@@ -12,7 +12,6 @@ package cheatsheets.basics
  *
  *  s. https://kotlinlang.org/docs/control-flow.html
  */
-
 fun main() {
     val x = 42
     println(checkValueClassic(x))
@@ -26,7 +25,6 @@ fun main() {
 /**
  * IF Statements
  */
-
 // Kotlin IFs können auf zwei Arten geschrieben werden. Einerseits in einer klassischen, imperativen Art:
 fun checkValueClassic(x: Int): String {
     if (x == 42) {
@@ -50,7 +48,6 @@ fun checkValueWithExpression(x: Int): String {
 /**
  * Schleifen
  */
-
 // Die `while`-loop ist in Kotlin fast identisch zu jeder bekannten imperativen Sprache.
 fun whileLoop() {
     var x = 0
@@ -96,7 +93,9 @@ fun forLoop() {
     }
 }
 
-// ---- Exceptions und Try Catch
+/**
+ * Exception & Try - Catch
+ */
 fun tryCatch() {
 
     // Als Beispiel eine Funktion, welche immer einen Fehler wirft:
@@ -116,8 +115,9 @@ fun tryCatch() {
     println(name)
 }
 
-// ---- When
-
+/**
+ * Pattern Matching mit `when`
+ */
 /*
   When ist ein kleines schweizer Taschenmesser und der große Bruder des eher bekannten `switch`-Statements aus anderen
   Sprachen.
