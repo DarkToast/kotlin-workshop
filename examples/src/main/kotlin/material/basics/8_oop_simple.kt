@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_VARIABLE", "UNUSED_PARAMETER", "unused", "RedundantExplicitType")
 
-package cheatsheets.basics
+package material.basics
 
 /**
  * Themen:

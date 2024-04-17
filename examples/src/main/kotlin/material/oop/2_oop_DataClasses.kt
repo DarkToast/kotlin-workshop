@@ -1,4 +1,4 @@
-package cheatsheets.oop
+package material.oop
 
 data class FirstName(val value: String)
 

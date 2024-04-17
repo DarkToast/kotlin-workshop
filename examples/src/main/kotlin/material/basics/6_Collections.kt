@@ -1,8 +1,6 @@
 @file:Suppress("UNUSED_VARIABLE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE", "UNUSED_VALUE")
 
-package cheatsheets.basics
-
-import java.util.Optional
+package material.basics
 
 fun main() {
     /**
