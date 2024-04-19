@@ -1,41 +1,28 @@
 plugins {
-    id 'org.springframework.boot' version '2.7.4'
-    id 'org.jetbrains.kotlin.jvm' version "1.7.20"
-    id 'org.jetbrains.kotlin.plugin.jpa' version "1.7.20"
-    id "org.jetbrains.kotlin.plugin.spring" version "1.7.20"
-    id 'com.github.ben-manes.versions' version '0.42.0'
-}
-
-repositories {
-    mavenCentral()
+    alias(libs.plugins.org.springframework.boot)
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.jpa)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.spring)
 }
 
 dependencies {
-    def springVersion = "2.7.5"
+    implementation libs.spring.boot.starter.actuator
+    implementation libs.spring.boot.starter.web
+    implementation libs.spring.boot.starter.data.jpa
+    implementation libs.spring.boot.starter.logging
 
-    implementation "org.springframework.boot:spring-boot-starter-actuator:$springVersion"
-    implementation "org.springframework.boot:spring-boot-starter-web:$springVersion"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$springVersion"
-    implementation "org.springframework.boot:spring-boot-starter-logging:$springVersion"
-
-    implementation('io.github.microutils:kotlin-logging-jvm:3.0.0') {
+    implementation(libs.kotlin.logging.jvm) {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
-    implementation 'com.h2database:h2:2.1.214'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4'
+    implementation libs.h2
+    implementation libs.kotlinx.coroutines.core.jvm
 
-    runtimeOnly 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
-    runtimeOnly 'org.jetbrains.kotlin:kotlin-reflect:1.7.20'
+    runtimeOnly libs.jaxb.api
+    runtimeOnly libs.kotlin.reflect
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test:$springVersion"
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-}
-
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
+    testImplementation libs.spring.boot.starter.test
+    testImplementation libs.junit.jupiter
 }
 
 test {
@@ -43,4 +30,3 @@ test {
     testLogging.showStandardStreams = true
     testLogging.exceptionFormat "full"
 }
-

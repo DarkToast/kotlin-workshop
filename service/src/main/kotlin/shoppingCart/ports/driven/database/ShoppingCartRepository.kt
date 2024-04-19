@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import shoppingCart.domain.Item
 import shoppingCart.domain.Product
 import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
 import java.util.Optional
 import java.util.UUID
-import javax.transaction.Transactional
 
 @Repository
 class ShoppingCartRepository(private val jpaRepo: JpaShoppingCartRepo) : ShoppingCartRepositoryPort {

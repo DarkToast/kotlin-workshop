@@ -1,5 +1,8 @@
 package shoppingCart.ports.driver.rest
 
+
+import jakarta.servlet.http.HttpServletRequest
+import mu.KotlinLogging
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.ResponseEntity
@@ -10,7 +13,6 @@ import shoppingCart.domain.DomainException
 import shoppingCart.ports.PortException
 import shoppingCart.ports.driver.rest.dto.Failure
 import java.time.LocalDateTime
-import javax.servlet.http.HttpServletRequest
 
 @ControllerAdvice
 class LastLineOfDefenseErrorHandler {
