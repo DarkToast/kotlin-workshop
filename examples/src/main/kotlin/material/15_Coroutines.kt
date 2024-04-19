@@ -1,4 +1,4 @@
-package cheatsheets
+package material
 
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred

@@ -1,4 +1,4 @@
-package cheatsheets
+package material
 
 /**
  * Kotlin erlaubt es, bestehende Klassen um neue Methoden zu erweitern. Diese "Extensions" sind dabei nur dort
