@@ -53,4 +53,20 @@ fun main() {
     val mSet: MutableSet<String> = mutableSetOf("blue", "green", "red")
     mSet -= "blue"
     mSet += setOf("yellow", "gray")
+
+    // Für kleinere Elemente gibt es noch das Pair und Triple
+    // `Pair` modelliert zwei Werte, die zusammengefasst werden.
+    val pair: Pair<String, Int> = Pair("blue", 1)
+
+    // `Triple` ist das Äquivalent zu `Pair`. Fasst aber drei Werte zusammen.
+    val tripe: Triple<String, Int, Boolean> = Triple("blue", 1, true)
+
+    // Collections können auch per Deconkstruktion recht einfach auseinander genommen werden.
+    // Als Beispiel das pair und eine Liste.
+    val (farbe, int) = pair
+
+    // Bei der Liste werden die einzelnen Elemente der Reihe nach dekonstruktiert.
+    val (first, second) = colorList
+
+
 }
