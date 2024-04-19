@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_VARIABLE", "KotlinConstantConditions", "unused")
 
-package workshop.collections
+package cheatsheets.basics
 
 /**
  * Themen:
@@ -9,8 +9,9 @@ package workshop.collections
  *  - Try-Catch
  *  - Exceptions
  *  - When
+ *
+ *  s. https://kotlinlang.org/docs/control-flow.html
  */
-
 fun main() {
     val x = 42
     println(checkValueClassic(x))
@@ -21,8 +22,9 @@ fun main() {
     tryCatch()
 }
 
-// ---- IFs
-
+/**
+ * IF Statements
+ */
 // Kotlin IFs können auf zwei Arten geschrieben werden. Einerseits in einer klassischen, imperativen Art:
 fun checkValueClassic(x: Int): String {
     if (x == 42) {
@@ -32,8 +34,9 @@ fun checkValueClassic(x: Int): String {
     }
 }
 
-// Und zweitens als eine Expression. IF hat somit einen Rückgabewert. Dabei gilt die letzte Zeile der Blöcke als
+// Und zweitens als eine Expression. IF hat somit einen "Rückgabewert". Dabei gilt die letzte Zeile der Blöcke als
 // "return"-Wert.
+// Bei der Eingabe von `42` als `x` wird "Die Antwort" von der Funktion zurück gegeben.
 fun checkValueWithExpression(x: Int): String {
     return if (x == 42) {
         "Die Antwort"
@@ -42,9 +45,10 @@ fun checkValueWithExpression(x: Int): String {
     }
 }
 
-// ---- Loops
-
-// Die `while`-loop ist in Kotlin zur Abwechslung mal wie in jeder anderen Sprache. ;-)
+/**
+ * Schleifen
+ */
+// Die `while`-loop ist in Kotlin fast identisch zu jeder bekannten imperativen Sprache.
 fun whileLoop() {
     var x = 0
 
@@ -55,32 +59,46 @@ fun whileLoop() {
 }
 
 fun forLoop() {
-    // `listOf` ist eine von Kotlins Utilityfunctions
+    // `listOf` ist eine von Kotlins Utilityfunctions um eine Liste von Werten zu erzeugen.
     val list = listOf(1, 2, 3, 4, 5)
 
-    // for each loop
+    // Die foreach-Loop iteriert über jedes Collectionsobjekt von Kotlin. `x` fungiert hierbei als "Laufvariable",
+    // welche bei jeder Iteration das nächste Objekt repräsentiert.
     for (x in list) {
         println("The value is $x")
     }
 
-    // for loop mit einer Iteratorvariable. Das Konstrukt basiert auf dem `ClosedRange` interface. Jedes Element, welches
-    // dieses Interface implementiert, kann auch mit den Kotlin-Forloops benutzt werden. Für Int, Long und Char gibt es
-    // bereits Implementierungen.
-    for (x in 1..10) {
+    // Kotlin kennt nur die foreach-loop. Möchte man allerdings das Verhalten einer festen Anzahl an Schleifendurchgängen
+    // erzeugen, so bietet Kotlin mit einer Range eine Collectionklasse an, die mit der foreach-loop korrespondiert.
+    // Als Beispiel erzeugt der Ausdruck `1 .. 10` eine Range von "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+    for (x in 1 .. 10) {
+        print("$x, ")
+    }
+    println()
+
+    // Für eine Abfolge von 1 bis ausschließlich 10 wird eine `..<` Range benutzt: "1, 2, 3, 4, 5, 6, 7, 8, 9"
+    for (x in 1 ..< 10) {
+        print("$x, ")
+    }
+    println()
+
+    // Hier ein Beispiel einer Range von 1 bis 10 in 2er-Schritten mit dem Zusatz `step 2`.
+    for (x in 1..10 step 2) {
         print("$x, ")
     }
 
-    // Hier ein Beispiel einer Range von 1 bis 10 mit 2er Schritten. Wie das ganze programmatisch funktioniert, ist aber
-    // Thema in einer advanced session.
-    for (x in 1..10 step 2) {
+    // FÜr eine Degression von z.B. 10 nach 1 wird `downTo` verwendet:
+    for (x in 10 downTo 1) {
         print("$x, ")
     }
 }
 
-// ---- Exceptions und Try Catch
-
+/**
+ * Exception & Try - Catch
+ */
 fun tryCatch() {
 
+    // Als Beispiel eine Funktion, welche immer einen Fehler wirft:
     fun getCustomerName() {
         throw RuntimeException("Hallo Welt")
     }
@@ -97,23 +115,24 @@ fun tryCatch() {
     println(name)
 }
 
-// ---- When
-
+/**
+ * Pattern Matching mit `when`
+ */
 /*
-  When ist ein kleines schweizer Taschenmesser und der große Bruder des java-`switch`.
-  Aber trotzdem der kleine Bruder vom Scala `match` ;-)
+  When ist ein kleines schweizer Taschenmesser und der große Bruder des eher bekannten `switch`-Statements aus anderen
+  Sprachen.
 
   Damit lassen sich eine große Anzahl an Fallunterscheidungen behandeln.
   - Wertevergleiche
   - in range Vergleiche
-  - Typvergleiche
+  - Typ-Vergleiche
  */
 fun usingWhen() {
 
-    // `Any` ist der große Obertyp aller Klassen in Kotlin. Äquivalent zum Java `Object`
+    // `Any` ist der Obertyp aller Klassen in Kotlin. Jeder Typ ist also auch ein Any.
     val value: Any = 42
 
-    // Auch `when` ist eine expression und hat einen Rückgabwert.
+    // Auch `when` ist eine expression und hat einen "Rückgabewert".
     val result: String = when (value) {
         0 -> {
             "zero"

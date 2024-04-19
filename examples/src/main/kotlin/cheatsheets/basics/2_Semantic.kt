@@ -6,16 +6,14 @@
  *  - value equality
  */
 
-// Kotlin ist, wie Java, in ein Packagesystem eingebunden. Hier gelten die Regeln von Java. Pro Package, ein Verzeichnis
+// Kotlin ist in ein Packagesystem eingebunden. Hier gelten die Regeln: Pro Package, ein Verzeichnis.
 // mit 1 .. n *.kt Dateien.
-
 package cheatsheets.basics
 
 /*
-  Kotlindateien sind nicht an Klassen gebunden, sondern sind seht frei in ihrem Inhalt.
-
-  Generell können ohne Klassen Werte definiert werden. Diese gelangen dann in einen globalen Scope. Daher: Vorsicht mit
-  solchen Konstrukten.
+  Kotlindateien können mehrere Elemente, wie Variablen, Funktionen, Klassen etc. enthalten und sind nicht an einen Typ gebunden:
+  Die Elemente sollten aber immer einen Bezug zueinander haben. Der umschließende Dateiname sollte daher einen, alle Elemente beschreibenden,
+  Namen besitzen.
 */
 val x = "Hello world"
 
@@ -23,37 +21,39 @@ fun helloWorld() {
     println("Hello world")
 }
 
-// Pro Kotlindatei können beliebig viele Klassen definiert werden. Da Klassen recht simpel erstellt werden können,
-// wird man sich beim Umstieg auf Kotlin schnell auf dieses System einlassen. Die Datei sollte dann besser einen
-// generischeren Namen besitzen.
 class Foo() {
-
 }
 
 class Bar
 
+// Da Kotlin vornehmlich auf der JVM beheimatet ist, ist der zentrale Einstiegspunkt die, aus Java bekannte, `main`-Funktion.
 fun main() {
-    // Generell ist in Kotlin alles ein Objekt. Hier handelt es sich um ein `Int`-Typ.
+    
+    // Generell ist in Kotlin alles ein Objekt. Hier handelt es sich um ein `Int`-Typ.  Primitive Typen wie aus C, Java, etc. bekannt, 
+    // gibt es für den Kotlincompiler nicht.
     val x: Int = 42
     val y: Int = 42
 
-    // So hat `Int` z.B. auch eine `toString`-Methode
+    // So hat `Int` z.B. auch eine `toString`- oder z.B. `plus`-Methode
     x.toString()
+    x.plus(5)
 
-    // Da in Kotlin alles ein Objekt ist, hat man kurzerhand den `==`-Operator als `value-Equality` definiert, sodass
-    // dieser Ausdruck `true` zurück gibt,
+    // Um Werte zu vergleichen, bietet Kotlin den `==`-Operator als Wertevergleich an.
     println(x == y)
 
-    // Das gilt für alle Objekte. Hier der `List`-Typ. Wichtig ist selbstverstänlich die Implementierung von `equals`.
+    // Das gilt für alle Objekte. Hier der `List`-Typ. "Unter der Haube" wird dabei die Methode `equals` aufgerufen.
     val list1: List<String> = listOf("Hallo", "Welt")
     val list2: List<String> = listOf("Hallo", "Welt")
 
-    // Für einen Referenzvergleich wurde in Kotlin der `===`-Operator eingeführt.
+    // Für einen Vergleich auf Objekt-Referenzen wurde in Kotlin der `===`-Operator eingeführt.
     println(list1 == list2) // true
     println(list1 === list2) // false
 
+    // Kotlin bietet einen modernen Umgang mit Strings mit String-Interperloation, also dem direkten Nutzen von Values und Variablen in String:
     println("Klein aber fein: Stringinterpolation:  $x")
 
+    // Und die Möglichkeit der Mulit-Line Strings. Als Beispiel kann hier mit sehr wenig Aufwand ein Json-Payload erstellt und mit String-Interpolation
+    // mit Werten gefüllt werden.
     println(
         """
         | {

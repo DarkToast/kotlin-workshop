@@ -1,22 +1,17 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id 'com.github.ben-manes.versions' version '0.42.0'
-}
-
-repositories {
-    mavenCentral()
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
 }
 
 dependencies {
-    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+    implementation libs.logstash.logback.encoder
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0'
-    implementation 'io.github.microutils:kotlin-logging-jvm:3.0.0'
+    implementation libs.kotlinx.coroutines.core.jvm
+    runtimeOnly libs.kotlin.logging.jvm
 
-    testImplementation 'io.kotest:kotest-assertions-core-jvm:5.5.0'
-    testImplementation 'io.kotest:kotest-runner-junit5-jvm:5.5.0'
+    testImplementation libs.kotest.assertions.core.jvm
+    testImplementation libs.kotest.runner.junit5.jvm
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation libs.junit.jupiter
 }
 
 test {
