@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER", "unused", "RedundantVisibilityModifier")
 
-package cheatsheets.oop
+package material.oop
 
 /**
  * Der Klassenkonstruktor ermöglicht direkt die Definition von Klassenattributen:

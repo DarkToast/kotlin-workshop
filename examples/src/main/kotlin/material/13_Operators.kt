@@ -1,4 +1,4 @@
-package cheatsheets
+package material
 
 /**
  * Kotlin erlaubt es, eine begrenzte Anzahl von Operatoren wie `+`, `-`, `*`, `/`, `++`, `!`, etc.

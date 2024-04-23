@@ -1,4 +1,4 @@
-package cheatsheets
+package material
 
 /**
  * Delegations bieten in Kotlin syntactic sugar für delegate objects, sodass man ein direktes Durchschleifen

@@ -2,9 +2,9 @@
     "KotlinConstantConditions", "CanBeVal"
 )
 
-package cheatsheets.basics
+package material.basics
 
-import cheatsheets.Customer
+import material.Customer
 
 val customer = Customer()
 

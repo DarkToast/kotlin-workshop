@@ -1,4 +1,4 @@
-package cheatsheets.fp
+package material.fp
 
 import cheatsheets.Autumn
 import cheatsheets.Measurement

@@ -8,7 +8,7 @@
 
 // Kotlin ist in ein Packagesystem eingebunden. Hier gelten die Regeln: Pro Package, ein Verzeichnis.
 // mit 1 .. n *.kt Dateien.
-package cheatsheets.basics
+package material.basics
 
 /*
   Kotlindateien können mehrere Elemente, wie Variablen, Funktionen, Klassen etc. enthalten und sind nicht an einen Typ gebunden:

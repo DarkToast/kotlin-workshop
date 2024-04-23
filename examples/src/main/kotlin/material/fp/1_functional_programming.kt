@@ -1,11 +1,11 @@
 @file:Suppress("UNUSED_VARIABLE")
 
-package cheatsheets
+package material
 
-import cheatsheets.oop.Employee
-import cheatsheets.oop.Salary
-import cheatsheets.oop.max
-import cheatsheets.oop.yvonne
+import material.oop.Employee
+import material.oop.Salary
+import material.oop.max
+import material.oop.yvonne
 
 /**
  +-------------------+
