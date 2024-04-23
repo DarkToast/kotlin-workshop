@@ -1,6 +1,6 @@
 @file:Suppress("USELESS_IS_CHECK", "unused", "RedundantExplicitType", "CanBeVal")
 
-package cheatsheets.oop
+package material.oop
 
 /**
  * Eine "normale" Klasse haben wir bereits kennen gelernt:

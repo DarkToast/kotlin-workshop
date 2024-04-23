@@ -1,4 +1,4 @@
-package cheatsheets.basics
+package material.basics
 
 /**
  * Themen:

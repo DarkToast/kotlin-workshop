@@ -1,4 +1,4 @@
-package cheatsheets.oop
+package material.oop
 
 data class EmailToken(val token: String) {
     fun isValid() = true

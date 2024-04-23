@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_VARIABLE", "KotlinConstantConditions", "unused")
 
-package cheatsheets.basics
+package material.basics
 
 /**
  * Themen:
