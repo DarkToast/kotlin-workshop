@@ -1,4 +1,4 @@
-package shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.rest.dto
 
 data class PutProduct(
     val sku: String?,

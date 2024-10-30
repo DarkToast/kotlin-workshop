@@ -1,4 +1,4 @@
-package shoppingCart.ports.driven.database
+package shoppingCart.ports.database
 
 import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid

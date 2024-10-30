@@ -14,8 +14,8 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import shoppingCart.Application
-import shoppingCart.ports.driver.rest.dto.GetItem
-import shoppingCart.ports.driver.rest.dto.GetProduct
+import shoppingCart.ports.rest.dto.GetItem
+import shoppingCart.ports.rest.dto.GetProduct
 
 /*
  * Aufgabe: 7

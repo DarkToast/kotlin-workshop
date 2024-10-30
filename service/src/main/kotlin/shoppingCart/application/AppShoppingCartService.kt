@@ -5,8 +5,8 @@ import shoppingCart.domain.Quantity
 import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
-import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import shoppingCart.ports.driven.productService.ProductRepositoryPort
+import shoppingCart.ports.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.productService.ProductRepositoryPort
 import java.util.Optional
 
 class ProductNotFoundException(sku: SKU) : ApplicationException("The product with the sku $sku is unknown.")

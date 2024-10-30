@@ -1,8 +1,8 @@
-package shoppingCart.ports.driver.rest
+package shoppingCart.ports.rest
 
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
-import mu.KotlinLogging
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
@@ -13,7 +13,7 @@ import shoppingCart.application.ApplicationException
 import shoppingCart.application.ProductNotFoundException
 import shoppingCart.domain.DomainException
 import shoppingCart.ports.PortException
-import shoppingCart.ports.driver.rest.dto.Failure
+import shoppingCart.ports.rest.dto.Failure
 import java.time.LocalDateTime
 
 @ControllerAdvice

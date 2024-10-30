@@ -1,6 +1,6 @@
 package shoppingCart.domain
 
-data class Product(val sku: SKU, val price: Price, val name: Name)
+import shoppingCart.domain.money.Price
 
 data class Name(val value: String) {
     private val regex = "[\\w\\düöäÜÖÄß&]{1,40}".toRegex()
@@ -25,3 +25,5 @@ data class SKU(val value: String) {
         return value
     }
 }
+
+data class Product(val sku: SKU, val price: Price, val name: Name)

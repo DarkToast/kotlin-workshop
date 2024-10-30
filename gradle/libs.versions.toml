@@ -2,14 +2,14 @@
 
 [versions]
 kotlin = "1.9.23"
-kotlinx-coroutines = "1.8.0"
-kotlin-logging = "3.0.5"
-kotest = "5.8.1"
-spring = "3.2.4"
-h2 = "2.2.224"
+kotlinx-coroutines = "1.8.1"
+kotlin-logging = "7.0.0"
+kotest = "5.9.1"
+spring = "3.3.5"
+h2 = "2.3.232"
 jaxb-api = "2.3.1"
-junit = "5.10.2"
-logstash = "7.4"
+junit = "5.11.3"
+logstash = "8.0"
 
 [plugins]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "1.9.23" }
@@ -21,7 +21,7 @@ org-jetbrains-kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring"
 [libraries]
 logstash-logback-encoder = { group = "net.logstash.logback", name = "logstash-logback-encoder", version.ref = "logstash" }
 kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines" }
-kotlin-logging-jvm = { group = "io.github.microutils", name = "kotlin-logging-jvm", version.ref = "kotlin-logging" }
+kotlin-logging-jvm = { group = "io.github.oshai", name = "kotlin-logging-jvm", version.ref = "kotlin-logging" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotest-assertions-core-jvm = { group = "io.kotest", name = "kotest-assertions-core-jvm", version.ref = "kotest" }
 kotest-runner-junit5-jvm = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }

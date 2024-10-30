@@ -1,6 +1,6 @@
-package shoppingCart.ports.driven.database
+package shoppingCart.ports.database
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.findByIdOrNull

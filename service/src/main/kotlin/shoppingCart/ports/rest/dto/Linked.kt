@@ -1,4 +1,4 @@
-package shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.rest.dto
 
 import java.net.URI
 

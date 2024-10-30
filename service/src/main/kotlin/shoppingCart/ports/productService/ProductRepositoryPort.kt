@@ -1,4 +1,4 @@
-package shoppingCart.ports.driven.productService
+package shoppingCart.ports.productService
 
 import shoppingCart.domain.Product
 import shoppingCart.domain.SKU

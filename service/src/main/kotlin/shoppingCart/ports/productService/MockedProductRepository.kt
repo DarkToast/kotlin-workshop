@@ -1,11 +1,10 @@
-package shoppingCart.ports.driven.productService
+package shoppingCart.ports.productService
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import shoppingCart.domain.Name
-import shoppingCart.domain.Price
+import shoppingCart.domain.money.Price
 import shoppingCart.domain.Product
 import shoppingCart.domain.SKU
-import java.util.Optional
 
 class MockedProductRepository : ProductRepositoryPort {
     private val logger = KotlinLogging.logger {}

@@ -1,6 +1,6 @@
-package shoppingCart.ports.driver.rest
+package shoppingCart.ports.rest
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
@@ -12,8 +12,8 @@ import shoppingCart.domain.Quantity
 import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCartUuid
 import shoppingCart.ports.PortException
-import shoppingCart.ports.driver.rest.dto.PutProduct
-import shoppingCart.ports.driver.rest.dto.ShoppingCartDto
+import shoppingCart.ports.rest.dto.PutProduct
+import shoppingCart.ports.rest.dto.ShoppingCartDto
 import java.net.URI
 import java.util.UUID
 

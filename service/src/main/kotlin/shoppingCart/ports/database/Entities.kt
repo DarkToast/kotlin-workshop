@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package shoppingCart.ports.driven.database
+package shoppingCart.ports.database
 
 import jakarta.persistence.CascadeType
 import jakarta.persistence.CascadeType.MERGE
@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import shoppingCart.domain.Item
 import shoppingCart.domain.Name
-import shoppingCart.domain.Price
+import shoppingCart.domain.money.Price
 import shoppingCart.domain.Product
 import shoppingCart.domain.Quantity
 import shoppingCart.domain.SKU

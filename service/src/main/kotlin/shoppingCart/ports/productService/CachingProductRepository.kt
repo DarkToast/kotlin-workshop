@@ -1,4 +1,4 @@
-package shoppingCart.ports.driven.productService
+package shoppingCart.ports.productService
 
 import org.springframework.cache.annotation.Cacheable
 import shoppingCart.domain.Product

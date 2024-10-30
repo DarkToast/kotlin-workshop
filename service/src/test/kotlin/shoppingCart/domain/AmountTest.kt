@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import shoppingCart.domain.money.Amount
+import shoppingCart.domain.money.MaximumShoppingCardAmountExceededException
 
 /*
  * Aufgabe 3:

@@ -4,22 +4,20 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import shoppingCart.domain.Item
 import shoppingCart.domain.Name
-import shoppingCart.domain.Price
+import shoppingCart.domain.money.Price
 import shoppingCart.domain.Product
 import shoppingCart.domain.Quantity
 import shoppingCart.domain.SKU
 import shoppingCart.domain.ShoppingCart
 import shoppingCart.domain.ShoppingCartUuid
-import shoppingCart.ports.driven.database.ShoppingCartRepositoryPort
-import shoppingCart.ports.driven.productService.ProductRepositoryPort
-import java.util.Optional
+import shoppingCart.ports.database.ShoppingCartRepositoryPort
+import shoppingCart.ports.productService.ProductRepositoryPort
 
 /* Aufgabe 6 */
 class AppShoppingCartServiceTest {

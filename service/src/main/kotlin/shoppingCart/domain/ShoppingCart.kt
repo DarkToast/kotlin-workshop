@@ -1,18 +1,14 @@
 package shoppingCart.domain
 
+import shoppingCart.domain.money.Amount
 import java.util.Optional
 import java.util.UUID
 
 class MaximumProductCountExceededException(productCount: Int) :
     DomainException("The maximum product count of 50 was exceeded. Actual: '$productCount'")
 
-data class Item(val product: Product, val quantity: Quantity) {
-    val amount: Amount = product.price * quantity
-
-    fun addQuantity(q: Quantity) = Item(
-        product = product,
-        quantity = this.quantity + q
-    )
+data class ShoppingCartUuid(val uuid: UUID = UUID.randomUUID()) {
+    override fun toString(): String = uuid.toString()
 }
 
 class ShoppingCart(
@@ -89,8 +85,3 @@ class ShoppingCart(
     }
 }
 
-data class ShoppingCartUuid(val uuid: UUID = UUID.randomUUID()) {
-    constructor(uuid: String) : this(UUID.fromString(uuid))
-
-    override fun toString(): String = uuid.toString()
-}

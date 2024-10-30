@@ -1,8 +1,8 @@
-package shoppingCart.ports.driver.rest.dto
+package shoppingCart.ports.rest.dto
 
-import shoppingCart.domain.Amount
+import shoppingCart.domain.money.Amount
 import shoppingCart.domain.ShoppingCart
-import shoppingCart.ports.driver.rest.dto.Method.GET
+import shoppingCart.ports.rest.dto.Method.GET
 import java.net.URI
 import java.util.UUID
 
