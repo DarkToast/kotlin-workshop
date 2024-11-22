@@ -5,14 +5,14 @@ import shoppingCart.domain.Quantity
 
 class TooHighPriceException(value: Int) : DomainException("Price must not exceed 120,00€. Actual: '$value'")
 
-data class Price(val euro: Int, val cent: Int) : Money<Price>(euro, cent) {
+data class Price(val euro: Int, val cent: Int) : Money(euro, cent) {
     constructor(cent: Int) : this(cent / 100, cent % 100)
 
     init {
         if (valueInCent > 12000) throw TooHighPriceException(valueInCent)
     }
 
-    override fun plus(money: Money<*>): Price {
+    operator fun plus(money: Money): Price {
         val value = this.valueInCent + money.valueInCent
         return Price(value / 100, value % 100)
     }
