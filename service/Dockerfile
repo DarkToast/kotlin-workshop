@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-slim-stretch
+FROM openjdk:24-jdk-slim
 
 COPY ./build/libs/service.jar app.jar
 
