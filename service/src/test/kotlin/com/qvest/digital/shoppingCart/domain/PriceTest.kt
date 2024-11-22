@@ -8,7 +8,7 @@ import org.junit.jupiter.api.assertThrows
 import com.qvest.digital.shoppingCart.domain.money.Price
 import com.qvest.digital.shoppingCart.domain.money.TooHighPriceException
 
-class PriceTest() {
+class PriceTest {
 
 
 /*

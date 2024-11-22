@@ -42,10 +42,10 @@ import com.qvest.digital.shoppingCart.domain.money.Price
  * - Ein ShoppingCart kann nicht mehr als 50 verschiedene Produkte haben.   -> MaximumProductCountExceededException
 */
 class ShoppingCartTest {
-    lateinit var cart: ShoppingCart
+    private lateinit var cart: ShoppingCart
 
-    val sku = com.qvest.digital.shoppingCart.domain.SKU("12345")
-    val secondSku = com.qvest.digital.shoppingCart.domain.SKU("54321")
+    private val sku = SKU("12345")
+    private val secondSku = SKU("54321")
 
     @BeforeEach
     @Test
@@ -151,39 +151,39 @@ class ShoppingCartTest {
 
         assertThrows<MaximumProductCountExceededException> {
             cart.addProduct(
-                com.qvest.digital.shoppingCart.domain.Product(
-                    com.qvest.digital.shoppingCart.domain.SKU("51"),
+                Product(
+                    SKU("51"),
                     Price(1, 0),
-                    com.qvest.digital.shoppingCart.domain.Name("Milch")
+                    Name("Milch")
                 ), Quantity(1))
         }
     }
 
     private fun aCartWithFiftyProducts(): ShoppingCart {
-        (1..50).forEach { it ->
+        (1..50).forEach {
             cart.addProduct(
-                com.qvest.digital.shoppingCart.domain.Product(
-                    com.qvest.digital.shoppingCart.domain.SKU("$it"),
+                Product(
+                    SKU("$it"),
                     Price(1, 0),
-                    com.qvest.digital.shoppingCart.domain.Name("Joghurt")
+                    Name("Joghurt")
                 ), Quantity(1))
         }
         return cart
     }
 
-    private fun aProduct(price: Price = Price(10, 0)): com.qvest.digital.shoppingCart.domain.Product {
-        return com.qvest.digital.shoppingCart.domain.Product(
+    private fun aProduct(price: Price = Price(10, 0)): Product {
+        return Product(
             sku,
             price,
-            com.qvest.digital.shoppingCart.domain.Name("Schokolade")
+            Name("Schokolade")
         )
     }
 
-    private fun anotherProduct(price: Price = Price(10, 0)): com.qvest.digital.shoppingCart.domain.Product {
-        return com.qvest.digital.shoppingCart.domain.Product(
+    private fun anotherProduct(price: Price = Price(10, 0)): Product {
+        return Product(
             secondSku,
             price,
-            com.qvest.digital.shoppingCart.domain.Name("Brot")
+            Name("Brot")
         )
     }
 }

@@ -20,7 +20,7 @@ class CreateShoppingCartTest {
     fun `a POST on shoppingcart returns HTTP 201`() {
         val response = restTemplate.postForEntity("/shoppingcart", "", String::class.java)
 
-        assertEquals(201, response.statusCodeValue)
+        assertEquals(201, response.statusCode.value())
     }
 
     @Test
@@ -38,7 +38,7 @@ class CreateShoppingCartTest {
 
         val response = restTemplate.getForEntity(location, String::class.java)
 
-        assertEquals(200, response.statusCodeValue)
+        assertEquals(200, response.statusCode.value())
     }
 
     @Test
@@ -47,7 +47,7 @@ class CreateShoppingCartTest {
 
         val response = restTemplate.getForEntity(location, String::class.java)
 
-        assertEquals(404, response.statusCodeValue)
+        assertEquals(404, response.statusCode.value())
     }
 
     @Test
@@ -56,7 +56,7 @@ class CreateShoppingCartTest {
 
         val response = restTemplate.getForEntity(location, String::class.java)
 
-        assertEquals(400, response.statusCodeValue)
+        assertEquals(400, response.statusCode.value())
     }
 
 

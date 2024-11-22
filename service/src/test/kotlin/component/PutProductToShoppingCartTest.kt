@@ -34,7 +34,7 @@ import com.qvest.digital.shoppingCart.ports.rest.dto.GetProduct
 */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
-class PutProductToShoppingCartTest() {
+class PutProductToShoppingCartTest {
 
     @Autowired
     lateinit var restTemplate: TestRestTemplate
@@ -66,7 +66,7 @@ class PutProductToShoppingCartTest() {
 
         val response = addProduct(location, product)
 
-        assertEquals(200, response.statusCodeValue)
+        assertEquals(200, response.statusCode.value())
     }
 
     @Test
@@ -133,7 +133,7 @@ class PutProductToShoppingCartTest() {
 
         val response = addProduct(location, product)
 
-        assertEquals(400, response.statusCodeValue)
+        assertEquals(400, response.statusCode.value())
     }
 
     @Test
@@ -143,7 +143,7 @@ class PutProductToShoppingCartTest() {
 
         val response = addProduct(location, product)
 
-        assertEquals(400, response.statusCodeValue)
+        assertEquals(400, response.statusCode.value())
     }
 
     @Test
@@ -153,7 +153,7 @@ class PutProductToShoppingCartTest() {
 
         val response = addProduct(location, product)
 
-        assertEquals(404, response.statusCodeValue)
+        assertEquals(404, response.statusCode.value())
     }
 
 

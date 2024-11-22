@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
-class SkuTest() {
+class SkuTest {
     /*
      * Aufgabe 2:
      * Entfernen Sie bitte die Kommentare von den hier drunter liegenden Tests und implementieren Sie in der Datei
@@ -18,46 +18,46 @@ class SkuTest() {
     @Test
     fun `can contain up to 20 alphanumeric characters`() {
         assertDoesNotThrow {
-            com.qvest.digital.shoppingCart.domain.SKU("12345678901234567890")
+            SKU("12345678901234567890")
         }
     }
 
     @Test
     fun `A SKU can contain 1 character`() {
         assertDoesNotThrow {
-            com.qvest.digital.shoppingCart.domain.SKU("1")
+            SKU("1")
         }
     }
 
     @Test
     fun `are equals`() {
-        assertTrue(com.qvest.digital.shoppingCart.domain.SKU("1234567") == com.qvest.digital.shoppingCart.domain.SKU("1234567"))
+        assertTrue(SKU("1234567") == SKU("1234567"))
     }
 
     @Test
     fun `must not be empty`() {
         assertThrows<IllegalArgumentException> {
-            com.qvest.digital.shoppingCart.domain.SKU("")
+            SKU("")
         }
     }
 
     @Test
     fun `must not exceed 20 characters`() {
         assertThrows<IllegalArgumentException> {
-            com.qvest.digital.shoppingCart.domain.SKU("123456789013245678901")
+            SKU("123456789013245678901")
         }
     }
 
     @Test
     fun `must contain alphanumeric characters`() {
         assertThrows<IllegalArgumentException> {
-            com.qvest.digital.shoppingCart.domain.SKU("13246<7890")
+            SKU("13246<7890")
         }
     }
 
 
     @Test
     fun `A SKU can be represented as string`() {
-        assertEquals("12345678901234567890", com.qvest.digital.shoppingCart.domain.SKU("12345678901234567890").toString())
+        assertEquals("12345678901234567890", SKU("12345678901234567890").toString())
     }
 }

@@ -22,7 +22,7 @@ import com.qvest.digital.shoppingCart.domain.money.MaximumShoppingCardAmountExce
  * - Ein Amount muss seinen Wert in Cents ausdrücken können
  * - Zwei Amounts können über `plus` addiert werden.
 */
-class AmountTest() {
+class AmountTest {
     @Test
     fun `can be zero`() {
         assertDoesNotThrow { Amount(0, 0) }
