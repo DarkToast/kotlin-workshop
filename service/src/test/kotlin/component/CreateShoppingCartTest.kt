@@ -29,7 +29,7 @@ class CreateShoppingCartTest {
 
         val location = response.headers["LOCATION"]?.get(0)!!
         assertNotNull(location)
-        assertTrue(location.contains("""\/shoppingcart\/[\w\d-]+""".toRegex()))
+        assertTrue(location.contains("""/shoppingcart/[\w\d-]+""".toRegex()))
     }
 
     @Test

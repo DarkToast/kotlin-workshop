@@ -1,3 +1,5 @@
+@file:Suppress("NonAsciiCharacters")
+
 package com.qvest.digital.shoppingCart.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
