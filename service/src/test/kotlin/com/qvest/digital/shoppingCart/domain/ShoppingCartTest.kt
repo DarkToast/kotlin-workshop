@@ -10,16 +10,17 @@ import org.junit.jupiter.api.assertThrows
 import com.qvest.digital.shoppingCart.domain.money.Amount
 import com.qvest.digital.shoppingCart.domain.money.MaximumShoppingCardAmountExceededException
 import com.qvest.digital.shoppingCart.domain.money.Price
+import org.junit.jupiter.api.Disabled
 
 
 /*
  * Aufgabe: 5
  *
- * Entfernen Sie bitte die @Disabled annotation von der hier drunter liegenden Klasse und implementieren Sie nach
- * und nach die einzelnen Teste der Klasse shoppingCart.domain.ShoppingCart.
+ * Entfernen Sie bitte die @Disabled annotation von der hier drunter liegenden Testklasse und implementieren Sie nach
+ * und nach die einzelnen Teste der Klasse com.qvest.digital.shoppingCart.domain.ShoppingCart.
  *
- * Die Teste sind mit Level 1 - 3 markiert und zeigen die steigende Komplexität der Klasse und auch der Implmenentierung
- * an. Denken Sie sich bitte bei jedem Level ein paar zusätzliche Tests aus um die funktionale Abdeckung noch zu
+ * Die Teste sind mit Level 1 - 3 markiert und zeigen die steigende Komplexität der Klasse und auch der Implementierung
+ * an. Denken Sie bitte bei jedem Level an ein paar zusätzliche Tests, um die funktionale Abdeckung noch zu
  * erhöhen.
  *
  * Das Ziel ist, kompliziertere Methoden mit Collections und nullable fields zu implementieren.
@@ -41,6 +42,7 @@ import com.qvest.digital.shoppingCart.domain.money.Price
  * - Ein ShoppingCart kann nicht mehr als 300,00€ wert sein.                -> MaximumShoppingCardAmountExceededException
  * - Ein ShoppingCart kann nicht mehr als 50 verschiedene Produkte haben.   -> MaximumProductCountExceededException
 */
+@Disabled
 class ShoppingCartTest {
     private lateinit var cart: ShoppingCart
 
