@@ -16,24 +16,26 @@ import org.springframework.http.ResponseEntity
 import com.qvest.digital.shoppingCart.Application
 import com.qvest.digital.shoppingCart.ports.rest.dto.GetItem
 import com.qvest.digital.shoppingCart.ports.rest.dto.GetProduct
+import org.junit.jupiter.api.Disabled
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
-/*
+/**
  * Aufgabe: 7
  *
  * Dieser Test testet die gesamte Komponente für das Feature `put product`.
- * Nachdem Sie die Aufgaben 1 - 6 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle.
+ * Nachdem Sie die Aufgaben 1 - 6 abgeschlossen haben, fehlt nun noch die REST-Schnittstelle innerhalb des
+ * Packages `com.qvest.digital.shoppingCart.ports.rest`.
  *
- * Bitte implementieren Sie einen REST Endpunkt, der ihren in Aufgabe 6 geschriebenen Service aufruft.
+ * Bitte implementieren Sie einen REST Endpunkt, der den in Aufgabe 6 geschriebenen Service aufruft.
  *
- * Einige Teste haben eine Beschreibung, die mit einem '!' beginnen. Diese sind zur Zeit inaktiv. Entfernen Sie
- * bitte das Ausrufezeichen, um den Test zu aktivieren und ihn implementieren zu können.
+ * Einige Teste haben die @Disabled Annotation. Diese Tests sind zurzeit inaktiv. Entfernen Sie
+ * bitte die Annotation, um die Tests zu aktivieren und implementieren zu können.
  *
  * Die Tests besitzen das Level 1 und Level 2. Fangen Sie bitte zunächst mit Level 1 an.
- *
- * Das Ziel ist, die Interoperabilität zwischen Javalibraries und Kotlin und seinen Möglichkeiten kennen zu lernen.
-*/
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
+ * Als Hinweis soll die Klasse LastLineOfDefenseErrorHandler dienen, die eine allgemeine Exceptionbehandlung bietet.
+ */
+@Disabled
+@SpringBootTest(webEnvironment = RANDOM_PORT, classes = [Application::class])
 class PutProductToShoppingCartTest {
 
     @Autowired

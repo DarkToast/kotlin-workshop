@@ -45,20 +45,7 @@ class LastLineOfDefenseErrorHandler {
     }
 
     @ExceptionHandler(value = [DomainException::class])
-    fun handleDomainException(ex: DomainException, request: HttpServletRequest): ResponseEntity<Failure> {
-        val httpStatus = when (ex) {
-            is ProductNotFoundException -> NOT_FOUND
-            is ShoppingCartNotFoundException -> NOT_FOUND
-            is MaximumProductCountExceededException -> BAD_REQUEST
-            else -> BAD_REQUEST
-        }
-
-        logger.warn(ex) { "Got domain explicit failure. Returning ${httpStatus.name}" }
-
-        val now = LocalDateTime.now().toString()
-        val message = ex.message ?: ""
-        val error = Failure(now, httpStatus.value(), httpStatus.reasonPhrase, message, request.requestURI)
-
-        return ResponseEntity(error, HttpHeaders(), httpStatus)
+    fun handleDomainException(ex: RuntimeException, request: HttpServletRequest): ResponseEntity<Failure> {
+        return ResponseEntity.badRequest().build()
     }
 }

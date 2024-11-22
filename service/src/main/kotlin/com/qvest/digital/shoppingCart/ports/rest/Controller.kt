@@ -70,25 +70,4 @@ class Controller(private val shoppingCartPort: ShoppingCartPort) {
      *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
      *   `ResponseEntity` kann aber auch normal instantiiert werden.
      */
-    @PutMapping(path = ["/shoppingcart/{uuid}/items"])
-    fun putProductToShoppingCart(@PathVariable uuid: UUID, @RequestBody putProductDto: PutProduct): ResponseEntity<ShoppingCartDto> {
-        logger.info { "PUT - Adding product to shopping cart" }
-
-        val shoppingCartUuid = ShoppingCartUuid(uuid)
-        return if (putProductDto.sku != null && putProductDto.quantity != null) {
-            val sku = SKU(putProductDto.sku)
-            val quantity = Quantity(putProductDto.quantity)
-
-            val shoppingCart = shoppingCartPort.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
-
-            return if (shoppingCart != null) {
-                ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
-            } else {
-                logger.warn { "Shopping cart was not found." }
-                ResponseEntity.notFound().build()
-            }
-        } else {
-            ResponseEntity.badRequest().build()
-        }
-    }
 }
