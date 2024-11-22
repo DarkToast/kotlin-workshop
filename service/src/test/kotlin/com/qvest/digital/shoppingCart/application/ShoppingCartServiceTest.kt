@@ -13,6 +13,8 @@ import com.qvest.digital.shoppingCart.ports.product.ProductPort
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
@@ -28,6 +30,7 @@ import org.mockito.Mockito.times
  *  Die Methode soll ein Produkt in den Warenkorb legen und lediglich die bestehenden Domnainmethoden
  *  und Ports nutzen.
  */
+@Disabled
 class ShoppingCartServiceTest {
     private var shoppingCartPort = Mockito.mock(RepositoryPort::class.java)
     private val productPort = Mockito.mock(ProductPort::class.java)
@@ -41,28 +44,26 @@ class ShoppingCartServiceTest {
         Name("Milch")
     )
 
-
     @Test
     fun `if not existing, the service returns empty`() {
-        val service = ShoppingCartService(shoppingCartPort, productPort)
+        val service = TODO() // ShoppingCartService(shoppingCartPort, productPort)
 
         Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(null)
 
-        assertThrows<ShoppingCartNotFoundException> {
-            service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
-        }
+        val shoppingCart = TODO()
+        assertNull(shoppingCart)
     }
 
     @Test
     fun `if exists the shopping cart has the product`() {
-        val service = ShoppingCartService(shoppingCartPort, productPort)
+        val service = TODO() // ShoppingCartService(shoppingCartPort, productPort)
 
         Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
         Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(milk)
 
-        val shoppingCart = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        val shoppingCart: ShoppingCart = TODO() // service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
         assertNotNull(shoppingCart)
-        assertFalse(shoppingCart!!.isEmpty())
+        assertFalse(shoppingCart.isEmpty())
         assertEquals(Quantity(2), shoppingCart.quantityOfProduct(sku))
 
         val items: List<Item> = shoppingCart.items()
@@ -72,22 +73,24 @@ class ShoppingCartServiceTest {
 
     @Test
     fun `if exists the shopping cart has no product on a unknown SKU`() {
-        val service = ShoppingCartService(shoppingCartPort, productPort)
+        val service = TODO() // ShoppingCartService(shoppingCartPort, productPort)
 
         Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
         Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(null)
 
-        assertThrows<ProductNotFoundException> { service.putProductIntoShoppingCart(uuid, sku, Quantity(2)) }
+        assertThrows<ProductNotFoundException> {
+            TODO() // service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        }
     }
 
     @Test
     fun `if exists the shopping cart should be saved`() {
-        val service = ShoppingCartService(shoppingCartPort, productPort)
+        val service = TODO() // ShoppingCartService(shoppingCartPort, productPort)
 
         Mockito.`when`(shoppingCartPort.load(uuid)).thenReturn(shoppingCart)
         Mockito.`when`(productPort.findProductBySku(sku)).thenReturn(milk)
 
-        service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
+        TODO() // service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
 
         Mockito.verify(shoppingCartPort, times(1)).save(shoppingCart)
     }

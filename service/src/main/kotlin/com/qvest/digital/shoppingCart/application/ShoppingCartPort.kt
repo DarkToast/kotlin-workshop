@@ -9,6 +9,4 @@ interface ShoppingCartPort {
     fun takeNewShoppingCart(): ShoppingCart
 
     fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): ShoppingCart?
-
-    fun putProductIntoShoppingCart(shoppingCartUuid: ShoppingCartUuid, productSku: SKU, quantity: Quantity): ShoppingCart?
 }

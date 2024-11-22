@@ -16,7 +16,7 @@ class ShoppingCartNotFoundException(uuid: ShoppingCartUuid) :
     DomainException("The shopping cart with id $uuid is unknown.")
 
 @Service
-class ShoppingCartService(private val repositoryPort: RepositoryPort, private val productPort: ProductPort) :
+class ShoppingCartService(private val repositoryPort: RepositoryPort) :
     ShoppingCartPort {
 
     override fun takeNewShoppingCart(): ShoppingCart {
@@ -27,19 +27,5 @@ class ShoppingCartService(private val repositoryPort: RepositoryPort, private va
 
     override fun showShoppingCart(shoppingCartUuid: ShoppingCartUuid): ShoppingCart? {
         return repositoryPort.load(shoppingCartUuid)
-    }
-
-    override fun putProductIntoShoppingCart(
-        shoppingCartUuid: ShoppingCartUuid,
-        productSku: SKU,
-        quantity: Quantity
-    ): ShoppingCart? {
-        val shoppingCart = repositoryPort.load(shoppingCartUuid) ?: throw ShoppingCartNotFoundException(shoppingCartUuid)
-        val product = productPort.findProductBySku(productSku) ?: throw ProductNotFoundException(productSku)
-
-        shoppingCart.addProduct(product, quantity)
-        repositoryPort.save(shoppingCart)
-
-        return shoppingCart
     }
 }
