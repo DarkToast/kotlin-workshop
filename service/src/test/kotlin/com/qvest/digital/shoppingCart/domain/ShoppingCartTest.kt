@@ -88,8 +88,8 @@ class ShoppingCartTest {
         assertEquals(uuid, cart.shoppingCartUuid)
         assertEquals(Amount(28, 0), cart.amount())
 
-        assertEquals(Quantity(2), cart.quantityOfProduct(sku).get())
-        assertEquals(Quantity(4), cart.quantityOfProduct(secondSku).get())
+        assertEquals(Quantity(2), cart.quantityOfProduct(sku))
+        assertEquals(Quantity(4), cart.quantityOfProduct(secondSku))
     }
 
     @Test
@@ -101,8 +101,8 @@ class ShoppingCartTest {
 
         val cart = ShoppingCart(items = items)
 
-        assertEquals(5, cart.quantityOfProduct(sku).get().value)
-        assertEquals(1, cart.quantityOfProduct(secondSku).get().value)
+        assertEquals(5, cart.quantityOfProduct(sku)?.value)
+        assertEquals(1, cart.quantityOfProduct(secondSku)?.value)
     }
 
     @Test
@@ -119,7 +119,7 @@ class ShoppingCartTest {
 
         val cart = ShoppingCart(items = items)
 
-        assertEquals(10, cart.quantityOfProduct(sku).get().value)
+        assertEquals(10, cart.quantityOfProduct(sku)?.value)
     }
 
     @Test
@@ -130,7 +130,7 @@ class ShoppingCartTest {
             cart.addProduct(aProduct(), Quantity(6))
         }
 
-        assertEquals(5, cart.quantityOfProduct(sku).get().value)
+        assertEquals(5, cart.quantityOfProduct(sku)?.value)
     }
 
     @Test

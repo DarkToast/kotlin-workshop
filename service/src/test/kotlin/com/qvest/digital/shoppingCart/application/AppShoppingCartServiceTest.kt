@@ -54,7 +54,7 @@ class AppShoppingCartServiceTest {
         val shoppingCart = service.putProductIntoShoppingCart(uuid, sku, Quantity(2))
         assertNotNull(shoppingCart)
         assertFalse(shoppingCart!!.isEmpty())
-        assertEquals(Quantity(2), shoppingCart.quantityOfProduct(sku).get())
+        assertEquals(Quantity(2), shoppingCart.quantityOfProduct(sku))
 
         val items: List<Item> = shoppingCart.items()
         assertEquals(1, items.size)

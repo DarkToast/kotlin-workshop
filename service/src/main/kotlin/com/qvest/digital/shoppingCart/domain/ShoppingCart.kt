@@ -1,7 +1,6 @@
 package com.qvest.digital.shoppingCart.domain
 
 import com.qvest.digital.shoppingCart.domain.money.Amount
-import java.util.Optional
 import java.util.UUID
 
 class MaximumProductCountExceededException(productCount: Int) :
@@ -37,17 +36,18 @@ class ShoppingCart(
 
         val mutatedItems = cartItems.toMutableMap()
 
-        val item = Optional.ofNullable(mutatedItems[product.sku])
-            .map { it.addQuantity(quantity) }
-            .orElseGet { Item(product, quantity) }
+        val item = mutatedItems[product.sku]
+            ?.addQuantity(quantity)
+            ?: Item(product, quantity)
 
         mutatedItems[product.sku] = item
+
         cartItems = mutatedItems
         return this
     }
 
-    fun quantityOfProduct(sku: SKU): Optional<Quantity> {
-        return Optional.ofNullable(cartItems[sku]).map { it.quantity }
+    fun quantityOfProduct(sku: SKU): Quantity? {
+        return cartItems[sku].let { it?.quantity }
     }
 
     fun items(): List<Item> {
