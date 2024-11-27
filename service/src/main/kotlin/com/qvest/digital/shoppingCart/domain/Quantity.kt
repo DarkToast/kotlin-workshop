@@ -1,5 +1,7 @@
 package com.qvest.digital.shoppingCart.domain
 
+import com.qvest.digital.shoppingCart.DomainException
+
 data class Quantity(val value: Int) {
     init {
         if (value < 0) throw IllegalArgumentException("Quantity must not be zero")

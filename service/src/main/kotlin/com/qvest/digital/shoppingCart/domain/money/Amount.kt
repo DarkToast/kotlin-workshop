@@ -1,6 +1,6 @@
 package com.qvest.digital.shoppingCart.domain.money
 
-import com.qvest.digital.shoppingCart.domain.DomainException
+import com.qvest.digital.shoppingCart.DomainException
 
 class MaximumShoppingCardAmountExceededException(value: Int) :
     DomainException("The maximum shopping card amount of 300,00€ exceeded. Actual: '$value'")

@@ -1,23 +1,21 @@
 package com.qvest.digital.shoppingCart.ports.rest
 
-import com.qvest.digital.shoppingCart.application.ShoppingCartService
+import com.qvest.digital.shoppingCart.application.ShoppingCartPort
 import com.qvest.digital.shoppingCart.domain.Quantity
+import com.qvest.digital.shoppingCart.domain.SKU
 import com.qvest.digital.shoppingCart.domain.ShoppingCartUuid
-import com.qvest.digital.shoppingCart.ports.PortException
 import com.qvest.digital.shoppingCart.ports.rest.dto.PutProduct
 import com.qvest.digital.shoppingCart.ports.rest.dto.ShoppingCartDto
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import java.net.URI
 import java.util.UUID
-
-class ShoppingCartNotFoundException(uuid: ShoppingCartUuid) :
-    PortException("The shopping cart with id $uuid is unknown.")
 
 /**
  * Generell braucht in Spring nicht jede Controllermethode Exceptions behandeln.
@@ -27,16 +25,16 @@ class ShoppingCartNotFoundException(uuid: ShoppingCartUuid) :
  * @see LastLineOfDefenseErrorHandler
  */
 @Controller
-class ShoppingCartController(private val shoppingCartService: ShoppingCartService) {
+class Controller(private val shoppingCartPort: ShoppingCartPort) {
 
     private val logger = KotlinLogging.logger {}
 
-    @RequestMapping(path = ["/shoppingcart/{uuid}"], method = [RequestMethod.GET])
+    @GetMapping(path = ["/shoppingcart/{uuid}"])
     fun getShoppingCart(@PathVariable uuid: UUID): ResponseEntity<ShoppingCartDto> {
         logger.info { "GET shopping cart." }
 
         val shoppingCartUuid = ShoppingCartUuid(uuid)
-        val shoppingCart = shoppingCartService.showShoppingCart(shoppingCartUuid)
+        val shoppingCart = shoppingCartPort.showShoppingCart(shoppingCartUuid)
 
         return if (shoppingCart != null) {
             ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))
@@ -46,11 +44,11 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
         }
     }
 
-    @RequestMapping(path = ["/shoppingcart"], method = [RequestMethod.POST])
+    @PostMapping(path = ["/shoppingcart"])
     fun postNewShoppingCart(): ResponseEntity<ShoppingCartDto> {
         logger.info { "POST - Create new shopping cart" }
 
-        val cart = shoppingCartService.takeNewShoppingCart()
+        val cart = shoppingCartPort.takeNewShoppingCart()
         val uri = URI("/shoppingcart/${cart.shoppingCartUuid}")
 
         return ResponseEntity.created(uri).build()
@@ -72,19 +70,16 @@ class ShoppingCartController(private val shoppingCartService: ShoppingCartServic
      *   Beispiel in Zeile 37. Der Jackson Objektmapper kümmert sich dann um die Serialisierung nach JSON.
      *   `ResponseEntity` kann aber auch normal instantiiert werden.
      */
-    @RequestMapping(path = ["/shoppingcart/{uuid}/items"], method = [RequestMethod.PUT])
-    fun putProductToShoppingCart(
-        @PathVariable uuid: UUID,
-        @RequestBody putProductDto: PutProduct
-    ): ResponseEntity<ShoppingCartDto> {
+    @PutMapping(path = ["/shoppingcart/{uuid}/items"])
+    fun putProductToShoppingCart(@PathVariable uuid: UUID, @RequestBody putProductDto: PutProduct): ResponseEntity<ShoppingCartDto> {
         logger.info { "PUT - Adding product to shopping cart" }
 
         val shoppingCartUuid = ShoppingCartUuid(uuid)
         return if (putProductDto.sku != null && putProductDto.quantity != null) {
-            val sku = com.qvest.digital.shoppingCart.domain.SKU(putProductDto.sku)
+            val sku = SKU(putProductDto.sku)
             val quantity = Quantity(putProductDto.quantity)
 
-            val shoppingCart = shoppingCartService.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
+            val shoppingCart = shoppingCartPort.putProductIntoShoppingCart(shoppingCartUuid, sku, quantity)
 
             return if (shoppingCart != null) {
                 ResponseEntity.ok(ShoppingCartDto.fromDomain(shoppingCart))

@@ -1,5 +1,6 @@
 package com.qvest.digital.shoppingCart.domain
 
+import com.qvest.digital.shoppingCart.DomainException
 import com.qvest.digital.shoppingCart.domain.money.Amount
 import java.util.UUID
 

@@ -1,6 +1,7 @@
 package com.qvest.digital.shoppingCart.ports.database
 
 import com.qvest.digital.shoppingCart.domain.Item
+import com.qvest.digital.shoppingCart.domain.Product
 import com.qvest.digital.shoppingCart.domain.ShoppingCart
 import com.qvest.digital.shoppingCart.domain.ShoppingCartUuid
 import io.github.oshai.kotlinlogging.KotlinLogging
@@ -11,21 +12,21 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 @Repository
-class ShoppingCartRepository(private val jpaRepo: JpaShoppingCartRepo) : ShoppingCartRepositoryPort {
+interface JpaShoppingCartRepo : CrudRepository<ShoppingCartEntity, UUID>
+
+@Repository
+class Repository(private val jpaRepo: JpaShoppingCartRepo) : RepositoryPort {
     private val logger = KotlinLogging.logger {}
 
     @Transactional
     override fun load(shoppingCartUuid: ShoppingCartUuid): ShoppingCart? {
         logger.info { "Loading shopping cart '${shoppingCartUuid.uuid}' from database" }
-
-        val value = jpaRepo.findByIdOrNull(shoppingCartUuid.uuid)?.toDomain()
-
-        if (value != null) {
-            logger.info { "Found $value" }
-        }
-
-        return value
-
+        return jpaRepo
+            .findByIdOrNull(shoppingCartUuid.uuid)
+            ?.toDomain()
+            ?.also {
+                logger.info { "Found shopping cart '${shoppingCartUuid.uuid}'" }
+            }
     }
 
     @Transactional
@@ -34,9 +35,6 @@ class ShoppingCartRepository(private val jpaRepo: JpaShoppingCartRepo) : Shoppin
         jpaRepo.save(shoppingCart.toEntity())
     }
 }
-
-@Repository
-interface JpaShoppingCartRepo : CrudRepository<ShoppingCartEntity, UUID>
 
 private fun ShoppingCart.toEntity() = ShoppingCartEntity(
     uuid = this.shoppingCartUuid.uuid,
@@ -51,7 +49,7 @@ private fun Item.toEntity(shoppingCartId: UUID) = ItemEntity(
     product = this.product.toEntity()
 )
 
-private fun com.qvest.digital.shoppingCart.domain.Product.toEntity() = ProductEntity(
+private fun Product.toEntity() = ProductEntity(
     sku = this.sku.value,
     name = this.name.value,
     price = this.price.valueInCent

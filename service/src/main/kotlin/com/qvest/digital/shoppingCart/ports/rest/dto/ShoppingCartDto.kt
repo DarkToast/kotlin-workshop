@@ -12,10 +12,9 @@ data class ShoppingCartDto(
     val items: List<GetItem>
 ) : Linked<ShoppingCartDto>() {
 
-    private fun withLinks(): ShoppingCartDto {
-        return addLink("self", GET, URI("/shoppingcart/${uuid}"))
+    private fun withLinks(): ShoppingCartDto =
+        addLink("self", GET, URI("/shoppingcart/${uuid}"))
             .addLink("addProduct", Method.PUT, URI("/shoppingcart/${uuid}/items"))
-    }
 
     companion object {
         fun fromDomain(shoppingCart: ShoppingCart): ShoppingCartDto {

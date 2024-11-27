@@ -1,6 +1,6 @@
 package com.qvest.digital.shoppingCart.domain.money
 
-import com.qvest.digital.shoppingCart.domain.DomainException
+import com.qvest.digital.shoppingCart.DomainException
 import com.qvest.digital.shoppingCart.domain.Quantity
 
 class TooHighPriceException(value: Int) : DomainException("Price must not exceed 120,00€. Actual: '$value'")
