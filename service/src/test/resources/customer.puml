@@ -1,0 +1,20 @@
+@startuml
+class Customer {
+    +id: String
+    +name: String
+    +vorname: String
+    +email: String
+    +phone: String
+    +address: List<Address>
+}
+
+class Address {
+    +id: Int
+    +street: String
+    +postCode: String
+    +city: String
+    +country: String
+}
+
+Customer "1" ---> "1..*" Address
+@enduml
